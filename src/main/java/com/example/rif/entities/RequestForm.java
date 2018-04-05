@@ -2,6 +2,7 @@ package com.example.rif.entities;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -65,7 +66,11 @@ public class RequestForm {
     @Column(columnDefinition = "BOOLEAN default false", name = "is_loadtest_type_reliabilitytest")
     private boolean loadTestTypeReliabilityTest;
     // loadTest Date
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern="dd/MM/yyyy")
     private Date targetStartDate;
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern="dd/MM/yyyy")
     private Date targetFinishDate;
 
     private String remark;

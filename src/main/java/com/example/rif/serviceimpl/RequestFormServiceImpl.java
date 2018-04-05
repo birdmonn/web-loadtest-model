@@ -36,7 +36,8 @@ public class RequestFormServiceImpl implements RequestFormService {
 
     @Override
     public RequestForm update(Long id, RequestForm requestForm) {
-        return null;
+        requestForm.setId(id);
+        return requestFormRepository.saveAndFlush(requestForm);
     }
 
     @Override

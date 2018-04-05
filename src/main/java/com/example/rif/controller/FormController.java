@@ -38,8 +38,11 @@ public class FormController implements WebMvcConfigurer {
 
     @GetMapping("/{id}")
     public String showForm(@PathVariable long id, Model model) {
-        int i = 0;
-        model.addAttribute("requestForm", requestFormService.findById(id));
+        RequestForm requestForm = requestFormService.findById(id);
+        if (requestForm == null) {
+            return "form";
+        }
+        model.addAttribute("requestForm", requestForm);
         return "form";
     }
 
@@ -51,6 +54,18 @@ public class FormController implements WebMvcConfigurer {
         }
         System.out.print(requestForm.getProjectName());
         requestFormService.create(requestForm);
+        return "redirect:/all-case";
+    }
+
+    @PostMapping("/{id}")
+    public String updateRequestForm(@Valid RequestForm requestForm, @PathVariable long id, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors() && null == requestFormService.findById(id)) {
+            return "form";
+        }
+
+        System.out.print(requestForm.getProjectName());
+        requestFormService.update(id, requestForm);
         return "redirect:/all-case";
     }
 }
