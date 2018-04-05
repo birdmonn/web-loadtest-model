@@ -27,43 +27,43 @@ public class RequestForm {
     private String languageDev;
     private String languageDevDetail;
     @Column(columnDefinition = "BOOLEAN default false")
-    private boolean isBrowserIe;
+    private boolean browserIe;
     @Column(columnDefinition = "BOOLEAN default false")
-    private boolean isBrowserFirefox;
-    private String sucuritySupport;
+    private boolean browserFirefox;
+    private String securitySupport;
     @Column(columnDefinition = "BOOLEAN default false", name = "is_system_impact_f5")
-    private boolean isSystemImpactF5;
+    private boolean systemImpactF5;
     @Column(columnDefinition = "BOOLEAN default false", name = "is_system_impact_ldap")
-    private boolean isSystemImpactLDAP;
+    private boolean isSystemImpactLdap;
     @Column(columnDefinition = "BOOLEAN default false", name = "is_system_impact_firewall")
-    private boolean isSystemImpactFirewall;
+    private boolean systemImpactFirewall;
     @Column(columnDefinition = "BOOLEAN default false", name = "is_system_impact_proxy")
-    private boolean isSystemImpactProxy;
+    private boolean systemImpactProxy;
     @Column(columnDefinition = "BOOLEAN default false", name = "is_system_impact_ad")
-    private boolean isSystemImpactAd;
+    private boolean systemImpactAd;
     @Column(columnDefinition = "BOOLEAN default false", name = "is_system_impact_sff")
-    private boolean isSystemImpactSff;
+    private boolean systemImpactSff;
     @Column(columnDefinition = "BOOLEAN default false", name = "is_system_impact_siebel")
-    private boolean isSystemImpactSiebel;
+    private boolean systemImpactSiebel;
     @Column(columnDefinition = "BOOLEAN default false", name = "is_system_impact_sap")
-    private boolean isSystemImpactSap;
+    private boolean systemImpactSap;
     @Column(columnDefinition = "BOOLEAN default false", name = "is_system_impact_eai")
-    private boolean isSystemImpactEai;
+    private boolean systemImpactEai;
     @Column(columnDefinition = "BOOLEAN default false", name = "is_system_impact_Ivr")
-    private boolean isSystemImpactIvr;
+    private boolean systemImpactIvr;
     private String systemImpactEtc;
     // load test : user concurrent
     @Column(columnDefinition = "BOOLEAN default false", name = "is_impact_Assessment_ex")
-    private boolean isImpactAssessmentEX;
+    private boolean impactAssessmentEx;
     @Column(columnDefinition = "BOOLEAN default false", name = "is_impact_Assessment_ih")
-    private boolean isImpactAssessmentIH;
-    private String userCocurrent;
+    private boolean impactAssessmentIh;
+    private String userConcurrent;
     @Column(columnDefinition = "BOOLEAN default false", name = "is_loadtest_type_loadtest")
-    private boolean isLoadTestTypeLoadTest;
+    private boolean loadTestTypeLoadTest;
     @Column(columnDefinition = "BOOLEAN default false", name = "is_loadtest_type_StressTest")
-    private boolean isLoadTestTypeStressTest;
+    private boolean loadTestTypeStressTest;
     @Column(columnDefinition = "BOOLEAN default false", name = "is_loadtest_type_reliabilitytest")
-    private boolean isLoadTestTypeReliabilityTest;
+    private boolean loadTestTypeReliabilityTest;
     // loadTest Date
     private Date targetStartDate;
     private Date targetFinishDate;
@@ -182,107 +182,107 @@ public class RequestForm {
     }
 
     public boolean isBrowserIe() {
-        return isBrowserIe;
+        return browserIe;
     }
 
     public void setBrowserIe(boolean browserIe) {
-        isBrowserIe = browserIe;
+        this.browserIe = browserIe;
     }
 
     public boolean isBrowserFirefox() {
-        return isBrowserFirefox;
+        return browserFirefox;
     }
 
     public void setBrowserFirefox(boolean browserFirefox) {
-        isBrowserFirefox = browserFirefox;
+        this.browserFirefox = browserFirefox;
     }
 
-    public String getSucuritySupport() {
-        return sucuritySupport;
+    public String getSecuritySupport() {
+        return securitySupport;
     }
 
-    public void setSucuritySupport(String sucuritySupport) {
-        this.sucuritySupport = sucuritySupport;
+    public void setSecuritySupport(String securitySupport) {
+        this.securitySupport = securitySupport;
     }
 
     public boolean isSystemImpactF5() {
-        return isSystemImpactF5;
+        return systemImpactF5;
     }
 
     public void setSystemImpactF5(boolean systemImpactF5) {
-        isSystemImpactF5 = systemImpactF5;
+        this.systemImpactF5 = systemImpactF5;
     }
 
-    public boolean isSystemImpactLDAP() {
-        return isSystemImpactLDAP;
+    public boolean isSystemImpactLdap() {
+        return isSystemImpactLdap;
     }
 
-    public void setSystemImpactLDAP(boolean systemImpactLDAP) {
-        isSystemImpactLDAP = systemImpactLDAP;
+    public void setSystemImpactLdap(boolean systemImpactLdap) {
+        isSystemImpactLdap = systemImpactLdap;
     }
 
     public boolean isSystemImpactFirewall() {
-        return isSystemImpactFirewall;
+        return systemImpactFirewall;
     }
 
     public void setSystemImpactFirewall(boolean systemImpactFirewall) {
-        isSystemImpactFirewall = systemImpactFirewall;
+        this.systemImpactFirewall = systemImpactFirewall;
     }
 
     public boolean isSystemImpactProxy() {
-        return isSystemImpactProxy;
+        return systemImpactProxy;
     }
 
     public void setSystemImpactProxy(boolean systemImpactProxy) {
-        isSystemImpactProxy = systemImpactProxy;
+        this.systemImpactProxy = systemImpactProxy;
     }
 
     public boolean isSystemImpactAd() {
-        return isSystemImpactAd;
+        return systemImpactAd;
     }
 
     public void setSystemImpactAd(boolean systemImpactAd) {
-        isSystemImpactAd = systemImpactAd;
+        this.systemImpactAd = systemImpactAd;
     }
 
     public boolean isSystemImpactSff() {
-        return isSystemImpactSff;
+        return systemImpactSff;
     }
 
     public void setSystemImpactSff(boolean systemImpactSff) {
-        isSystemImpactSff = systemImpactSff;
+        this.systemImpactSff = systemImpactSff;
     }
 
     public boolean isSystemImpactSiebel() {
-        return isSystemImpactSiebel;
+        return systemImpactSiebel;
     }
 
     public void setSystemImpactSiebel(boolean systemImpactSiebel) {
-        isSystemImpactSiebel = systemImpactSiebel;
+        this.systemImpactSiebel = systemImpactSiebel;
     }
 
     public boolean isSystemImpactSap() {
-        return isSystemImpactSap;
+        return systemImpactSap;
     }
 
     public void setSystemImpactSap(boolean systemImpactSap) {
-        isSystemImpactSap = systemImpactSap;
+        this.systemImpactSap = systemImpactSap;
     }
 
     public boolean isSystemImpactEai() {
-        return isSystemImpactEai;
+        return systemImpactEai;
     }
 
     public void setSystemImpactEai(boolean systemImpactEai) {
-        isSystemImpactEai = systemImpactEai;
+        this.systemImpactEai = systemImpactEai;
     }
 
     public boolean isSystemImpactIvr() {
-        return isSystemImpactIvr;
+        return systemImpactIvr;
     }
 
     public void setSystemImpactIvr(boolean systemImpactIvr) {
-        isSystemImpactIvr = systemImpactIvr;
+        this.systemImpactIvr = systemImpactIvr;
     }
 
     public String getSystemImpactEtc() {
@@ -293,52 +293,52 @@ public class RequestForm {
         this.systemImpactEtc = systemImpactEtc;
     }
 
-    public boolean isImpactAssessmentEX() {
-        return isImpactAssessmentEX;
+    public boolean isImpactAssessmentEx() {
+        return impactAssessmentEx;
     }
 
-    public void setImpactAssessmentEX(boolean impactAssessmentEX) {
-        isImpactAssessmentEX = impactAssessmentEX;
+    public void setImpactAssessmentEx(boolean impactAssessmentEx) {
+        this.impactAssessmentEx = impactAssessmentEx;
     }
 
-    public boolean isImpactAssessmentIH() {
-        return isImpactAssessmentIH;
+    public boolean isImpactAssessmentIh() {
+        return impactAssessmentIh;
     }
 
-    public void setImpactAssessmentIH(boolean impactAssessmentIH) {
-        isImpactAssessmentIH = impactAssessmentIH;
+    public void setImpactAssessmentIh(boolean impactAssessmentIh) {
+        this.impactAssessmentIh = impactAssessmentIh;
     }
 
-    public String getUserCocurrent() {
-        return userCocurrent;
+    public String getUserConcurrent() {
+        return userConcurrent;
     }
 
-    public void setUserCocurrent(String userCocurrent) {
-        this.userCocurrent = userCocurrent;
+    public void setUserConcurrent(String userConcurrent) {
+        this.userConcurrent = userConcurrent;
     }
 
     public boolean isLoadTestTypeLoadTest() {
-        return isLoadTestTypeLoadTest;
+        return loadTestTypeLoadTest;
     }
 
     public void setLoadTestTypeLoadTest(boolean loadTestTypeLoadTest) {
-        isLoadTestTypeLoadTest = loadTestTypeLoadTest;
+        this.loadTestTypeLoadTest = loadTestTypeLoadTest;
     }
 
     public boolean isLoadTestTypeStressTest() {
-        return isLoadTestTypeStressTest;
+        return loadTestTypeStressTest;
     }
 
     public void setLoadTestTypeStressTest(boolean loadTestTypeStressTest) {
-        isLoadTestTypeStressTest = loadTestTypeStressTest;
+        this.loadTestTypeStressTest = loadTestTypeStressTest;
     }
 
     public boolean isLoadTestTypeReliabilityTest() {
-        return isLoadTestTypeReliabilityTest;
+        return loadTestTypeReliabilityTest;
     }
 
     public void setLoadTestTypeReliabilityTest(boolean loadTestTypeReliabilityTest) {
-        isLoadTestTypeReliabilityTest = loadTestTypeReliabilityTest;
+        this.loadTestTypeReliabilityTest = loadTestTypeReliabilityTest;
     }
 
     public Date getTargetStartDate() {
