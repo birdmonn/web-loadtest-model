@@ -23,13 +23,13 @@ public class SearchCaseController {
     @GetMapping()
     public String allList(Model model){
         model.addAttribute("caseList", requestFormService.findAll());
-        return "search-case";
+        return "searchCase";
     }
 
 
     @PostMapping()
     public String qurey(@Valid RequestForm requestForm,Model model){
         model.addAttribute("caseList", requestFormService.findByProjectIdAndProjectNameAndContact(requestForm.getProjectId(),requestForm.getProjectName(),requestForm.getContact()));
-        return "search-case";
+        return "searchCase";
     }
 }
