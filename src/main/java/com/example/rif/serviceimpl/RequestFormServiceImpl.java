@@ -18,7 +18,7 @@ public class RequestFormServiceImpl implements RequestFormService {
     }
 
     @Override
-    public List<RequestForm> findall() {
+    public List<RequestForm> findAll() {
         return requestFormRepository.findAll();
     }
 
@@ -27,6 +27,11 @@ public class RequestFormServiceImpl implements RequestFormService {
         RequestForm requestForm123 = requestFormRepository.getOne(id);
         RequestForm requestForm = requestFormRepository.findAsId(id);
         return requestForm;
+    }
+
+    @Override
+    public List<RequestForm> findByProjectIdAndProjectNameAndContact(String projectId, String projectName, String contact) {
+        return requestFormRepository.findByprojectIdAndprojectNameAndcontact(projectId, projectName, contact);
     }
 
     @Override

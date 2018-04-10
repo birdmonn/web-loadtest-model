@@ -74,6 +74,7 @@ public class RequestForm {
     private Date targetFinishDate;
 
     private String remark;
+    private String statusRequest = "wait";
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created", updatable = false)
@@ -384,6 +385,14 @@ public class RequestForm {
 
     public void setModified(Date modified) {
         this.modified = modified;
+    }
+
+    public String getStatusRequest() {
+        return (this.statusRequest == null) ?"wait" :statusRequest;
+    }
+
+    public void setStatusRequest(String statusRequest) {
+        this.statusRequest = statusRequest;
     }
 }
 

@@ -66,6 +66,6 @@ public class FormController implements WebMvcConfigurer {
 
         System.out.print(requestForm.getProjectName());
         requestFormService.update(id, requestForm);
-        return "redirect:/all-case";
+        return "redirect:/search-case";
     }
 }

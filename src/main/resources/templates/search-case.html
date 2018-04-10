@@ -5,34 +5,66 @@
 <meta charset="utf-8">
 <title>Form</title>
 <script src="./jquery-3.3.1.js"></script>
-<link rel="stylesheet" type="text/css" href="./Form-css.css">
-<link rel="stylesheet" type="text/css" href="./vertical-menu-css.css">
-	<link rel="stylesheet" type="text/css" href="./table-case-css.css">
+    <link rel="stylesheet" type="text/css" href="css/Form-css.css" th:href="@{/css/Form-css.css}">
+    <link rel="stylesheet" type="text/css" href="css/menu-bar-css.css" th:href="@{/css/menu-bar-css.css}">
+    <link rel="stylesheet" type="text/css" href="css/menu-bar-css.css" th:href="@{/css/row-col.css}">
+	<link rel="stylesheet" type="text/css" href="css/table-case-css.css" th:href="@{/css/table-case-css.css}">
 </head>
 <body style="font-family:Verdana;">
 <div class="Banner" style="background-color:#f1f1f1;padding:15px;">
   <h1>Banner web</h1>
 </div>
 <div style="overflow:auto">
-  <div class="vertical-menu"> <a href="/form">Form</a> <a href="/search-case" class="active">All Case</a> <a href="#">Report</a> </div>
-	<div class="search-case">
-		
-		<form>
-		<h3> Search </h3>	
-			<div>
-				Project ID :
-				<input type="text">
-			</div> 
-				<div>
-				Project Name :
-				<input type="text">
-			</div> 
-				<div>
-					contact  :
-				<input type="text">
-			</div> 
-		</form>
-	</div>
+    <ul>
+        <li><a href="/form">Form</a></li>
+        <li><a class="active" href="/search-case">All Case</a></li>
+        <li><a href="#">Report</a></li>
+    </ul>
+    <div class="search-case">
+        <form method="post" action="/searchCase#" th:action="@{/searchCase}" th:object="${requestForm}">
+            <div class="row">
+                <div class="col-tab-10"></div>
+                <div class="col-10">
+                    <label>Search</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-tab-10"></div>
+                <div class="col-10">
+                    <label>Project ID</label>
+                </div>
+                <div class="col-25">
+                    <input type="text" id="pId" name="projectId">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-tab-10"></div>
+                <div class="col-10">
+                    <label>Project Name</label>
+                </div>
+                <div class="col-25">
+                    <input type="text" id="pName" name="projectName">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-tab-10"></div>
+                <div class="col-10">
+                    <label>Contact</label>
+                </div>
+                <div class="col-25">
+                    <input type="text" id="contact" name="contact">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-tab-10"></div>
+                <div class="col-tab-10"></div>
+                <div class="col-10">
+                    <button class="button" type="submit" value="Submit">Search</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
   <div class="main">
     <h2>All case</h2>
     <table id="table-case">
@@ -40,11 +72,13 @@
         <th>Project Id</th>
         <th>Project Name</th>
           <th>Contact</th>
+          <th>Status</th>
       </tr>
         <tr th:each="case : ${caseList}">
         <td><a th:text="${case.projectId}" th:href="${'/form/' + case.id}"></a></td>
-        <td>Alfreds Futterkiste</td>
-        <td>Maria Anders</td>
+            <td><a th:text="${case.projectName}" th:href="${'/form/' + case.id}"></a></td>
+            <td><a th:text="${case.contact}" th:href="${'/form/' + case.id}"></a></td>
+            <td><a th:text="${case.statusRequest}" th:href="${'/form/' + case.id}"></a></td>
       </tr>
     </table>
   </div>
