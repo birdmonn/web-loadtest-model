@@ -6,9 +6,11 @@ import java.util.List;
 
 public interface RequestFormService {
 
-    List<RequestForm> findall();
+    List<RequestForm> findAll();
 
     RequestForm findById(Long id);
+
+    List<RequestForm> findByProjectIdAndProjectNameAndContact(String projectId,String projectName,String contact);
 
     RequestForm create(RequestForm requestForm);
 

@@ -18,15 +18,36 @@ public class RequestFormServiceImpl implements RequestFormService {
     }
 
     @Override
-    public List<RequestForm> findall() {
+    public List<RequestForm> findAll() {
         return requestFormRepository.findAll();
     }
 
     @Override
     public RequestForm findById(Long id) {
-        RequestForm requestForm123 = requestFormRepository.getOne(id);
-        RequestForm requestForm = requestFormRepository.findAsId(id);
-        return requestForm;
+        return requestFormRepository.findAsId(id);
+    }
+
+    @Override
+    public List<RequestForm> findByProjectIdAndProjectNameAndContact(String projectId, String projectName, String contact) {
+        if (projectId.trim().equals("") && projectName.trim().equals("") && !contact.trim().equals("")) {
+            return requestFormRepository.findByContact(contact);
+        }
+        if (projectId.trim().equals("") && !projectName.trim().equals("") && contact.trim().equals("")) {
+            return requestFormRepository.findByProjectName(projectName);
+        }
+        if (!projectId.trim().equals("") && projectName.trim().equals("") && contact.trim().equals("")) {
+            return requestFormRepository.findByProjectId(projectId);
+        }
+        if (projectId.trim().equals("") && !projectName.trim().equals("") && !contact.trim().equals("")) {
+            return requestFormRepository.findByProjectNameAndContact(projectName, contact);
+        }
+        if (!projectId.trim().equals("") && !projectName.trim().equals("") && contact.trim().equals("")) {
+            return requestFormRepository.findByProjectIdAndProjectName(projectId, projectName);
+        }
+        if (!projectId.trim().equals("") && projectName.trim().equals("") && !contact.trim().equals("")) {
+            return requestFormRepository.findByProjectIdAndContact(projectId, contact);
+        }
+        return requestFormRepository.findByProjectIdAndProjectNameAndContact(projectId, projectName, contact);
     }
 
     @Override

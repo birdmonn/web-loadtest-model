@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<title>Form</title>
+<script src="./jquery-3.3.1.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/Form-css.css" th:href="@{/css/Form-css.css}">
+    <link rel="stylesheet" type="text/css" href="css/menu-bar-css.css" th:href="@{/css/menu-bar-css.css}">
+    <link rel="stylesheet" type="text/css" href="css/menu-bar-css.css" th:href="@{/css/row-col.css}">
+	<link rel="stylesheet" type="text/css" href="css/table-case-css.css" th:href="@{/css/table-case-css.css}">
+    <link rel="stylesheet" type="text/css" href="css/button.css" th:href="@{/css/button.css}">
+</head>
+<body style="font-family:Verdana;">
+<div class="Banner" style="background-color:#f1f1f1;padding:15px;">
+  <h1>Banner web</h1>
+</div>
+<div style="overflow:auto">
+    <ul>
+        <li><a href="/form">Form</a></li>
+        <li><a class="active" href="/searchCase">All Case</a></li>
+        <li><a href="#">Report</a></li>
+    </ul>
+    <div class="search-case">
+        <form method="post" action="/searchCase#" th:action="@{/searchCase}" th:object="${requestForm}">
+            <div class="row">
+                <div class="col-tab-10"></div>
+                <div class="col-10">
+                    <label>Search</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-tab-10"></div>
+                <div class="col-10">
+                    <label>Project ID</label>
+                </div>
+                <div class="col-25">
+                    <input type="text" id="pId" name="projectId">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-tab-10"></div>
+                <div class="col-10">
+                    <label>Project Name</label>
+                </div>
+                <div class="col-25">
+                    <input type="text" id="pName" name="projectName">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-tab-10"></div>
+                <div class="col-10">
+                    <label>Contact</label>
+                </div>
+                <div class="col-25">
+                    <input type="text" id="contact" name="contact">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-tab-10"></div>
+                <div class="col-tab-10"></div>
+                <div class="col-10">
+                    <button class="button" type="submit" value="Submit">Search</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+  <div class="main">
+    <h2>All case</h2>
+    <table id="table-case">
+      <tr>
+        <th>Project Id</th>
+        <th>Project Name</th>
+          <th>Contact</th>
+          <th>Status</th>
+      </tr>
+        <tr th:each="case : ${caseList}">
+        <td><a th:text="${case.projectId}" th:href="${'/form/' + case.id}"></a></td>
+            <td><a th:text="${case.projectName}" th:href="${'/form/' + case.id}"></a></td>
+            <td><a th:text="${case.contact}" th:href="${'/form/' + case.id}"></a></td>
+            <td><a th:text="${case.statusRequest}" th:href="${'/form/' + case.id}"></a></td>
+      </tr>
+    </table>
+  </div>
+</div>
+<div style="background-color:#f1f1f1;text-align:center;padding:10px;margin-top:7px;font-size:12px;">
+  <div>
+    <h3> contact us </h3>
+    <div> Email : nattapoo@ais.co.th </div>
+    <div> phone : 02-2222222 </div>
+  </div>
+</div>
+<script>
+w3IncludeHTML();
+</script>
+</body>
+</html>

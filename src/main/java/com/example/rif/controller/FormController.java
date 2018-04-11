@@ -54,7 +54,7 @@ public class FormController implements WebMvcConfigurer {
         }
         System.out.print(requestForm.getProjectName());
         requestFormService.create(requestForm);
-        return "redirect:/all-case";
+        return "redirect:/searchCase";
     }
 
     @PostMapping("/{id}")
@@ -66,6 +66,6 @@ public class FormController implements WebMvcConfigurer {
 
         System.out.print(requestForm.getProjectName());
         requestFormService.update(id, requestForm);
-        return "redirect:/all-case";
+        return "redirect:/searchCase";
     }
 }
