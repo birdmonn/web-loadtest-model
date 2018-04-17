@@ -7,15 +7,15 @@
 <script src="./jquery-3.3.1.js"></script>
     <link rel="stylesheet" type="text/css" href="css/Form-css.css" th:href="@{/css/Form-css.css}">
     <link rel="stylesheet" type="text/css" href="css/menu-bar-css.css" th:href="@{/css/menu-bar-css.css}">
-    <link rel="stylesheet" type="text/css" href="css/menu-bar-css.css" th:href="@{/css/row-col.css}">
+    <link rel="stylesheet" type="text/css" href="css/row-col.css" th:href="@{/css/row-col.css}">
 	<link rel="stylesheet" type="text/css" href="css/table-case-css.css" th:href="@{/css/table-case-css.css}">
     <link rel="stylesheet" type="text/css" href="css/button.css" th:href="@{/css/button.css}">
+    <link href="bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet" th:href="@{/bootstrap-3.3.7-dist/css/bootstrap.css}" />
 </head>
 <body style="font-family:Verdana;">
 <div class="Banner" style="background-color:#f1f1f1;padding:15px;">
   <h1>Banner web</h1>
 </div>
-<div style="overflow:auto">
     <ul>
         <li><a href="/form">Form</a></li>
         <li><a class="active" href="/searchCase">All Case</a></li>
@@ -66,8 +66,9 @@
 
         </form>
     </div>
-  <div class="main">
-    <h2>All case</h2>
+  <div class="container">
+    <h2>Search Case </h2>
+      <h5 th:text="${#lists.size(caseList)+ 'ทั้งหมด'}">ทั้งหมด</h5>
     <table id="table-case">
       <tr>
         <th>Project Id</th>
@@ -83,7 +84,6 @@
       </tr>
     </table>
   </div>
-</div>
 <div style="background-color:#f1f1f1;text-align:center;padding:10px;margin-top:7px;font-size:12px;">
   <div>
     <h3> contact us </h3>

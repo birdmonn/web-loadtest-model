@@ -19,7 +19,9 @@ label {
 star{
 	color: red;
 }
-
+text-error {
+    color:red;
+}
 .Banner {
 	width: 100%;
 	border-style: none;
