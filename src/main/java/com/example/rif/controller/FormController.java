@@ -50,7 +50,7 @@ public class FormController implements WebMvcConfigurer {
     public String checkPersonInfo(@Valid RequestForm requestForm, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            return "form";
+                return "form";
         }
         System.out.print(requestForm.getProjectName());
         requestFormService.create(requestForm);
