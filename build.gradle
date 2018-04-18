@@ -30,6 +30,8 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-jdbc')
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 	compile('org.springframework.boot:spring-boot-starter-web')
+	compile 'org.springframework.security:spring-security-web:5.0.4.RELEASE'
+	compile("org.springframework.boot:spring-boot-starter-security")
 	runtime('org.springframework.boot:spring-boot-devtools')
 	runtime('com.h2database:h2')
 	runtime('mysql:mysql-connector-java')
