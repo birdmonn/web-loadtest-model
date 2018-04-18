@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
@@ -17,13 +18,13 @@ public class RequestForm {
     private Long id;
     //  project detail
     private String projectId;
-    @NotNull
-    @Min(1)
+    @NotNull(message = "ProjectName cannot be empty")
+    @Size(min=1,message = "ProjectName cannot be empty")
     private String projectName;
     private String significantLevel;
     private String requestType;
-    @NotNull
-    @Min(1)
+    @NotNull(message = "Contact cannot be empty")
+    @Size(min=1,message = "Contact cannot be empty")
     private String contact;
     private String mobilePhone;
     private String objective;
