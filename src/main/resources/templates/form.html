@@ -60,7 +60,7 @@
       </div>
           <div class="col-65">
         <input type="text" id="pName" name="projectName" th:field="*{projectName}">
-              <text-error class="text-error" th:if="${#fields.hasErrors('projectName')}">กรุณากรอก</text-error>
+              <text-error class="text-error" th:if="${#fields.hasErrors('projectName')}" th:errors="*{projectName}" >กรุณากรอก</text-error>
       </div>
         </div>
     <div class="row">
@@ -102,7 +102,7 @@
       </div>
           <div class="col-65">
         <input id="contact" name="contact" type="text" th:field="*{contact}">
-              <text-error class="text-error" th:if="${#fields.hasErrors('contact')}" >กรุณากรอก</text-error>
+              <text-error class="text-error" th:if="${#fields.hasErrors('contact')}" th:errors="*{contact}">กรุณากรอก</text-error>
           </div>
         </div>
     <div class="row">
