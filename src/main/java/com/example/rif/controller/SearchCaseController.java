@@ -26,6 +26,7 @@ public class SearchCaseController {
     public String allList(Model model, HttpServletRequest request){
         model.addAttribute("caseList", requestFormService.findAll());
         String username = request.getRemoteUser();
+        boolean isadmin = request.isUserInRole("ADMIN");
         return "searchCase";
     }
 

@@ -18,8 +18,9 @@
 </div>
     <ul>
         <li><a href="/form">Form</a></li>
-        <li><a class="active" href="/searchCase">All Case</a></li>
+        <li><a class="active" href="/searchCase">Search Case</a></li>
         <li><a href="#">Report</a></li>
+        <li style="float:right"><a href="/logout">[[${#httpServletRequest.remoteUser}]] [Logout]</a></li>
     </ul>
     <div class="search-case">
         <form method="post" action="/searchCase#" th:action="@{/searchCase}" th:object="${requestForm}">
