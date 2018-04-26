@@ -9,11 +9,12 @@ public class UserWeb {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Size(min 6,)
+    @Size(min=6,message = "username is short")
     private String username;
     private String password;
     private String firstName;
     private String lastName;
+    private String role;
 
     public Long getId() {
         return id;
@@ -53,5 +54,13 @@ public class UserWeb {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }
