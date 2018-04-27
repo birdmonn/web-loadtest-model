@@ -1,11 +1,8 @@
-package com.example.rif.serviceimpl;
+package com.adss.rif.serviceimpl;
 
-import com.example.rif.entities.RequestForm;
-import com.example.rif.entities.UserWeb;
-import com.example.rif.repository.RequestFormRepository;
-import com.example.rif.repository.UserWebRepository;
-import com.example.rif.service.RequestFormService;
-import com.example.rif.service.UserWebService;
+import com.adss.rif.entities.UserWeb;
+import com.adss.rif.repository.UserWebRepository;
+import com.adss.rif.service.UserWebService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

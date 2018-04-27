@@ -1,9 +1,9 @@
-package com.example.rif.controller;
+package com.adss.rif.controller;
 
-import com.example.rif.entities.RequestForm;
-import com.example.rif.entities.UserWeb;
-import com.example.rif.service.RequestFormService;
-import com.example.rif.service.UserWebService;
+import com.adss.rif.entities.RequestForm;
+import com.adss.rif.entities.UserWeb;
+import com.adss.rif.service.RequestFormService;
+import com.adss.rif.service.UserWebService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

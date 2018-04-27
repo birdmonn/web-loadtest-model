@@ -1,6 +1,6 @@
-package com.example.rif.service;
+package com.adss.rif.service;
 
-import com.example.rif.entities.UserWeb;
+import com.adss.rif.entities.UserWeb;
 
 import java.util.List;
 

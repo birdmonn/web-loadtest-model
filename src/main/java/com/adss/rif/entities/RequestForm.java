@@ -1,4 +1,4 @@
-package com.example.rif.entities;
+package com.adss.rif.entities;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;

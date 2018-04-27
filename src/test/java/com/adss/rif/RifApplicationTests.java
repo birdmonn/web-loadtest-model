@@ -1,4 +1,4 @@
-package com.example.rif;
+package com.adss.rif;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

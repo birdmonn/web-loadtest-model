@@ -1,4 +1,4 @@
-package com.example.rif.entities;
+package com.adss.rif.entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;

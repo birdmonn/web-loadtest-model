@@ -1,13 +1,12 @@
-package com.example.rif;
+package com.adss.rif;
 
-import com.example.rif.entities.UserWeb;
-import com.example.rif.service.UserWebService;
+import com.adss.rif.service.UserWebService;
+import com.adss.rif.entities.UserWeb;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
