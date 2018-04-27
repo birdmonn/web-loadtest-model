@@ -13,9 +13,10 @@
 <div style="overflow:auto">
 	<ul>
 		<li><a href="/form">Form</a></li>
-		<li><a href="/searchCase">All Case</a></li>
+		<li><a href="/searchCase">Search Case</a></li>
 		<li><a href="#">Report</a></li>
-	</ul><h2>index</h2>
+		<li style="float:right"><a href="/logout">[[${#httpServletRequest.remoteUser}]] [Logout]</a></li>
+	</ul><h2>index [[${#httpServletRequest.remoteUser}]]</h2>
 </div>
 <div style="background-color:#f1f1f1;text-align:center;padding:10px;margin-top:7px;font-size:12px;">
 	<div>
