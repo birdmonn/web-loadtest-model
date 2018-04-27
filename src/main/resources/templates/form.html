@@ -11,9 +11,9 @@
     <link rel="stylesheet" type="text/css" href="css/button.css" th:href="@{/css/button.css}">
     <link href="./bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet" th:href="@{/bootstrap-3.3.7-dist/css/bootstrap.css}" />
     <script src="./bootstrap-3.3.7-dist/js/bootstrap.js" th:src="@{/bootstrap-3.3.7-dist/js/bootstrap.js}"></script>
-    <link href="./dist/css/bootstrap-datepicker.css" rel="stylesheet" th:href="@{/dist/css/bootstrap-datepicker.css}"/>
-    <script src="./dist/js/bootstrap-datepicker-custom.js" th:src="@{/dist/js/bootstrap-datepicker-custom.js}"></script>
-    <script src="./dist/locales/bootstrap-datepicker.en-GB.min.js" th:src="@{/dist/locales/bootstrap-datepicker.en-GB.min.js}" charset="UTF-8" ></script>
+    <link href="./dist-res/css/bootstrap-datepicker.css" rel="stylesheet" th:href="@{/dist-res/css/bootstrap-datepicker.css}"/>
+    <script src="./dist-res/js/bootstrap-datepicker-custom.js" th:src="@{/dist-res/js/bootstrap-datepicker-custom.js}"></script>
+    <script src="./dist-res/locales/bootstrap-datepicker.en-GB.min.js" th:src="@{/dist-res/locales/bootstrap-datepicker.en-GB.min.js}" charset="UTF-8" ></script>
     <script th:inline="javascript">
          $(document).ready(function () {
             $('.datepicker').datepicker({
@@ -60,7 +60,7 @@
       </div>
           <div class="col-65">
         <input type="text" id="pName" name="projectName" th:field="*{projectName}">
-              <text-error class="text-error" th:if="${#fields.hasErrors('projectName')}">กรุณากรอก</text-error>
+              <text-error class="text-error" th:if="${#fields.hasErrors('projectName')}" th:errors="*{projectName}" >กรุณากรอก</text-error>
       </div>
         </div>
     <div class="row">
@@ -102,7 +102,7 @@
       </div>
           <div class="col-65">
         <input id="contact" name="contact" type="text" th:field="*{contact}">
-              <text-error class="text-error" th:if="${#fields.hasErrors('contact')}" >กรุณากรอก</text-error>
+              <text-error class="text-error" th:if="${#fields.hasErrors('contact')}" th:errors="*{contact}">กรุณากรอก</text-error>
           </div>
         </div>
     <div class="row">
