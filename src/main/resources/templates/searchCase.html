@@ -76,12 +76,14 @@
         <th>Project Name</th>
           <th>Contact</th>
           <th>Status</th>
+          <th>User</th>
       </tr>
         <tr th:each="case : ${caseList}">
         <td><a th:text="${case.projectId}" th:href="${'/form/' + case.id}"></a></td>
             <td><a th:text="${case.projectName}" th:href="${'/form/' + case.id}"></a></td>
             <td><a th:text="${case.contact}" th:href="${'/form/' + case.id}"></a></td>
             <td><a th:text="${case.statusRequest}" th:href="${'/form/' + case.id}"></a></td>
+            <td><a th:text="${case.userWeb.username}" th:href="${'/form/edit/' + case.id}"></a></td>
       </tr>
     </table>
   </div>
@@ -93,7 +95,6 @@
   </div>
 </div>
 <script>
-w3IncludeHTML();
 </script>
 </body>
 </html>

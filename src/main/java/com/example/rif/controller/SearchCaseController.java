@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping("/searchCase")
@@ -24,6 +25,7 @@ public class SearchCaseController {
     }
     @GetMapping()
     public String allList(Model model, HttpServletRequest request){
+        List<RequestForm> requestFormList = requestFormService.findAll();
         model.addAttribute("caseList", requestFormService.findAll());
         String username = request.getRemoteUser();
         boolean isadmin = request.isUserInRole("ADMIN");

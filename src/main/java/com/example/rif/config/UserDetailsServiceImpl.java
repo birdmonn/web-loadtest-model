@@ -11,26 +11,28 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
-
-import static java.util.Collections.emptyList;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
-    @Autowired
     private UserWebService userWebService;
+
+    @Autowired
+    public UserDetailsServiceImpl(UserWebService userWebService) {
+        this.userWebService = userWebService;
+    }
 
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserWeb userWeb = userWebService.findByUsername(username);
-
-        return new User(userWeb.getUsername(), userWeb.getPassword(),getRole(userWeb.getRole()));
+        return new User(userWeb.getUsername(), userWeb.getPassword(), getRole(userWeb.getRole()));
     }
 
-    private List getRole(String role){
-        return Arrays.asList(new SimpleGrantedAuthority("ROLE_"+role));
+    private List<SimpleGrantedAuthority> getRole(String role) {
+        List<SimpleGrantedAuthority> roleList = new ArrayList<>();
+        roleList.add(new SimpleGrantedAuthority("ROLE_" + role));
+        return roleList;
     }
 }

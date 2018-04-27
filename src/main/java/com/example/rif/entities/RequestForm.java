@@ -6,6 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
@@ -19,12 +20,13 @@ public class RequestForm {
     //  project detail
     private String projectId;
     @NotNull(message = "ProjectName cannot be empty")
-    @Size(min=1,message = "ProjectName cannot be empty")
+    @NotEmpty(message = "ProjectName cannot be empty")
+    @Min(1)
     private String projectName;
     private String significantLevel;
     private String requestType;
     @NotNull(message = "Contact cannot be empty")
-    @Size(min=1,message = "Contact cannot be empty")
+    @Size(min = 1, message = "Contact cannot be empty")
     private String contact;
     private String mobilePhone;
     private String objective;
@@ -74,14 +76,16 @@ public class RequestForm {
     private boolean loadTestTypeReliabilityTest;
     // loadTest Date
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern="dd/MM/yyyy")
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date targetStartDate;
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern="dd/MM/yyyy")
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date targetFinishDate;
 
     private String remark;
     private String statusRequest = "wait";
+    @ManyToOne
+    private UserWeb userWeb;
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created", updatable = false)
@@ -395,11 +399,19 @@ public class RequestForm {
     }
 
     public String getStatusRequest() {
-        return (this.statusRequest == null) ?"wait" :statusRequest;
+        return (this.statusRequest == null) ? "wait" : statusRequest;
     }
 
     public void setStatusRequest(String statusRequest) {
         this.statusRequest = statusRequest;
+    }
+
+    public UserWeb getUserWeb() {
+        return userWeb;
+    }
+
+    public void setUserWeb(UserWeb userWeb) {
+        this.userWeb = userWeb;
     }
 }
 
