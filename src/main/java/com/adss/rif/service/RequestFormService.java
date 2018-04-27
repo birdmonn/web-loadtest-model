@@ -1,6 +1,6 @@
-package com.example.rif.service;
+package com.adss.rif.service;
 
-import com.example.rif.entities.RequestForm;
+import com.adss.rif.entities.RequestForm;
 
 import java.util.List;
 

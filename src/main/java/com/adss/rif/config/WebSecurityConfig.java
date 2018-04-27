@@ -1,4 +1,4 @@
-package com.example.rif.config;
+package com.adss.rif.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

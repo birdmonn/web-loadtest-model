@@ -1,4 +1,4 @@
-package com.example.rif.config;
+package com.adss.rif.config;
 
 public interface SecurityService {
     String findLoggedInUsername();

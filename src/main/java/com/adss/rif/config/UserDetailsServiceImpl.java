@@ -1,7 +1,7 @@
-package com.example.rif.config;
+package com.adss.rif.config;
 
-import com.example.rif.entities.UserWeb;
-import com.example.rif.service.UserWebService;
+import com.adss.rif.entities.UserWeb;
+import com.adss.rif.service.UserWebService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;

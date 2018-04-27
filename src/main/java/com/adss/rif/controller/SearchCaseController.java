@@ -1,9 +1,8 @@
-package com.example.rif.controller;
+package com.adss.rif.controller;
 
-import com.example.rif.entities.RequestForm;
-import com.example.rif.service.RequestFormService;
+import com.adss.rif.entities.RequestForm;
+import com.adss.rif.service.RequestFormService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
