@@ -21,12 +21,11 @@ public class RequestForm {
     private String projectId;
     @NotNull(message = "ProjectName cannot be empty")
     @NotEmpty(message = "ProjectName cannot be empty")
-    @Min(1)
     private String projectName;
     private String significantLevel;
     private String requestType;
     @NotNull(message = "Contact cannot be empty")
-    @Size(min = 1, message = "Contact cannot be empty")
+    @NotEmpty(message = "ProjectName cannot be empty")
     private String contact;
     private String mobilePhone;
     private String objective;
@@ -85,6 +84,7 @@ public class RequestForm {
     private String remark;
     private String statusRequest = "wait";
     @ManyToOne
+//    @Column(updatable = false)
     private UserWeb userWeb;
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
