@@ -30,7 +30,7 @@ public class FormController implements WebMvcConfigurer {
     }
 
     @GetMapping()
-    public String showForm(RequestForm requestForm) {
+    public String showForm() {
         return PathView.formCreate;
     }
 
