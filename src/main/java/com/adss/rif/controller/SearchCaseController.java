@@ -1,7 +1,9 @@
 package com.adss.rif.controller;
 
 import com.adss.rif.entities.RequestForm;
+import com.adss.rif.entities.SearchForm;
 import com.adss.rif.service.RequestFormService;
+import com.adss.rif.utils.PathView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -23,18 +24,16 @@ public class SearchCaseController {
         this.requestFormService = requestFormService;
     }
     @GetMapping()
-    public String allList(Model model, HttpServletRequest request){
+    public String allList(Model model){
         List<RequestForm> requestFormList = requestFormService.findAll();
         model.addAttribute("caseList", requestFormService.findAll());
-        String username = request.getRemoteUser();
-        boolean isadmin = request.isUserInRole("ADMIN");
-        return "searchCase";
+        return PathView.searchCase;
     }
 
 
     @PostMapping()
-    public String qurey(@Valid RequestForm requestForm,Model model){
-        model.addAttribute("caseList", requestFormService.findByProjectIdAndProjectNameAndContact(requestForm.getProjectId(),requestForm.getProjectName(),requestForm.getContact()));
-        return "searchCase";
+    public String qurey(@Valid SearchForm searchForm, Model model){
+        model.addAttribute("caseList", requestFormService.findByProjectIdAndProjectNameAndContact(searchForm.getProjectId(),searchForm.getProjectName(),searchForm.getContact()));
+        return PathView.searchCase;
     }
 }

@@ -1,99 +1,81 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta charset="utf-8">
-<title>Form</title>
-<script src="./jquery-3.3.1.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/Form-css.css" th:href="@{/css/Form-css.css}">
-    <link rel="stylesheet" type="text/css" href="css/menu-bar-css.css" th:href="@{/css/menu-bar-css.css}">
-    <link rel="stylesheet" type="text/css" href="css/row-col.css" th:href="@{/css/row-col.css}">
-	<link rel="stylesheet" type="text/css" href="css/table-case-css.css" th:href="@{/css/table-case-css.css}">
-    <link rel="stylesheet" type="text/css" href="css/button.css" th:href="@{/css/button.css}">
-    <link href="bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet" th:href="@{/bootstrap-3.3.7-dist/css/bootstrap.css}" />
+    <title>Search Case</title>
+    <div th:include="fragments/head :: head" th:remove="tag">Global Header</div>
+    <link rel="stylesheet" type="text/css" href="css/table-case-css.css" th:href="@{/css/table-case-css.css}">
 </head>
 <body style="font-family:Verdana;">
-<div class="Banner" style="background-color:#f1f1f1;padding:15px;">
-  <h1>Banner web</h1>
+<!--  Banner -->
+<div th:replace="fragments/banner :: .banner"> menu Bar</div>
+<!--  menu -->
+<div th:replace="fragments/menuBar :: menuBar('searchCase')">menuBar</div>
+<div class="search-case">
+    <form method="post" action="/searchCase#" th:action="@{/searchCase}" th:object="${requestForm}">
+        <div class="row">
+            <div class="col-tab-10"></div>
+            <div class="col-10">
+                <label>Search</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-tab-10"></div>
+            <div class="col-10">
+                <label>Project ID</label>
+            </div>
+            <div class="col-25">
+                <input type="text" id="pId" name="projectId">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-tab-10"></div>
+            <div class="col-10">
+                <label>Project Name</label>
+            </div>
+            <div class="col-25">
+                <input type="text" id="pName" name="projectName">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-tab-10"></div>
+            <div class="col-10">
+                <label>Contact</label>
+            </div>
+            <div class="col-25">
+                <input type="text" id="contact" name="contact">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-tab-10"></div>
+            <div class="col-tab-10"></div>
+            <div class="col-10">
+                <button class="button" type="submit" value="Submit">Search</button>
+            </div>
+        </div>
+    </form>
 </div>
-    <ul>
-        <li><a href="/form">Form</a></li>
-        <li><a class="active" href="/searchCase">Search Case</a></li>
-        <li><a href="#">Report</a></li>
-        <li style="float:right"><a href="/logout">[[${#httpServletRequest.remoteUser}]] [Logout]</a></li>
-    </ul>
-    <div class="search-case">
-        <form method="post" action="/searchCase#" th:action="@{/searchCase}" th:object="${requestForm}">
-            <div class="row">
-                <div class="col-tab-10"></div>
-                <div class="col-10">
-                    <label>Search</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-tab-10"></div>
-                <div class="col-10">
-                    <label>Project ID</label>
-                </div>
-                <div class="col-25">
-                    <input type="text" id="pId" name="projectId">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-tab-10"></div>
-                <div class="col-10">
-                    <label>Project Name</label>
-                </div>
-                <div class="col-25">
-                    <input type="text" id="pName" name="projectName">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-tab-10"></div>
-                <div class="col-10">
-                    <label>Contact</label>
-                </div>
-                <div class="col-25">
-                    <input type="text" id="contact" name="contact">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-tab-10"></div>
-                <div class="col-tab-10"></div>
-                <div class="col-10">
-                    <button class="button" type="submit" value="Submit">Search</button>
-                </div>
-            </div>
-
-        </form>
-    </div>
-  <div class="container">
+<div class="container">
     <h2>Search Case </h2>
-      <h5 th:text="${#lists.size(caseList)+ 'ทั้งหมด'}">ทั้งหมด</h5>
+    <h5 th:text="${#lists.size(caseList)+ 'ทั้งหมด'}">ทั้งหมด</h5>
     <table id="table-case">
-      <tr>
-        <th>Project Id</th>
-        <th>Project Name</th>
-          <th>Contact</th>
-          <th>Status</th>
-          <th>User</th>
-      </tr>
+        <tr>
+            <th>Project Id</th>
+            <th>Project Name</th>
+            <th>Contact</th>
+            <th>Status</th>
+            <th>User</th>
+        </tr>
         <tr th:each="case : ${caseList}">
-        <td><a th:text="${case.projectId}" th:href="${'/form/' + case.id}"></a></td>
+            <td><a th:text="${case.projectId}" th:href="${'/form/' + case.id}"></a></td>
             <td><a th:text="${case.projectName}" th:href="${'/form/' + case.id}"></a></td>
             <td><a th:text="${case.contact}" th:href="${'/form/' + case.id}"></a></td>
             <td><a th:text="${case.statusRequest}" th:href="${'/form/' + case.id}"></a></td>
             <td><a th:text="${case.userWeb.username}" th:href="${'/form/edit/' + case.id}"></a></td>
-      </tr>
+        </tr>
     </table>
-  </div>
-<div style="background-color:#f1f1f1;text-align:center;padding:10px;margin-top:7px;font-size:12px;">
-  <div>
-    <h3> contact us </h3>
-    <div> Email : nattapoo@ais.co.th </div>
-    <div> phone : 02-2222222 </div>
-  </div>
 </div>
+<!--  footer -->
+<div th:replace="fragments/footer :: .footer"> menu Bar</div>
 <script>
 </script>
 </body>
