@@ -1,6 +1,7 @@
 package com.adss.rif.controller;
 
 import com.adss.rif.entities.RequestForm;
+import com.adss.rif.entities.SearchForm;
 import com.adss.rif.service.RequestFormService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,15 +27,15 @@ public class SearchCaseController {
     public String allList(Model model, HttpServletRequest request){
         List<RequestForm> requestFormList = requestFormService.findAll();
         model.addAttribute("caseList", requestFormService.findAll());
-        String username = request.getRemoteUser();
-        boolean isadmin = request.isUserInRole("ADMIN");
+//        String username = request.getRemoteUser();
+//        boolean isadmin = request.isUserInRole("ADMIN");
         return "searchCase";
     }
 
 
     @PostMapping()
-    public String qurey(@Valid RequestForm requestForm,Model model){
-        model.addAttribute("caseList", requestFormService.findByProjectIdAndProjectNameAndContact(requestForm.getProjectId(),requestForm.getProjectName(),requestForm.getContact()));
+    public String qurey(@Valid SearchForm searchForm, Model model){
+        model.addAttribute("caseList", requestFormService.findByProjectIdAndProjectNameAndContact(searchForm.getProjectId(),searchForm.getProjectName(),searchForm.getContact()));
         return "searchCase";
     }
 }
