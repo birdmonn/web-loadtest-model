@@ -57,7 +57,8 @@ public class RequestFormServiceImpl implements RequestFormService {
 
     @Override
     public RequestForm update(Long id, RequestForm requestForm) {
-        requestForm.setId(id);
+        RequestForm dataFormOriginal =  requestFormRepository.findAsId(id);
+        requestForm.setUserWeb(dataFormOriginal.getUserWeb());
         return requestFormRepository.saveAndFlush(requestForm);
     }
 
