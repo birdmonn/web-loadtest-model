@@ -30,7 +30,7 @@ public class FormController implements WebMvcConfigurer {
     }
 
     @GetMapping()
-    public String showForm() {
+    public String showForm(RequestForm requestForm) {
         return PathView.formCreate;
     }
 
@@ -51,7 +51,7 @@ public class FormController implements WebMvcConfigurer {
         String userlogin = request.getRemoteUser();
         String userCreateForm = requestForm.getUserWeb().getUsername();
         if (requestForm == null ||(request.isUserInRole("USER") && !request.getRemoteUser().equals(requestForm.getUserWeb().getUsername()))) {
-            return "redirect:/index";
+            return "redirect:"+PathView.index;
         }
         model.addAttribute("requestForm", requestForm);
         return PathView.formEdit;

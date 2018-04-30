@@ -30,7 +30,6 @@ public class SearchCaseController {
         return PathView.searchCase;
     }
 
-
     @PostMapping()
     public String qurey(@Valid SearchForm searchForm, Model model){
         model.addAttribute("caseList", requestFormService.findByProjectIdAndProjectNameAndContact(searchForm.getProjectId(),searchForm.getProjectName(),searchForm.getContact()));

@@ -2,6 +2,7 @@ package com.adss.rif.controller;
 
 import com.adss.rif.entities.UserWeb;
 import com.adss.rif.service.UserWebService;
+import com.adss.rif.utils.PathView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -32,6 +33,6 @@ public class RegisterController {
         userWeb.setRole("USER");
         userWeb.setPassword(new BCryptPasswordEncoder().encode(userWeb.getPassword()));
         userWebService.create(userWeb);
-        return "login";
+        return PathView.login;
     }
 }
