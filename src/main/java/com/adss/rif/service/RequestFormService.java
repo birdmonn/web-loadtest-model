@@ -10,6 +10,8 @@ public interface RequestFormService {
 
     RequestForm findById(Long id);
 
+    List<RequestForm> findByUserWeb(String userWeb);
+
     List<RequestForm> findByProjectIdAndProjectNameAndContact(String projectId,String projectName,String contact);
 
     RequestForm create(RequestForm requestForm);

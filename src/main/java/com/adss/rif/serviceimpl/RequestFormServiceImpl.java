@@ -28,6 +28,11 @@ public class RequestFormServiceImpl implements RequestFormService {
     }
 
     @Override
+    public List<RequestForm> findByUserWeb(String userWeb) {
+        return requestFormRepository.findByUserWeb(userWeb);
+    }
+
+    @Override
     public List<RequestForm> findByProjectIdAndProjectNameAndContact(String projectId, String projectName, String contact) {
         if (projectId.trim().equals("") && projectName.trim().equals("") && !contact.trim().equals("")) {
             return requestFormRepository.findByContact(contact);
