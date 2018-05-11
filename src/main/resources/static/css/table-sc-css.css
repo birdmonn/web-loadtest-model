@@ -1,0 +1,23 @@
+@charset "utf-8";
+/* CSS Document */
+#table-cs {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+border-collapse: collapse;
+}
+
+#table-cs td, #table-cs th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#table-cs tr:nth-child(even){background-color: #f2f2f2;}
+
+#table-cs tr:hover {background-color: #ddd;}
+
+#table-cs th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #8dc63f;
+    color: white;
+}

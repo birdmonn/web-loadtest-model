@@ -1,5 +1,6 @@
 package com.adss.rif.controller;
 
+import com.adss.rif.entities.LoadTestScenarios;
 import com.adss.rif.entities.RequestForm;
 import com.adss.rif.entities.UserWeb;
 import com.adss.rif.service.RequestFormService;
@@ -77,5 +78,13 @@ public class FormController implements WebMvcConfigurer {
         }
         requestFormService.update(id, requestForm);
         return "redirect:"+PathView.searchCase;
+    }
+
+    @PostMapping(value="", params={"addRowLoadTest"})
+    public String addRowLoadTest(RequestForm requestForm,Model model, final BindingResult bindingResult, HttpServletRequest request) {
+        requestForm.getLoadTestScenariosList().add(new LoadTestScenarios());
+        requestForm.setId(123L);
+        model.addAttribute("requestForm", requestForm);
+        return PathView.formCreate;
     }
 }

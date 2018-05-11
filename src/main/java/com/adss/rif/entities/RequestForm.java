@@ -1,15 +1,17 @@
 package com.adss.rif.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "request_form")
@@ -86,6 +88,8 @@ public class RequestForm {
     @ManyToOne
 //    @Column(updatable = false)
     private UserWeb userWeb;
+    @OneToMany(mappedBy = "requestForm")
+    private List<LoadTestScenarios> loadtestList = new ArrayList<>();
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created", updatable = false)
@@ -412,6 +416,15 @@ public class RequestForm {
 
     public void setUserWeb(UserWeb userWeb) {
         this.userWeb = userWeb;
+    }
+
+    @JsonIgnore
+    public List<LoadTestScenarios> getLoadtestList() {
+        return loadtestList;
+    }
+
+    public void setLoadtestList(List<LoadTestScenarios> loadtestList) {
+        this.loadtestList = loadtestList;
     }
 }
 
