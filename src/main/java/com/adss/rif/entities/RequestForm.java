@@ -1,15 +1,16 @@
 package com.adss.rif.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "request_form")
@@ -86,6 +87,12 @@ public class RequestForm {
     @ManyToOne
 //    @Column(updatable = false)
     private UserWeb userWeb;
+    @OneToMany(mappedBy = "requestForm")
+    private List<LoadTestScenario> loadTestScenarioList = new ArrayList<>();
+    @OneToMany(mappedBy = "requestForm")
+    private List<StressTestScenario> stressTestScenarioList = new ArrayList<>();
+    @OneToMany(mappedBy = "requestForm")
+    private List<ReliabilityTestScenario> reliabilityTestScenarioList = new ArrayList<>();
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created", updatable = false)
@@ -412,6 +419,31 @@ public class RequestForm {
 
     public void setUserWeb(UserWeb userWeb) {
         this.userWeb = userWeb;
+    }
+
+    @JsonIgnore
+    public List<LoadTestScenario> getLoadTestScenarioList() {
+        return loadTestScenarioList;
+    }
+
+    public void setLoadTestScenarioList(List<LoadTestScenario> loadTestScenarioList) {
+        this.loadTestScenarioList = loadTestScenarioList;
+    }
+    @JsonIgnore
+    public List<StressTestScenario> getStressTestScenarioList() {
+        return stressTestScenarioList;
+    }
+
+    public void setStressTestScenarioList(List<StressTestScenario> stressTestScenarioList) {
+        this.stressTestScenarioList = stressTestScenarioList;
+    }
+    @JsonIgnore
+    public List<ReliabilityTestScenario> getReliabilityTestScenarioList() {
+        return reliabilityTestScenarioList;
+    }
+
+    public void setReliabilityTestScenarioList(List<ReliabilityTestScenario> reliabilityTestScenarioList) {
+        this.reliabilityTestScenarioList = reliabilityTestScenarioList;
     }
 }
 
