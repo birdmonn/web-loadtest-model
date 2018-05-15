@@ -15,13 +15,13 @@
         <div class="row">
             <div class="col-tab-10"></div>
             <div class="col-10">
-                <label>Search</label>
+                <label th:text="#{label.search}">Search</label>
             </div>
         </div>
         <div class="row">
             <div class="col-tab-10"></div>
             <div class="col-10">
-                <label>Project ID</label>
+                <label th:text="#{label.projectId}">Project ID</label>
             </div>
             <div class="col-25">
                 <input type="text" id="pId" name="projectId">
@@ -30,7 +30,7 @@
         <div class="row">
             <div class="col-tab-10"></div>
             <div class="col-10">
-                <label>Project Name</label>
+                <label th:text="#{label.projectName}">Project Name</label>
             </div>
             <div class="col-25">
                 <input type="text" id="pName" name="projectName">
@@ -39,7 +39,7 @@
         <div class="row">
             <div class="col-tab-10"></div>
             <div class="col-10">
-                <label>Contact</label>
+                <label th:text="#{label.contact}">Contact</label>
             </div>
             <div class="col-25">
                 <input type="text" id="contact" name="contact">
@@ -59,11 +59,11 @@
     <h5 th:text="${#lists.size(caseList)+ 'ทั้งหมด'}">ทั้งหมด</h5>
     <table id="table-case">
         <tr>
-            <th>Project Id</th>
-            <th>Project Name</th>
-            <th>Contact</th>
-            <th>Status</th>
-            <th>User</th>
+            <th th:text="#{label.projectId}">Project Id</th>
+            <th th:text="#{label.projectName}">Project Name</th>
+            <th th:text="#{label.contact}">Contact</th>
+            <th th:text="#{label.status}">Status</th>
+            <th th:text="#{label.user}">User</th>
         </tr>
         <tr th:each="case : ${caseList}">
             <td><a th:text="${case.projectId}" th:href="${'/form/' + case.id}"></a></td>

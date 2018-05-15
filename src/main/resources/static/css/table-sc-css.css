@@ -1,20 +1,25 @@
 @charset "utf-8";
 /* CSS Document */
-#table-cs {
+.table-sc {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 border-collapse: collapse;
 }
 
-#table-cs td, #table-cs th {
+.table-sc td{
+border: 1px solid #ddd;
+    padding: 8px;
+    vertical-align: top;
+}
+.table-sc th {
     border: 1px solid #ddd;
     padding: 8px;
+    text-align : center;
 }
+.table-sc tr:nth-child(even){background-color: #f2f2f2;}
 
-#table-cs tr:nth-child(even){background-color: #f2f2f2;}
+.table-cs tr:hover {background-color: #ddd;}
 
-#table-cs tr:hover {background-color: #ddd;}
-
-#table-cs th {
+.table-sc th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;

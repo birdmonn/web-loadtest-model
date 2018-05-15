@@ -1,24 +1,24 @@
 package com.adss.rif.entities;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "load_test_sc")
-public class LoadTestScenarios {
+@Table(name = "stress_test_sc")
+public class StressTestScenario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String detail;
     private String dataTest;
     private String concurrent;
-    private String Commend;
-
+    private String other;
     @ManyToOne
     private RequestForm requestForm;
-
+    @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created", updatable = false)
     private Date created;
@@ -58,12 +58,12 @@ public class LoadTestScenarios {
         this.concurrent = concurrent;
     }
 
-    public String getCommend() {
-        return Commend;
+    public String getOther() {
+        return other;
     }
 
-    public void setCommend(String commend) {
-        Commend = commend;
+    public void setOther(String other) {
+        this.other = other;
     }
 
     public Date getCreated() {
