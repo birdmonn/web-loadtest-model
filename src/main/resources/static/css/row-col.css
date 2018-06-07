@@ -41,6 +41,28 @@
     width: 90%;
     margin-top: 6px;
 }
+.col-tab-80{
+    float: left;
+    width: 80%;
+    margin-top: 6px;
+}
+.col-20-right{
+    text-align : right;
+    float: right;
+    width: 20%;
+       margin-top: 6px;
+}
+.col-40-right{
+    text-align : right;
+    float:left;
+    width: 40%;
+       margin-top: 6px;
+}
+.col-tab-60{
+    float: left;
+    width: 60%;
+       margin-top: 6px;
+}
 /* Clear floats after the columns */
 .row:after {
     content: "";
@@ -48,11 +70,13 @@
     clear: both;
 }
 @media screen and (max-width: 600px) {
-    .col-10,.col-15,.col-25, .col-65, input[type=submit] {
+    .col-10,.col-15,.col-200right,.col-25,.col-40-right, .col-65, input[type=submit] {
         width: 100%;
         margin-top: 0;
+        margin-right: 10px;
+        margin-left: 10px;
     }
-	.col-tab-10,.col-tab-5{
+	.col-tab-10,.col-tab-5,.col-tab-60,.col-tab-80{
 	width: 0%;
 	}
 }
