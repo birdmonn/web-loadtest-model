@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
-@RequestMapping("/index")
+@RequestMapping("")
 public class IndexController {
 
     private RequestFormService requestFormService;
@@ -24,10 +24,23 @@ public class IndexController {
         this.requestFormService = requestFormService;
     }
 
-    @GetMapping()
-    public String myCaseShow (Model model,HttpServletRequest request){
+    @GetMapping("/index")
+    public String myCaseShowIndex(Model model, HttpServletRequest request) {
+        List<RequestForm> requestFormList = requestFormService.findByCreateByUser(request.getRemoteUser());
+        model.addAttribute("caseList", requestFormList);
+        return PathView.index;
+    }
 
-        List<RequestForm> requestFormList = requestFormService.findByUserWeb(request.getRemoteUser());
+    @GetMapping("/")
+    public String myCaseShowIndex2(Model model, HttpServletRequest request) {
+        List<RequestForm> requestFormList = requestFormService.findByCreateByUser(request.getRemoteUser());
+        model.addAttribute("caseList", requestFormList);
+        return PathView.index;
+    }
+
+    @GetMapping()
+    public String myCaseShow(Model model, HttpServletRequest request) {
+        List<RequestForm> requestFormList = requestFormService.findByCreateByUser(request.getRemoteUser());
         model.addAttribute("caseList", requestFormList);
         return PathView.index;
     }

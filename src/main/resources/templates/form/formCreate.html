@@ -17,10 +17,10 @@
                 todayBtn: true
             }).datepicker("setDate", "0");  //กำหนดเป็นวันปัจุบัน
         });
-        function addChild(type){
+        function addChild(type,page){
         $.ajax({
             type : "POST",
-            url : "/form?"+type,
+            url : "/form?"+type+"&page="+page,
             headers : { 'X-CSRF-TOKEN':token
             },
             data : $('form').serialize(),
@@ -30,13 +30,6 @@
             }
         });
         }
-
-
-
-
-
-
-
     </script>
 </head>
 <body style="font-family:Verdana;" th:id="form">
@@ -394,7 +387,10 @@
                     </thead>
                     <tbody>
                     <tr th:each="loadtest,rowStat : *{loadTestScenarioList}">
-                        <td th:text="${rowStat.count}">1</td>
+                        <td>
+                            <label th:text="${rowStat.count}">1</label>
+                            <input type="hidden" name="*{loadTestScenarioList[__${rowStat.index}__].id}" th:field="*{loadTestScenarioList[__${rowStat.index}__].id}">
+                        </td>
                         <td>
                             <input type="text" th:field="*{loadTestScenarioList[__${rowStat.index}__].detail}"/>
                         </td>
@@ -412,7 +408,7 @@
                 </table>
             </div>
             <div class="col-10">
-                <button type="button" name="addRowLoadTest" onclick="addChild('addRowLoadTest')"
+                <button type="button" name="addRowLoadTest" onclick="addChild('addRowLoadTest','formCreate')"
                         th:text="#{label.addRow}">Add row
                 </button>
             </div>
@@ -432,7 +428,10 @@
                     </thead>
                     <tbody>
                     <tr th:each="reliTest,rowStat : *{reliabilityTestScenarioList}">
-                        <td th:text="${rowStat.count}">1</td>
+                        <td>
+                            <label th:text="${rowStat.count}">1</label>
+                            <input type="hidden" name="*{reliabilityTestScenarioList[__${rowStat.index}__].id}" th:field="*{reliabilityTestScenarioList[__${rowStat.index}__].id}">
+                        </td>
                         <td>
                             <input type="text" th:field="*{reliabilityTestScenarioList[__${rowStat.index}__].detail}"/>
                         </td>
@@ -450,7 +449,7 @@
                 </table>
             </div>
             <div class="col-10">
-                <button type="button"  onclick="addChild('addRowReliTest')"
+                <button type="button"  onclick="addChild('addRowReliTest','formCreate')"
                         th:text="#{label.addRow}">Add row
                 </button>
             </div>
@@ -470,7 +469,10 @@
                     </thead>
                     <tbody>
                     <tr th:each="stressTest,rowStat : *{stressTestScenarioList}">
-                        <td th:text="${rowStat.count}">1</td>
+                        <td>
+                            <label th:text="${rowStat.count}">1</label>
+                            <input type="hidden" name="*{stressTestScenarioList[__${rowStat.index}__].id}" th:field="*{stressTestScenarioList[__${rowStat.index}__].id}">
+                        </td>
                         <td>
                             <input type="text" th:field="*{stressTestScenarioList[__${rowStat.index}__].detail}"/>
                         </td>
@@ -488,7 +490,7 @@
                 </table>
             </div>
             <div class="col-10">
-                <button type="button"  onclick="addChild('addRowStressTest')"
+                <button type="button"  onclick="addChild('addRowStressTest','formCreate')"
                         th:text="#{label.addRow}">Add row
                 </button>
             </div>

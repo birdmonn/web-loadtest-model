@@ -16,6 +16,8 @@ public interface StressTestScenarioService {
 
     void createAllList(List<StressTestScenario> stressTestScenarios, RequestForm requestForm);
 
+    void updateStatusAllList(List<StressTestScenario> stressTestScenarioList);
+
     StressTestScenario update(Long id, StressTestScenario stressTestScenario);
 
     StressTestScenario deleteById(Long id);

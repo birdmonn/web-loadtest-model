@@ -66,11 +66,11 @@
             <th th:text="#{label.user}">User</th>
         </tr>
         <tr th:each="case : ${caseList}">
-            <td><a th:text="${case.projectId}" th:href="${'/form/' + case.id}"></a></td>
-            <td><a th:text="${case.projectName}" th:href="${'/form/' + case.id}"></a></td>
-            <td><a th:text="${case.contact}" th:href="${'/form/' + case.id}"></a></td>
-            <td><a th:text="${case.statusRequest}" th:href="${'/form/' + case.id}"></a></td>
-            <td><a th:text="${case.userWeb.username}" th:href="${'/form/edit/' + case.id}"></a></td>
+            <td><a th:text="${case.projectId}" th:href="${'/form/formView/' + case.id}"></a></td>
+            <td><a th:text="${case.projectName}" th:href="${'/form/formView/' + case.id}"></a></td>
+            <td><a th:text="${case.contact}" th:href="${'/form/formView/' + case.id}"></a></td>
+            <td><a th:text="${case.statusRequest}" th:href="${'/form/formView/' + case.id}"></a></td>
+            <td><a th:text="${case.createByUser.username}" th:href="${'/form/formView/'+case.id}"></a></td>
         </tr>
     </table>
 </div>

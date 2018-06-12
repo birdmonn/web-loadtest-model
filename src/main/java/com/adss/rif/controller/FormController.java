@@ -51,13 +51,13 @@ public class FormController implements WebMvcConfigurer {
         return PathView.formCreate;
     }
 
-    @GetMapping("edit/{id}")
+    @GetMapping("formEdit/{id}")
     public String test(@PathVariable long id, Model model, HttpServletRequest request) {
         RequestForm requestForm = requestFormService.findById(id);
-        boolean roleuser = request.isUserInRole("USER");
-        String userlogin = request.getRemoteUser();
-        String userCreateForm = requestForm.getUserWeb().getUsername();
-        if (requestForm == null || (request.isUserInRole("USER") && !request.getRemoteUser().equals(requestForm.getUserWeb().getUsername()))) {
+//        boolean roleuser = request.isUserInRole("USER");
+//        String userlogin = request.getRemoteUser();
+//        String userCreateForm = requestForm.getUserWeb().getUsername();
+        if (requestForm == null || (request.isUserInRole("USER") && !request.getRemoteUser().equals(requestForm.getCreateByUser().getUsername()))) {
             return "redirect:" + PathView.index;
         }
         model.addAttribute("requestForm", requestForm);
@@ -71,17 +71,18 @@ public class FormController implements WebMvcConfigurer {
         if (bindingResult.hasErrors() || userWeb == null) {
             return PathView.formCreate;
         }
-        requestForm.setUserWeb(userWeb);
-        RequestForm formSave =  requestFormService.create(requestForm);
-        if (formSave != null){
-            loadTestScenarioService.createAllList(requestForm.getLoadTestScenarioList(),formSave);
-            reliabilityTestScenarioService.createAllList(requestForm.getReliabilityTestScenarioList(),formSave);
-            stressTestScenarioService.createAllList(requestForm.getStressTestScenarioList(),formSave);
+        requestForm.setCreateByUser(userWeb);
+        RequestForm formSave = requestFormService.create(requestForm);
+        if (formSave != null) {
+            loadTestScenarioService.createAllList(requestForm.getLoadTestScenarioList(), formSave);
+            reliabilityTestScenarioService.createAllList(requestForm.getReliabilityTestScenarioList(), formSave);
+            stressTestScenarioService.createAllList(requestForm.getStressTestScenarioList(), formSave);
+            return "redirect:" + PathView.formView +formSave.getId();
         }
-        return "redirect:" + PathView.searchCase;
+        return PathView.formCreate;
     }
 
-    @PostMapping("edit/{id}")
+    @PostMapping("formEdit/{id}")
     public String updateRequestForm(@PathVariable long id, @Valid RequestForm requestForm, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors() || null == requestFormService.findById(id) || requestForm.getProjectName().equals("")) {
@@ -92,23 +93,23 @@ public class FormController implements WebMvcConfigurer {
     }
 
     @PostMapping(value = "", params = {"addRowLoadTest"})
-    public String addRowLoadTest(RequestForm requestForm, Model model, final BindingResult bindingResult, HttpServletRequest request) {
+    public String addRowLoadTest(@RequestParam String page, RequestForm requestForm, Model model, final BindingResult bindingResult, HttpServletRequest request) {
         requestForm.getLoadTestScenarioList().add(new LoadTestScenario());
         model.addAttribute("requestForm", requestForm);
-        return PathView.formCreate;
+        return ".form/" + page;
     }
 
     @PostMapping(value = "", params = {"addRowReliTest"})
-    public String addRowReliTest(RequestForm requestForm, Model model, final BindingResult bindingResult, HttpServletRequest request) {
+    public String addRowReliTest(@RequestParam String page, RequestForm requestForm, Model model, final BindingResult bindingResult, HttpServletRequest request) {
         requestForm.getReliabilityTestScenarioList().add(new ReliabilityTestScenario());
         model.addAttribute("requestForm", requestForm);
-        return PathView.formCreate;
+        return "/form/" + page;
     }
 
     @PostMapping(value = "", params = {"addRowStressTest"})
-    public String addRowStressTest(RequestForm requestForm, Model model, final BindingResult bindingResult, HttpServletRequest request) {
+    public String addRowStressTest(@RequestParam String page, RequestForm requestForm, Model model, final BindingResult bindingResult, HttpServletRequest request) {
         requestForm.getStressTestScenarioList().add(new StressTestScenario());
         model.addAttribute("requestForm", requestForm);
-        return PathView.formCreate;
+        return "/form/" + page;
     }
 }

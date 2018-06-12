@@ -5,7 +5,7 @@ public class PathView {
     public static final String formCreate = "/form/formCreate";
     public static final String formEdit = "/form/formEdit";
     public static final String formView = "/form/formView";
-
+    public static final String formViewAdmin = "/form/formViewAdmin";
     //search
     public static final String searchCase = "/searchCase";
 

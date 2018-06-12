@@ -13,8 +13,8 @@ public interface RequestFormRepository extends JpaRepository<RequestForm, Long> 
     @Query("SELECT rf FROM RequestForm rf WHERE rf.id = ?1 ")
     RequestForm findAsId(Long id);
 
-    @Query("SELECT rf FROM RequestForm rf WHERE rf.userWeb.username = ?1 ")
-    List<RequestForm> findByUserWeb(String userWeb);
+    @Query("SELECT rf FROM RequestForm rf WHERE rf.createByUser.username = ?1 ")
+    List<RequestForm> findByCreateByUser(String createByUser);
 
     @Query("SELECT rf FROM RequestForm rf WHERE rf.projectId Like %?1% And rf.projectName Like %?2% And rf.contact Like %?3%" )
     List<RequestForm> findByProjectIdAndProjectNameAndContact(String projectId,String projectName,String contact);

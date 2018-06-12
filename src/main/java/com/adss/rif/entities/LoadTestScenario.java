@@ -16,6 +16,7 @@ public class LoadTestScenario {
     private String dataTest;
     private String concurrent;
     private String other;
+    private boolean scenarioPass;
 
     @ManyToOne
     private RequestForm requestForm;
@@ -89,5 +90,13 @@ public class LoadTestScenario {
 
     public void setOther(String other) {
         this.other = other;
+    }
+
+    public boolean isScenarioPass() {
+        return scenarioPass;
+    }
+
+    public void setScenarioPass(boolean scenarioPass) {
+        this.scenarioPass = scenarioPass;
     }
 }

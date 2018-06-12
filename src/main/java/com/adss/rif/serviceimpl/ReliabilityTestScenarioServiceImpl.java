@@ -47,6 +47,15 @@ public class ReliabilityTestScenarioServiceImpl implements ReliabilityTestScenar
     }
 
     @Override
+    public void updateStatusAllList(List<ReliabilityTestScenario> reliabilityTestScenarioList) {
+        for (ReliabilityTestScenario reliItem : reliabilityTestScenarioList){
+            ReliabilityTestScenario reliQuery = reliabilityTestScenarioRepository.getOne(reliItem.getId());
+            reliQuery.setScenarioPass(reliItem.isScenarioPass());
+            reliabilityTestScenarioRepository.saveAndFlush(reliQuery);
+        }
+    }
+
+    @Override
     public ReliabilityTestScenario update(Long id, ReliabilityTestScenario reliabilityTestScenario) {
         return null;
     }

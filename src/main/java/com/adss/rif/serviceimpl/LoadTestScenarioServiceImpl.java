@@ -3,9 +3,7 @@ package com.adss.rif.serviceimpl;
 import com.adss.rif.entities.LoadTestScenario;
 import com.adss.rif.entities.RequestForm;
 import com.adss.rif.repository.LoadTestScenarioRepository;
-import com.adss.rif.repository.RequestFormRepository;
 import com.adss.rif.service.LoadTestScenarioService;
-import com.adss.rif.service.RequestFormService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +26,15 @@ public class LoadTestScenarioServiceImpl implements LoadTestScenarioService {
     @Override
     public LoadTestScenario findById(Long id) {
         return loadTestScenarioRepository.getOne(id);
+    }
+
+    @Override
+    public void updateStatusAllList(List<LoadTestScenario> loadTestScenarioList) {
+        for (LoadTestScenario loadItem : loadTestScenarioList){
+            LoadTestScenario loadQuery = loadTestScenarioRepository.getOne(loadItem.getId());
+            loadQuery.setScenarioPass(loadItem.isScenarioPass());
+            loadTestScenarioRepository.saveAndFlush(loadQuery);
+        }
     }
 
     @Override
