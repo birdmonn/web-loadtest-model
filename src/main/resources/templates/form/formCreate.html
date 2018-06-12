@@ -17,10 +17,10 @@
                 todayBtn: true
             }).datepicker("setDate", "0");  //กำหนดเป็นวันปัจุบัน
         });
-        function addChild(type){
+        function addChild(type,page){
         $.ajax({
             type : "POST",
-            url : "/form?"+type,
+            url : "/form?"+type+"&page="+page,
             headers : { 'X-CSRF-TOKEN':token
             },
             data : $('form').serialize(),
@@ -408,7 +408,7 @@
                 </table>
             </div>
             <div class="col-10">
-                <button type="button" name="addRowLoadTest" onclick="addChild('addRowLoadTest')"
+                <button type="button" name="addRowLoadTest" onclick="addChild('addRowLoadTest','formCreate')"
                         th:text="#{label.addRow}">Add row
                 </button>
             </div>
@@ -449,7 +449,7 @@
                 </table>
             </div>
             <div class="col-10">
-                <button type="button"  onclick="addChild('addRowReliTest')"
+                <button type="button"  onclick="addChild('addRowReliTest','formCreate')"
                         th:text="#{label.addRow}">Add row
                 </button>
             </div>
@@ -490,7 +490,7 @@
                 </table>
             </div>
             <div class="col-10">
-                <button type="button"  onclick="addChild('addRowStressTest')"
+                <button type="button"  onclick="addChild('addRowStressTest','formCreate')"
                         th:text="#{label.addRow}">Add row
                 </button>
             </div>

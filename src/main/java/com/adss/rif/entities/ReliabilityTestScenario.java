@@ -16,6 +16,7 @@ public class ReliabilityTestScenario {
     private String dataTest;
     private String concurrent;
     private String other;
+    private boolean scenarioPass;
     @ManyToOne
     private RequestForm requestForm;
     @CreationTimestamp
@@ -88,5 +89,13 @@ public class ReliabilityTestScenario {
 
     public void setOther(String other) {
         this.other = other;
+    }
+
+    public boolean isScenarioPass() {
+        return scenarioPass;
+    }
+
+    public void setScenarioPass(boolean scenarioPass) {
+        this.scenarioPass = scenarioPass;
     }
 }

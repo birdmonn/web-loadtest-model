@@ -10,7 +10,7 @@ public interface RequestFormService {
 
     RequestForm findById(Long id);
 
-    List<RequestForm> findByUserWeb(String userWeb);
+    List<RequestForm> findByCreateByUser(String createByUser);
 
     List<RequestForm> findByProjectIdAndProjectNameAndContact(String projectId,String projectName,String contact);
 
@@ -19,5 +19,7 @@ public interface RequestFormService {
     RequestForm update(Long id, RequestForm requestForm);
 
     RequestForm deleteById(Long id);
+
+    RequestForm updateStatusScenario(RequestForm requestForm);
 
 }

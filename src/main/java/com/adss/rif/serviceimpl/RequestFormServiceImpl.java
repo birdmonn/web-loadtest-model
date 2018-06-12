@@ -28,8 +28,8 @@ public class RequestFormServiceImpl implements RequestFormService {
     }
 
     @Override
-    public List<RequestForm> findByUserWeb(String userWeb) {
-        return requestFormRepository.findByUserWeb(userWeb);
+    public List<RequestForm> findByCreateByUser(String createByUser) {
+        return requestFormRepository.findByCreateByUser(createByUser);
     }
 
     @Override
@@ -63,12 +63,22 @@ public class RequestFormServiceImpl implements RequestFormService {
     @Override
     public RequestForm update(Long id, RequestForm requestForm) {
         RequestForm dataFormOriginal =  requestFormRepository.findAsId(id);
-        requestForm.setUserWeb(dataFormOriginal.getUserWeb());
+//        requestForm.setUserWeb(dataFormOriginal.getUserWeb());
         return requestFormRepository.saveAndFlush(requestForm);
     }
 
     @Override
     public RequestForm deleteById(Long id) {
         return null;
+    }
+
+    @Override
+    public RequestForm updateStatusScenario(RequestForm requestForm) {
+        RequestForm dataFormOriginal =  requestFormRepository.findAsId(requestForm.getId());
+        dataFormOriginal.setStatusRequest(requestForm.getStatusRequest());
+        dataFormOriginal.setLoadTestScenarioList(requestForm.getLoadTestScenarioList());
+        dataFormOriginal.setReliabilityTestScenarioList(requestForm.getReliabilityTestScenarioList());
+        dataFormOriginal.setStressTestScenarioList(requestForm.getStressTestScenarioList());
+        return requestFormRepository.saveAndFlush(dataFormOriginal);
     }
 }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Form Create</title>
+    <title>Form Edit</title>
     <meta name="_csrf" th:content="${_csrf.token}"/>
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <div th:include="fragments/head :: head" th:remove="tag">Global Header</div>
@@ -17,10 +17,10 @@
                 todayBtn: true
             }).datepicker("setDate", "0");  //กำหนดเป็นวันปัจุบัน
         });
-        function addChild(type){
+        function addChild(type,page){
         $.ajax({
             type : "POST",
-            url : "/form?"+type,
+            url : "/form?"+type+"&page="+page,
             headers : { 'X-CSRF-TOKEN':token
             },
             data : $('form').serialize(),
@@ -408,7 +408,7 @@
                 </table>
             </div>
             <div class="col-10">
-                <button type="button" name="addRowLoadTest" onclick="addChild('addRowLoadTest')"
+                <button type="button" name="addRowLoadTest" onclick="addChild('addRowLoadTest','formEdit')"
                         th:text="#{label.addRow}">Add row
                 </button>
             </div>
@@ -449,7 +449,7 @@
                 </table>
             </div>
             <div class="col-10">
-                <button type="button"  onclick="addChild('addRowReliTest')"
+                <button type="button"  onclick="addChild('addRowReliTest','formEdit')"
                         th:text="#{label.addRow}">Add row
                 </button>
             </div>
@@ -490,7 +490,7 @@
                 </table>
             </div>
             <div class="col-10">
-                <button type="button"  onclick="addChild('addRowStressTest')"
+                <button class="button" type="button"  onclick="addChild('addRowStressTest','formEdit')"
                         th:text="#{label.addRow}">Add row
                 </button>
             </div>

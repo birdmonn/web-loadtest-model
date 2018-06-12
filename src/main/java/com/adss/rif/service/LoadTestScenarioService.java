@@ -15,6 +15,8 @@ public interface LoadTestScenarioService {
 
     void createAllList(List<LoadTestScenario>loadTestScenarioList ,RequestForm requestForm);
 
+    void updateStatusAllList (List<LoadTestScenario>loadTestScenarioList);
+
     LoadTestScenario update(Long id, LoadTestScenario loadTestScenario);
 
     LoadTestScenario deleteById(Long id);

@@ -86,7 +86,7 @@ public class RequestForm {
     private String statusRequest = "wait";
     @ManyToOne
 //    @Column(updatable = false)
-    private UserWeb userWeb;
+    private UserWeb createByUser;
     @OneToMany(mappedBy = "requestForm")
     private List<LoadTestScenario> loadTestScenarioList = new ArrayList<>();
     @OneToMany(mappedBy = "requestForm")
@@ -413,12 +413,12 @@ public class RequestForm {
         this.statusRequest = statusRequest;
     }
 
-    public UserWeb getUserWeb() {
-        return userWeb;
+    public UserWeb getCreateByUser() {
+        return createByUser;
     }
 
-    public void setUserWeb(UserWeb userWeb) {
-        this.userWeb = userWeb;
+    public void setCreateByUser(UserWeb createByUser) {
+        this.createByUser = createByUser;
     }
 
     @JsonIgnore

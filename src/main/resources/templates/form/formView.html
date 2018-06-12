@@ -28,8 +28,8 @@
         </div>
     </div>
     <div class="row">
-        <button type="button">
-            <a th:href="${'/form/edit/'} + *{id}" th:text="#{label.addRow}"> แก้ไข </a>
+        <button class="button" type="button">
+            <a th:href="${'/form/formEdit/'} + *{id}" th:text="#{label.edit}"> แก้ไข </a>
         </button>
     </div>
     <div class="row">
@@ -38,7 +38,7 @@
             <label th:text="#{label.own}">own</label>
         </div>
         <div class="col-25">
-            <label th:text="*{userWeb.username}">own</label>
+            <label th:text="*{createByUser.username}">own</label>
         </div>
     </div>
 
@@ -78,6 +78,7 @@
                     <th width="10%" th:text="#{label.concurrent}">Concurrent</th>
                     <th width="45%" th:text="#{label.dataTest}">Data Test</th>
                     <th width="20%" th:text="#{label.other}">Other</th>
+                    <th width="20%" th:text="#{label.scenarioPass}">Other</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -91,9 +92,13 @@
                     </td>
                     <td>
                         <label th:text="*{loadTestScenarioList[__${rowStat.index}__].dataTest}"/>
-                    </td>
+                    </td>t
                     <td>
                         <label th:text="*{loadTestScenarioList[__${rowStat.index}__].other}"/>
+                    </td>
+                    <td>
+                        <input name="*{loadTestScenarioList[__${rowStat.index}__].scenarioPass}" type="checkbox"
+                               th:field="*{loadTestScenarioList[__${rowStat.index}__].scenarioPass}" disabled>
                     </td>
                 </tr>
                 </tbody>
@@ -111,6 +116,7 @@
                     <th width="10%" th:text="#{label.concurrent}">Concurrent</th>
                     <th width="45%" th:text="#{label.dataTest}">Data Test</th>
                     <th width="20%" th:text="#{label.other}">Other</th>
+                    <th width="20%" th:text="#{label.scenarioPass}">Other</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -128,6 +134,10 @@
                     <td>
                         <label th:text="*{reliabilityTestScenarioList[__${rowStat.index}__].other}"/>
                     </td>
+                    <td>
+                        <input name="*{reliabilityTestScenarioList[__${rowStat.index}__].scenarioPass}" type="checkbox"
+                               th:field="*{reliabilityTestScenarioList[__${rowStat.index}__].scenarioPass}" disabled>
+                    </td>
                 </tr>
                 </tbody>
             </table>
@@ -144,6 +154,7 @@
                     <th width="10%" th:text="#{label.concurrent}">Concurrent</th>
                     <th width="45%" th:text="#{label.dataTest}">Data Test</th>
                     <th width="20%" th:text="#{label.other}">Other</th>
+                    <th width="20%" th:text="#{label.scenarioPass}">Other</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -160,6 +171,10 @@
                     </td>
                     <td>
                         <label th:text="*{stressTestScenarioList[__${rowStat.index}__].other}"/>
+                    </td>
+                    <td>
+                        <input name="*{stressTestScenarioList[__${rowStat.index}__].scenarioPass}" type="checkbox"
+                               th:field="*{stressTestScenarioList[__${rowStat.index}__].scenarioPass}" disabled>
                     </td>
                 </tr>
                 </tbody>

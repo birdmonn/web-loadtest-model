@@ -1,11 +1,8 @@
 package com.adss.rif.serviceimpl;
 
-import com.adss.rif.entities.ReliabilityTestScenario;
 import com.adss.rif.entities.RequestForm;
 import com.adss.rif.entities.StressTestScenario;
-import com.adss.rif.repository.ReliabilityTestScenarioRepository;
 import com.adss.rif.repository.StressTestScenarioRepository;
-import com.adss.rif.service.ReliabilityTestScenarioService;
 import com.adss.rif.service.StressTestScenarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,5 +51,14 @@ public class StressTestScenarioServiceImpl implements StressTestScenarioService 
     @Override
     public StressTestScenario deleteById(Long id) {
         return null;
+    }
+
+    @Override
+    public void updateStatusAllList(List<StressTestScenario> stressTestScenarioList) {
+        for (StressTestScenario stressItem : stressTestScenarioList){
+            StressTestScenario stressQuery = stressTestScenarioRepository.getOne(stressItem.getId());
+            stressQuery.setScenarioPass(stressItem.isScenarioPass());
+            stressTestScenarioRepository.saveAndFlush(stressQuery);
+        }
     }
 }
