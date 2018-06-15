@@ -13,7 +13,7 @@ public class UserWeb {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Size(min=6,message = "username is short")
+    @Size(min = 6, message = "username is short")
     private String username;
     private String password;
     private String firstName;

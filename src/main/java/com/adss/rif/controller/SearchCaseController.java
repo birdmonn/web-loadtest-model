@@ -23,16 +23,17 @@ public class SearchCaseController {
     public SearchCaseController(RequestFormService requestFormService) {
         this.requestFormService = requestFormService;
     }
+
     @GetMapping()
-    public String allList(Model model){
+    public String allList(Model model) {
         List<RequestForm> requestFormList = requestFormService.findAll();
         model.addAttribute("caseList", requestFormService.findAll());
         return PathView.searchCase;
     }
 
     @PostMapping()
-    public String qurey(@Valid SearchForm searchForm, Model model){
-        model.addAttribute("caseList", requestFormService.findByProjectIdAndProjectNameAndContact(searchForm.getProjectId(),searchForm.getProjectName(),searchForm.getContact()));
+    public String qurey(@Valid SearchForm searchForm, Model model) {
+        model.addAttribute("caseList", requestFormService.findByProjectIdAndProjectNameAndContact(searchForm.getProjectId(), searchForm.getProjectName(), searchForm.getContact()));
         return PathView.searchCase;
     }
 }

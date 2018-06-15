@@ -1,15 +1,11 @@
 package com.adss.rif.serviceimpl;
 
 import com.adss.rif.entities.FileReport;
-import com.adss.rif.entities.UserWeb;
 import com.adss.rif.repository.FileReportRepository;
-import com.adss.rif.repository.UserWebRepository;
 import com.adss.rif.service.FileReportService;
-import com.adss.rif.service.UserWebService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
 import java.util.List;
 
 @Service
@@ -48,7 +44,7 @@ public class FileReportServiceImpl implements FileReportService {
     }
 
     @Override
-    public void  deleteById(Long id) {
+    public void deleteById(Long id) {
         fileReportRepository.deleteById(id);
     }
 }

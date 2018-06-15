@@ -24,12 +24,12 @@ public class RegisterController {
     }
 
     @GetMapping()
-    public String openview(){
+    public String openview() {
         return "register";
     }
 
     @PostMapping()
-    public String createUser(@Valid UserWeb userWeb, Model model){
+    public String createUser(@Valid UserWeb userWeb, Model model) {
         userWeb.setRole("USER");
         userWeb.setPassword(new BCryptPasswordEncoder().encode(userWeb.getPassword()));
         userWebService.create(userWeb);

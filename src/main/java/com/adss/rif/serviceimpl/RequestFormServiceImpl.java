@@ -62,8 +62,6 @@ public class RequestFormServiceImpl implements RequestFormService {
 
     @Override
     public RequestForm update(Long id, RequestForm requestForm) {
-        RequestForm dataFormOriginal =  requestFormRepository.findAsId(id);
-//        requestForm.setUserWeb(dataFormOriginal.getUserWeb());
         return requestFormRepository.saveAndFlush(requestForm);
     }
 
@@ -74,7 +72,7 @@ public class RequestFormServiceImpl implements RequestFormService {
 
     @Override
     public RequestForm updateStatusScenario(RequestForm requestForm) {
-        RequestForm dataFormOriginal =  requestFormRepository.findAsId(requestForm.getId());
+        RequestForm dataFormOriginal = requestFormRepository.findAsId(requestForm.getId());
         dataFormOriginal.setStatusRequest(requestForm.getStatusRequest());
         dataFormOriginal.setLoadTestScenarioList(requestForm.getLoadTestScenarioList());
         dataFormOriginal.setReliabilityTestScenarioList(requestForm.getReliabilityTestScenarioList());
