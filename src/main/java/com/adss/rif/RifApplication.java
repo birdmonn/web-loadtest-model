@@ -2,10 +2,14 @@ package com.adss.rif;
 
 import com.adss.rif.service.UserWebService;
 import com.adss.rif.entities.UserWeb;
+import com.adss.rif.storage.StorageProperties;
+import com.adss.rif.storage.StorageService;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -15,6 +19,7 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import java.util.Locale;
 
 @SpringBootApplication
+@EnableConfigurationProperties(StorageProperties.class)
 public class RifApplication {
     @Autowired
     private UserWebService userWebService;
@@ -53,5 +58,10 @@ public class RifApplication {
         return messageSource;
     }
 
-
+    @Bean
+    CommandLineRunner init(StorageService storageService) {
+        return (args) -> {
+            storageService.init();
+        };
+    }
 }

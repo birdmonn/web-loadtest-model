@@ -5,14 +5,34 @@
     <title>View</title>
     <div th:include="fragments/head :: head" th:remove="tag">Global Header</div>
     <link rel="stylesheet" type="text/css" href="css/table-sc-css.css" th:href="@{/css/table-sc-css.css}">
+    <script src="./js/ShowFileNameUpload.js" th:src="@{/js/ShowFileNameUpload.js}"></script>
+    <script th:inline="javascript">
+       var token = $("meta[name='_csrf']").attr("content");
+        var header = $("meta[name='_csrf_header']").attr("content");
+        var objHeader = {};
+        objHeader[header] = token;
+        function testDelete(fileId,requestFormId){
+        $.ajax({
+            type : "POST",
+            url : "/report/deleteFile?fileId="+fileId+"&requestFormId="+requestFormId,
+            headers : { 'X-CSRF-TOKEN':token
+            },
+            data : $('form').serialize(),
+
+            success : function(response){
+                $('#form').html(response)
+            }
+        });
+        }
+    </script>
 </head>
-<body>
+<body th:id="form" th:object="${requestForm}">
 <!--  Banner -->
 <div th:replace="fragments/banner :: .banner"> menu Bar</div>
 <!--  menu -->
 <div th:replace="fragments/menuBar :: menuBar('')">menuBar</div>
-<div class="container">
-    <form th:action="@{/form/formViewAdmin/}+*{id}" th:object="${requestForm}" method="post">
+<div class="container" >
+    <form th:action="@{/form/formViewAdmin/}+*{id}" enctype="multipart/form-data" method="post">
         <div class="row">
             <div class="col-tab-80"></div>
             <div class="col-20-right">
@@ -201,6 +221,41 @@
                     </tbody>
                 </table>
             </div>
+        </div>
+        <h3>File: </h3>
+        <div class="row">
+            <div class="col-90">
+                <table class="table-sc">
+                    <thead>
+                    <tr>
+                        <th width="5%">No.</th>
+                        <th width="20%">File</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="fileReport,rowStat : *{fileReportList}">
+                        <td>
+                            <label th:text="${rowStat.count}">1</label>
+                            <input type="hidden" name="fileReportList[__${rowStat.index}__].id"
+                                   th:field="*{fileReportList[__${rowStat.index}__].id}">
+                        </td>
+                        <td>
+                            <a target="_blank" th:href="*{fileReportList[__${rowStat.index}__].path}" th:text="*{fileReportList[__${rowStat.index}__].fileName}"></a>
+                        </td>
+                        <td width="5%">
+                            <button type="button" name="addRowLoadTest" th:onclick="|testDelete('*{fileReportList[__${rowStat.index}__].id}','*{id}')|"
+                                    >delete row
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <input id="fileInput" type="file" name="file" onchange="updateSize();" multiple>
+            selected files: <span id="fileNum">0</span>;
+            total size: <span id="fileSize">0</span>
         </div>
         <div class="row">
             <input class="button" type="submit" value="Submit">
