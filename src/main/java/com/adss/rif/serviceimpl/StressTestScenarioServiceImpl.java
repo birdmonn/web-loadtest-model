@@ -35,8 +35,8 @@ public class StressTestScenarioServiceImpl implements StressTestScenarioService 
 
     @Override
     public void createAllList(List<StressTestScenario> stressTestScenarioList, RequestForm requestForm) {
-        for (StressTestScenario stressItem: stressTestScenarioList) {
-            if(!stressItem.getDetail().equals("") && stressItem.getDetail() != null){
+        for (StressTestScenario stressItem : stressTestScenarioList) {
+            if (!stressItem.getDetail().equals("") && stressItem.getDetail() != null) {
                 stressItem.setRequestForm(requestForm);
                 stressTestScenarioRepository.saveAndFlush(stressItem);
             }
@@ -55,7 +55,7 @@ public class StressTestScenarioServiceImpl implements StressTestScenarioService 
 
     @Override
     public void updateStatusAllList(List<StressTestScenario> stressTestScenarioList) {
-        for (StressTestScenario stressItem : stressTestScenarioList){
+        for (StressTestScenario stressItem : stressTestScenarioList) {
             StressTestScenario stressQuery = stressTestScenarioRepository.getOne(stressItem.getId());
             stressQuery.setScenarioPass(stressItem.isScenarioPass());
             stressTestScenarioRepository.saveAndFlush(stressQuery);

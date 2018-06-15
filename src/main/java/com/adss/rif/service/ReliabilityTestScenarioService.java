@@ -15,7 +15,7 @@ public interface ReliabilityTestScenarioService {
 
     void createAllList(List<ReliabilityTestScenario> reliabilityTestScenarioList, RequestForm requestForm);
 
-    void updateStatusAllList (List<ReliabilityTestScenario> reliabilityTestScenarioList);
+    void updateStatusAllList(List<ReliabilityTestScenario> reliabilityTestScenarioList);
 
     ReliabilityTestScenario update(Long id, ReliabilityTestScenario reliabilityTestScenario);
 

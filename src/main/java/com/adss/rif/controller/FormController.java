@@ -54,9 +54,6 @@ public class FormController implements WebMvcConfigurer {
     @GetMapping("formEdit/{id}")
     public String test(@PathVariable long id, Model model, HttpServletRequest request) {
         RequestForm requestForm = requestFormService.findById(id);
-//        boolean roleuser = request.isUserInRole("USER");
-//        String userlogin = request.getRemoteUser();
-//        String userCreateForm = requestForm.getUserWeb().getUsername();
         if (requestForm == null || (request.isUserInRole("USER") && !request.getRemoteUser().equals(requestForm.getCreateByUser().getUsername()))) {
             return "redirect:" + PathView.index;
         }
@@ -77,19 +74,18 @@ public class FormController implements WebMvcConfigurer {
             loadTestScenarioService.createAllList(requestForm.getLoadTestScenarioList(), formSave);
             reliabilityTestScenarioService.createAllList(requestForm.getReliabilityTestScenarioList(), formSave);
             stressTestScenarioService.createAllList(requestForm.getStressTestScenarioList(), formSave);
-            return "redirect:" + PathView.formView +formSave.getId();
+            return "redirect:" + PathView.formView + formSave.getId();
         }
         return PathView.formCreate;
     }
 
     @PostMapping("formEdit/{id}")
     public String updateRequestForm(@PathVariable long id, @Valid RequestForm requestForm, BindingResult bindingResult, Model model) {
-
         if (bindingResult.hasErrors() || null == requestFormService.findById(id) || requestForm.getProjectName().equals("")) {
             return PathView.formEdit;
         }
         requestFormService.update(id, requestForm);
-        return "redirect:" + PathView.searchCase;
+        return "redirect:" + PathView.formView + "/" + id;
     }
 
     @PostMapping(value = "", params = {"addRowLoadTest"})

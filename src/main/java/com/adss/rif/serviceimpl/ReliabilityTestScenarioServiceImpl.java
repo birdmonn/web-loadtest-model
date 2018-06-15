@@ -1,11 +1,8 @@
 package com.adss.rif.serviceimpl;
 
-import com.adss.rif.entities.LoadTestScenario;
 import com.adss.rif.entities.ReliabilityTestScenario;
 import com.adss.rif.entities.RequestForm;
-import com.adss.rif.repository.LoadTestScenarioRepository;
 import com.adss.rif.repository.ReliabilityTestScenarioRepository;
-import com.adss.rif.service.LoadTestScenarioService;
 import com.adss.rif.service.ReliabilityTestScenarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,8 +35,8 @@ public class ReliabilityTestScenarioServiceImpl implements ReliabilityTestScenar
 
     @Override
     public void createAllList(List<ReliabilityTestScenario> reliabilityTestScenarioList, RequestForm requestForm) {
-        for (ReliabilityTestScenario reliItem: reliabilityTestScenarioList) {
-            if(!reliItem.getDetail().equals("") && reliItem.getDetail() != null){
+        for (ReliabilityTestScenario reliItem : reliabilityTestScenarioList) {
+            if (!reliItem.getDetail().equals("") && reliItem.getDetail() != null) {
                 reliItem.setRequestForm(requestForm);
                 reliabilityTestScenarioRepository.saveAndFlush(reliItem);
             }
@@ -48,7 +45,7 @@ public class ReliabilityTestScenarioServiceImpl implements ReliabilityTestScenar
 
     @Override
     public void updateStatusAllList(List<ReliabilityTestScenario> reliabilityTestScenarioList) {
-        for (ReliabilityTestScenario reliItem : reliabilityTestScenarioList){
+        for (ReliabilityTestScenario reliItem : reliabilityTestScenarioList) {
             ReliabilityTestScenario reliQuery = reliabilityTestScenarioRepository.getOne(reliItem.getId());
             reliQuery.setScenarioPass(reliItem.isScenarioPass());
             reliabilityTestScenarioRepository.saveAndFlush(reliQuery);

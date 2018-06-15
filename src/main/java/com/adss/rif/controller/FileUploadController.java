@@ -37,7 +37,6 @@ public class FileUploadController {
     @GetMapping("/report/{pathId}/{filename:.+}")
     @ResponseBody
     public ResponseEntity<Resource> serveFile(@PathVariable String filename, @PathVariable String pathId) {
-
         Resource file = storageService.loadAsResource(pathId, filename);
         String originalFileName = fileReportService.findByPath("/report/" + pathId + "/" + filename).getFileName();
         return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
@@ -46,7 +45,6 @@ public class FileUploadController {
 
     @PostMapping("/report/uploadReport/{requestFormId}")
     public String handleFileUpload(@RequestParam("file") MultipartFile[] fileList, @PathVariable Long requestFormId) {
-
         RequestForm requestForm = requestFormService.findById(requestFormId);
         for (MultipartFile file : fileList) {
             file.getOriginalFilename();
@@ -57,14 +55,14 @@ public class FileUploadController {
     }
 
     @PostMapping("/report/deleteFile")
-    public String deleteFile(@RequestParam Long fileId,@RequestParam Long requestFormId, Model model, HttpServletRequest request) {
+    public String deleteFile(@RequestParam Long fileId, @RequestParam Long requestFormId, Model model, HttpServletRequest request) {
         if (!request.isUserInRole("ADMIN")) {
             return "redirect:" + PathView.index;
         }
         FileReport fileReport = fileReportService.findById(fileId);
         storageService.deleteFileByPath(fileReport.getPath());
         fileReportService.deleteById(fileReport.getId());
-        model.addAttribute("requestForm",requestFormService.findById(requestFormId));
+        model.addAttribute("requestForm", requestFormService.findById(requestFormId));
         return PathView.formViewAdmin;
     }
 

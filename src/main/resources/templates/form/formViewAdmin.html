@@ -243,8 +243,7 @@
                             <a target="_blank" th:href="*{fileReportList[__${rowStat.index}__].path}" th:text="*{fileReportList[__${rowStat.index}__].fileName}"></a>
                         </td>
                         <td width="5%">
-                            <button type="button" name="addRowLoadTest" th:onclick="|testDelete('*{fileReportList[__${rowStat.index}__].id}','*{id}')|"
-                                    >delete row
+                            <button type="button" name="addRowLoadTest" th:onclick="|testDelete('*{fileReportList[__${rowStat.index}__].id}','*{id}')|">delete row
                             </button>
                         </td>
                     </tr>

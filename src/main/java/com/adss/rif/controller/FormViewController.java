@@ -2,7 +2,6 @@ package com.adss.rif.controller;
 
 import com.adss.rif.entities.FileReport;
 import com.adss.rif.entities.RequestForm;
-import com.adss.rif.entities.StressTestScenario;
 import com.adss.rif.service.*;
 import com.adss.rif.storage.StorageService;
 import com.adss.rif.utils.PathView;
@@ -38,7 +37,6 @@ public class FormViewController {
         this.stressTestScenarioService = stressTestScenarioService;
         this.storageService = storageService;
         this.fileReportService = fileReportService;
-
     }
 
     @GetMapping("/formView/{id}")
@@ -72,6 +70,4 @@ public class FormViewController {
         }
         return "redirect:" + PathView.formView + "/" + id;
     }
-
-
 }

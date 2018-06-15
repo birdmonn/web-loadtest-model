@@ -1,6 +1,7 @@
 package com.adss.rif.service;
 
 import com.adss.rif.entities.FileReport;
+
 import java.util.List;
 
 public interface FileReportService {

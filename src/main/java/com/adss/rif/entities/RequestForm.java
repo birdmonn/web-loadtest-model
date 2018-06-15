@@ -431,6 +431,7 @@ public class RequestForm {
     public void setLoadTestScenarioList(List<LoadTestScenario> loadTestScenarioList) {
         this.loadTestScenarioList = loadTestScenarioList;
     }
+
     @JsonIgnore
     public List<StressTestScenario> getStressTestScenarioList() {
         return stressTestScenarioList;
@@ -439,6 +440,7 @@ public class RequestForm {
     public void setStressTestScenarioList(List<StressTestScenario> stressTestScenarioList) {
         this.stressTestScenarioList = stressTestScenarioList;
     }
+
     @JsonIgnore
     public List<ReliabilityTestScenario> getReliabilityTestScenarioList() {
         return reliabilityTestScenarioList;

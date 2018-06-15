@@ -10,8 +10,8 @@ public class SplitString {
         return instance;
     }
 
-    public String stringPathReport(String path){
+    public String stringPathReport(String path) {
         String[] partSplit = path.split("/");
-        return "/"+partSplit[2]+"/"+partSplit[3];
+        return "/" + partSplit[2] + "/" + partSplit[3];
     }
 }

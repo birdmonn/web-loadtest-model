@@ -30,7 +30,7 @@ public class LoadTestScenarioServiceImpl implements LoadTestScenarioService {
 
     @Override
     public void updateStatusAllList(List<LoadTestScenario> loadTestScenarioList) {
-        for (LoadTestScenario loadItem : loadTestScenarioList){
+        for (LoadTestScenario loadItem : loadTestScenarioList) {
             LoadTestScenario loadQuery = loadTestScenarioRepository.getOne(loadItem.getId());
             loadQuery.setScenarioPass(loadItem.isScenarioPass());
             loadTestScenarioRepository.saveAndFlush(loadQuery);
@@ -44,8 +44,8 @@ public class LoadTestScenarioServiceImpl implements LoadTestScenarioService {
 
     @Override
     public void createAllList(List<LoadTestScenario> loadTestScenarioList, RequestForm requestForm) {
-        for (LoadTestScenario loadItem: loadTestScenarioList) {
-            if(!loadItem.getDetail().equals("") && loadItem.getDetail() != null){
+        for (LoadTestScenario loadItem : loadTestScenarioList) {
+            if (!loadItem.getDetail().equals("") && loadItem.getDetail() != null) {
                 loadItem.setRequestForm(requestForm);
                 loadTestScenarioRepository.saveAndFlush(loadItem);
             }

@@ -13,9 +13,9 @@ public interface LoadTestScenarioService {
 
     LoadTestScenario create(LoadTestScenario loadTestScenario);
 
-    void createAllList(List<LoadTestScenario>loadTestScenarioList ,RequestForm requestForm);
+    void createAllList(List<LoadTestScenario> loadTestScenarioList, RequestForm requestForm);
 
-    void updateStatusAllList (List<LoadTestScenario>loadTestScenarioList);
+    void updateStatusAllList(List<LoadTestScenario> loadTestScenarioList);
 
     LoadTestScenario update(Long id, LoadTestScenario loadTestScenario);
 
