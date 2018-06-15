@@ -1,7 +1,11 @@
 package com.adss.rif.entities;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.Date;
 
 @Entity
 @Table(name = "user_web")
@@ -15,6 +19,14 @@ public class UserWeb {
     private String firstName;
     private String lastName;
     private String role;
+
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created", updatable = false)
+    private Date created;
+    @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date modified;
 
     public Long getId() {
         return id;

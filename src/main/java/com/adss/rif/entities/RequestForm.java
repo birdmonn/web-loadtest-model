@@ -93,6 +93,8 @@ public class RequestForm {
     private List<StressTestScenario> stressTestScenarioList = new ArrayList<>();
     @OneToMany(mappedBy = "requestForm")
     private List<ReliabilityTestScenario> reliabilityTestScenarioList = new ArrayList<>();
+    @OneToMany(mappedBy = "requestForm")
+    private List<FileReport> fileReportList = new ArrayList<>();
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created", updatable = false)
@@ -444,6 +446,15 @@ public class RequestForm {
 
     public void setReliabilityTestScenarioList(List<ReliabilityTestScenario> reliabilityTestScenarioList) {
         this.reliabilityTestScenarioList = reliabilityTestScenarioList;
+    }
+
+    @JsonIgnore
+    public List<FileReport> getFileReportList() {
+        return fileReportList;
+    }
+
+    public void setFileReportList(List<FileReport> fileReportList) {
+        this.fileReportList = fileReportList;
     }
 }
 
