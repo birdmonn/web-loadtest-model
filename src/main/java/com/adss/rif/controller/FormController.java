@@ -36,12 +36,12 @@ public class FormController implements WebMvcConfigurer {
         this.stressTestScenarioService = stressTestScenarioService;
     }
 
-    @GetMapping()
+    @GetMapping("/formCreate")
     public String showForm(RequestForm requestForm) {
         return PathView.formCreate;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/formCreate/{id}")
     public String showForm(@PathVariable long id, Model model) {
         RequestForm requestForm = requestFormService.findById(id);
         if (requestForm == null) {
@@ -74,7 +74,7 @@ public class FormController implements WebMvcConfigurer {
             loadTestScenarioService.createAllList(requestForm.getLoadTestScenarioList(), formSave);
             reliabilityTestScenarioService.createAllList(requestForm.getReliabilityTestScenarioList(), formSave);
             stressTestScenarioService.createAllList(requestForm.getStressTestScenarioList(), formSave);
-            return "redirect:" + PathView.formView + formSave.getId();
+            return "redirect:" + PathView.formView + "/" + formSave.getId();
         }
         return PathView.formCreate;
     }
@@ -92,7 +92,7 @@ public class FormController implements WebMvcConfigurer {
     public String addRowLoadTest(@RequestParam String page, RequestForm requestForm, Model model, final BindingResult bindingResult, HttpServletRequest request) {
         requestForm.getLoadTestScenarioList().add(new LoadTestScenario());
         model.addAttribute("requestForm", requestForm);
-        return ".form/" + page;
+        return "/form/" + page;
     }
 
     @PostMapping(value = "", params = {"addRowReliTest"})
