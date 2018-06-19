@@ -28,7 +28,7 @@
         </div>
     </div>
     <div class="row">
-        <button class="button" type="button">
+        <button class="buttonGreen width-10" type="button">
             <a th:href="${'/form/formEdit/'} + *{id}" th:text="#{label.edit}"> แก้ไข </a>
         </button>
     </div>
@@ -69,7 +69,7 @@
 
     <h3>Load Test SC: </h3>
     <div class="row">
-        <div class="col-90">
+        <div class="col-100">
             <table class="table-sc">
                 <thead>
                 <tr>
@@ -92,7 +92,7 @@
                     </td>
                     <td>
                         <label th:text="*{loadTestScenarioList[__${rowStat.index}__].dataTest}"/>
-                    </td>t
+                    </td>
                     <td>
                         <label th:text="*{loadTestScenarioList[__${rowStat.index}__].other}"/>
                     </td>
@@ -107,7 +107,7 @@
     </div>
     <h3>Reliability Test SC: </h3>
     <div class="row">
-        <div class="col-90">
+        <div class="col-100">
             <table class="table-sc">
                 <thead>
                 <tr>
@@ -145,7 +145,7 @@
     </div>
     <h3>Stress Test SC: </h3>
     <div class="row">
-        <div class="col-90">
+        <div class="col-100">
             <table class="table-sc">
                 <thead>
                 <tr>
@@ -175,6 +175,32 @@
                     <td>
                         <input name="*{stressTestScenarioList[__${rowStat.index}__].scenarioPass}" type="checkbox"
                                th:field="*{stressTestScenarioList[__${rowStat.index}__].scenarioPass}" disabled>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <h3>File: </h3>
+    <div class="row">
+        <div class="col-100">
+            <table class="table-sc" width="100%">
+                <thead>
+                <tr>
+                    <th width="10%">No.</th>
+                    <th width="80%">File</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="fileReport,rowStat : *{fileReportList}">
+                    <td width="10%">
+                        <label th:text="${rowStat.count}">1</label>
+                        <input type="hidden" name="fileReportList[__${rowStat.index}__].id"
+                               th:field="*{fileReportList[__${rowStat.index}__].id}">
+                    </td>
+                    <td width="80%">
+                        <a target="_blank" th:href="*{fileReportList[__${rowStat.index}__].path}"
+                           th:text="*{fileReportList[__${rowStat.index}__].fileName}"></a>
                     </td>
                 </tr>
                 </tbody>

@@ -9,7 +9,7 @@
 	 float: left;
     width: 5%;
     margin-top: 6px;
-} 
+}
 .col-tab-10{
 	float: left;
 	width: 10%;
@@ -29,7 +29,7 @@
 	 float: left;
     width: 25%;
     margin-top: 6px;
-} 
+}
 
 .col-65 {
     float: left;
@@ -63,6 +63,11 @@
     width: 60%;
        margin-top: 6px;
 }
+.col-100{
+    float: left;
+    width: 100%;
+       margin-top: 6px;
+}
 /* Clear floats after the columns */
 .row:after {
     content: "";
@@ -70,7 +75,7 @@
     clear: both;
 }
 @media screen and (max-width: 600px) {
-    .col-10,.col-15,.col-200right,.col-25,.col-40-right, .col-65, input[type=submit] {
+    .col-10,.col-15,.col-200right,.col-25,.col-40-right, .col-65,.col-100 input[type=submit] {
         width: 100%;
         margin-top: 0;
         margin-right: 10px;
