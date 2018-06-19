@@ -30,6 +30,9 @@
             }
         });
         }
+
+
+
     </script>
 </head>
 <body style="font-family:Verdana;" th:id="form">
@@ -189,15 +192,13 @@
                 <label th:text="#{label.browserSupport}">Browser Support</label>
             </div>
             <div class="col-15">
-                <input id="browserIe" name="browserIe" type="checkbox" th:field="*{browserIe}"
-                       th:value="${browserIe}">
-                <label th:text="#{label.internetExplorer}">Internet Explorer</label>
+                <label><input id="browserIe" name="browserIe" type="checkbox" th:field="*{browserIe}"
+                              th:value="${browserIe}"> Internet Explorer</label>
 
             </div>
             <div class="col-15">
-                <input id="browserFirefox" name="browserFirefox" type="checkbox" th:field="*{browserFirefox}"
-                       th:value="${browserFirefox}">
-                <label th:text="#{label.fireFox}">FireFox</label>
+                <label><input id="browserFirefox" name="browserFirefox" type="checkbox" th:field="*{browserFirefox}"
+                              th:value="${browserFirefox}">FireFox</label>
             </div>
         </div>
         <div class="row">
@@ -389,7 +390,8 @@
                     <tr th:each="loadtest,rowStat : *{loadTestScenarioList}">
                         <td>
                             <label th:text="${rowStat.count}">1</label>
-                            <input type="hidden" name="*{loadTestScenarioList[__${rowStat.index}__].id}" th:field="*{loadTestScenarioList[__${rowStat.index}__].id}">
+                            <input type="hidden" name="*{loadTestScenarioList[__${rowStat.index}__].id}"
+                                   th:field="*{loadTestScenarioList[__${rowStat.index}__].id}">
                         </td>
                         <td>
                             <input type="text" th:field="*{loadTestScenarioList[__${rowStat.index}__].detail}"/>
@@ -408,7 +410,8 @@
                 </table>
             </div>
             <div class="col-10">
-                <button class="buttonGreen" type="button" name="addRowLoadTest" onclick="addChild('addRowLoadTest','formCreate')"
+                <button class="buttonGreen" type="button" name="addRowLoadTest"
+                        onclick="addChild('addRowLoadTest','formCreate')"
                         th:text="#{label.addRow}">Add row
                 </button>
             </div>
@@ -430,16 +433,19 @@
                     <tr th:each="reliTest,rowStat : *{reliabilityTestScenarioList}">
                         <td>
                             <label th:text="${rowStat.count}">1</label>
-                            <input type="hidden" name="*{reliabilityTestScenarioList[__${rowStat.index}__].id}" th:field="*{reliabilityTestScenarioList[__${rowStat.index}__].id}">
+                            <input type="hidden" name="*{reliabilityTestScenarioList[__${rowStat.index}__].id}"
+                                   th:field="*{reliabilityTestScenarioList[__${rowStat.index}__].id}">
                         </td>
                         <td>
                             <input type="text" th:field="*{reliabilityTestScenarioList[__${rowStat.index}__].detail}"/>
                         </td>
                         <td>
-                            <input type="text" th:field="*{reliabilityTestScenarioList[__${rowStat.index}__].concurrent}"/>
+                            <input type="text"
+                                   th:field="*{reliabilityTestScenarioList[__${rowStat.index}__].concurrent}"/>
                         </td>
                         <td>
-                            <textarea type="text" th:field="*{reliabilityTestScenarioList[__${rowStat.index}__].dataTest}"/>
+                            <textarea type="text"
+                                      th:field="*{reliabilityTestScenarioList[__${rowStat.index}__].dataTest}"/>
                         </td>
                         <td>
                             <input type="text" th:field="*{reliabilityTestScenarioList[__${rowStat.index}__].other}"/>
@@ -449,7 +455,7 @@
                 </table>
             </div>
             <div class="col-10">
-                <button class="buttonGreen" type="button"  onclick="addChild('addRowReliTest','formCreate')"
+                <button class="buttonGreen" type="button" onclick="addChild('addRowReliTest','formCreate')"
                         th:text="#{label.addRow}">Add row
                 </button>
             </div>
@@ -471,7 +477,8 @@
                     <tr th:each="stressTest,rowStat : *{stressTestScenarioList}">
                         <td>
                             <label th:text="${rowStat.count}">1</label>
-                            <input type="hidden" name="*{stressTestScenarioList[__${rowStat.index}__].id}" th:field="*{stressTestScenarioList[__${rowStat.index}__].id}">
+                            <input type="hidden" name="*{stressTestScenarioList[__${rowStat.index}__].id}"
+                                   th:field="*{stressTestScenarioList[__${rowStat.index}__].id}">
                         </td>
                         <td>
                             <input type="text" th:field="*{stressTestScenarioList[__${rowStat.index}__].detail}"/>
@@ -490,7 +497,7 @@
                 </table>
             </div>
             <div class="col-10">
-                <button class="buttonGreen" type="button"  onclick="addChild('addRowStressTest','formCreate')"
+                <button class="buttonGreen" type="button" onclick="addChild('addRowStressTest','formCreate')"
                         th:text="#{label.addRow}">Add row
                 </button>
             </div>

@@ -189,15 +189,15 @@
                 <label th:text="#{label.browserSupport}">Browser Support</label>
             </div>
             <div class="col-15">
-                <input id="browserIe" name="browserIe" type="checkbox" th:field="*{browserIe}"
-                       th:value="${browserIe}">
-                <label th:text="#{label.internetExplorer}">Internet Explorer</label>
+                <label>
+                    <input id="browserIe" name="browserIe" type="checkbox" th:field="*{browserIe}" th:value="${browserIe}">
+                    Internet Explorer
+                </label>
 
             </div>
             <div class="col-15">
-                <input id="browserFirefox" name="browserFirefox" type="checkbox" th:field="*{browserFirefox}"
-                       th:value="${browserFirefox}">
-                <label th:text="#{label.fireFox}">FireFox</label>
+                <label><input id="browserFirefox" name="browserFirefox" type="checkbox" th:field="*{browserFirefox}"
+                              th:value="${browserFirefox}">FireFox</label>
             </div>
         </div>
         <div class="row">
