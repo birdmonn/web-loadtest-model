@@ -1,16 +1,26 @@
 @charset "utf-8";
 /* CSS Document */
-.button {
+.buttonGreen {
     background-color: #8dc63f; /* Green */
     border: none;
     color: white;
-    padding: 12px 32px;
+    padding: 10px 20px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 4px 2px;
     cursor: pointer;
 	border-radius: 2px;
 	text-color :white;
+}
+.buttonGreen:hover {
+   background: #6B9532;
+}
+.width-10{
+    width: 10%;
+    display: inline-block;
+}
+.width-100{
+    width: 100%;
+    display: inline-block;
 }
