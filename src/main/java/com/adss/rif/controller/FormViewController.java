@@ -60,6 +60,7 @@ public class FormViewController {
         stressTestScenarioService.updateStatusAllList(requestForm.getStressTestScenarioList());
         loadTestScenarioService.updateStatusAllList(requestForm.getLoadTestScenarioList());
         reliabilityTestScenarioService.updateStatusAllList(requestForm.getReliabilityTestScenarioList());
+        fileReportService.updateSlaDetail(requestForm.getFileReportList());
         RequestForm requestFormUpdate = requestFormService.updateStatusScenario(requestForm);
         for (MultipartFile file : fileList) {
             if (!file.getOriginalFilename().equals("")) {

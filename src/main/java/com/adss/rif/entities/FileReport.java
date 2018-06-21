@@ -17,7 +17,9 @@ public class FileReport {
     private String fileName;
     @ManyToOne
     private RequestForm requestForm;
-
+    private boolean slaPass;
+    @Column(columnDefinition = "text")
+    private String detail;
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created", updatable = false)
@@ -65,6 +67,22 @@ public class FileReport {
 
     public void setRequestForm(RequestForm requestForm) {
         this.requestForm = requestForm;
+    }
+
+    public boolean isSlaPass() {
+        return slaPass;
+    }
+
+    public void setSlaPass(boolean slaPass) {
+        this.slaPass = slaPass;
+    }
+
+    public String getDetail() {
+        return detail;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
     }
 
     public Date getCreated() {

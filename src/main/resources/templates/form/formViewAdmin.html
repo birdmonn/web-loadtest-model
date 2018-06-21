@@ -26,6 +26,7 @@
         }
 
 
+
     </script>
 </head>
 <body th:id="form" th:object="${requestForm}">
@@ -231,7 +232,9 @@
                     <thead>
                     <tr>
                         <th width="10%">No.</th>
-                        <th width="80%">File</th>
+                        <th width="30%">File</th>
+                        <th width="20%">SLA Pass</th>
+                        <th width="30%">Detail</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -241,9 +244,17 @@
                             <input type="hidden" name="fileReportList[__${rowStat.index}__].id"
                                    th:field="*{fileReportList[__${rowStat.index}__].id}">
                         </td>
-                        <td width="80%">
+                        <td width="30%">
                             <a target="_blank" th:href="*{fileReportList[__${rowStat.index}__].path}"
                                th:text="*{fileReportList[__${rowStat.index}__].fileName}"></a>
+                        </td>
+                        <td width="20%">
+                            <input type="checkbox" name="*{fileReportList[__${rowStat.index}__].slaPass}"
+                                   th:field="*{fileReportList[__${rowStat.index}__].slaPass}"/>
+                        </td>
+                        <td width="30%">
+                            <textarea name="*{fileReportList[__${rowStat.index}__].detail}"
+                                   th:field="*{fileReportList[__${rowStat.index}__].detail}"/>
                         </td>
                         <td width="10%">
                             <button class="buttonGreen width-100" type="button" name="addRowLoadTest"
