@@ -47,4 +47,14 @@ public class FileReportServiceImpl implements FileReportService {
     public void deleteById(Long id) {
         fileReportRepository.deleteById(id);
     }
+
+    @Override
+    public void updateSlaDetail(List<FileReport> fileReportList) {
+        for (FileReport fileReportItem : fileReportList){
+            FileReport fileReportTemp = findById(fileReportItem.getId());
+            fileReportTemp.setDetail(fileReportItem.getDetail());
+            fileReportTemp.setSlaPass(fileReportItem.isSlaPass());
+            update(fileReportTemp.getId(),fileReportTemp);
+        }
+    }
 }

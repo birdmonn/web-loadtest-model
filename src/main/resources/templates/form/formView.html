@@ -128,8 +128,9 @@
                     <td>
                         <label th:text="*{reliabilityTestScenarioList[__${rowStat.index}__].concurrent}"/>
                     </td>
-                    <td>
-                        <label th:text="*{reliabilityTestScenarioList[__${rowStat.index}__].dataTest}"/>
+                    <td class="width-100px">
+                        <label class="width-100px"
+                               th:text="*{reliabilityTestScenarioList[__${rowStat.index}__].dataTest}"/>
                     </td>
                     <td>
                         <label th:text="*{reliabilityTestScenarioList[__${rowStat.index}__].other}"/>
@@ -188,7 +189,9 @@
                 <thead>
                 <tr>
                     <th width="10%">No.</th>
-                    <th width="80%">File</th>
+                    <th width="30%">File</th>
+                    <th width="20%">SLA Pass</th>
+                    <th width="30px">Detail</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -198,9 +201,16 @@
                         <input type="hidden" name="fileReportList[__${rowStat.index}__].id"
                                th:field="*{fileReportList[__${rowStat.index}__].id}">
                     </td>
-                    <td width="80%">
+                    <td width="30%">
                         <a target="_blank" th:href="*{fileReportList[__${rowStat.index}__].path}"
                            th:text="*{fileReportList[__${rowStat.index}__].fileName}"></a>
+                    </td>
+                    <td width="20%">
+                        <input type="checkbox" name="*{fileReportList[__${rowStat.index}__].slaPass}"
+                               th:field="*{fileReportList[__${rowStat.index}__].slaPass}" disabled/>
+                    </td>
+                    <td width="30px">
+                        <label th:text="*{fileReportList[__${rowStat.index}__].detail}"></label>
                     </td>
                 </tr>
                 </tbody>

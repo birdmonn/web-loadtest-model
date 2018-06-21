@@ -12,7 +12,9 @@ public class StressTestScenario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(columnDefinition = "text")
     private String detail;
+    @Column(columnDefinition = "text")
     private String dataTest;
     private String concurrent;
     private String other;

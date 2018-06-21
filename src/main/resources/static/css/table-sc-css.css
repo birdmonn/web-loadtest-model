@@ -18,7 +18,7 @@ border: 1px solid #ddd;
 }
 .table-sc tr:nth-child(even){background-color: #f2f2f2;}
 
-.table-cs tr:hover {background-color: #ddd;}
+.table-sc tr:hover {background-color: #ddd;}
 
 .table-sc th {
     padding-top: 12px;

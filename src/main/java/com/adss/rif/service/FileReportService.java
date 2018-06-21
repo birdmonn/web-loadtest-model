@@ -16,6 +16,8 @@ public interface FileReportService {
 
     FileReport update(Long id, FileReport fileReport);
 
+    void updateSlaDetail(List<FileReport> fileReportList);
+
     void deleteById(Long id);
 
 }
