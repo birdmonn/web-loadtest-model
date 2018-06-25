@@ -2,16 +2,18 @@
 <html lang="th" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>View</title>
     <div th:include="fragments/head :: head" th:remove="tag">Global Header</div>
     <link rel="stylesheet" type="text/css" href="css/table-sc-css.css" th:href="@{/css/table-sc-css.css}">
+    <link rel="stylesheet" type="text/css" href="css/modal-delete.css" th:href="@{/css/modal-delete.css}">
     <script src="./js/ShowFileNameUpload.js" th:src="@{/js/ShowFileNameUpload.js}"></script>
     <script th:inline="javascript">
        var token = $("meta[name='_csrf']").attr("content");
         var header = $("meta[name='_csrf_header']").attr("content");
         var objHeader = {};
         objHeader[header] = token;
-        function testDelete(fileId,requestFormId){
+        function reqDelete(fileId,requestFormId){
         $.ajax({
             type : "POST",
             url : "/report/deleteFile?fileId="+fileId+"&requestFormId="+requestFormId,
@@ -258,7 +260,7 @@
                         </td>
                         <td width="10%">
                             <button class="buttonGreen width-100" type="button" name="addRowLoadTest"
-                                    th:onclick="|testDelete('*{fileReportList[__${rowStat.index}__].id}','*{id}')|">
+                                    th:onclick="|showModalDelete('*{fileReportList[__${rowStat.index}__].id}','*{id}')|">
                                 delete row
                             </button>
                         </td>
@@ -279,7 +281,28 @@
         </div>
     </form>
 </div>
+<!--<div th:replace="fragments/modalDelete :: .modalDelete"> modal Delete</div>-->
+<div id="myModal" class="modal">
 
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close" onclick="cancelDelete();">&times;</span>
+            <!--<h2>Modal Header</h2>-->
+        </div>
+        <div class="modal-body">
+            <p>you want to delete file ?</p>
+            <!--<p>Some other text...</p>-->
+        </div>
+        <div class="modal-footer">
+            <!--<h3>Modal Footer</h3>-->
+            <button th:class="buttonGreen" onclick="confirmDelete();" th:text="Confirm"></button>
+            <button th:class="buttonGreen" onclick="cancelDelete();" th:text="Cancel"></button>
+        </div>
+    </div>
+
+</div>
+<script src="./js/modalDelete.js" th:src="@{/js/modalDelete.js}"></script>
 <!--  footer -->
 <div th:replace="fragments/footer :: .footer"> menu Bar</div>
 </body>
