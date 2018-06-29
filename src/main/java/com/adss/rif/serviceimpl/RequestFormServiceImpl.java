@@ -6,6 +6,8 @@ import com.adss.rif.service.RequestFormService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -78,5 +80,17 @@ public class RequestFormServiceImpl implements RequestFormService {
         dataFormOriginal.setReliabilityTestScenarioList(requestForm.getReliabilityTestScenarioList());
         dataFormOriginal.setStressTestScenarioList(requestForm.getStressTestScenarioList());
         return requestFormRepository.saveAndFlush(dataFormOriginal);
+    }
+
+    @Override
+    public List<RequestForm> findByCrateByUserAndDepartment(String createByUser, String department) {
+        List<RequestForm> requestFormList = requestFormRepository.findByCreateByUser(createByUser);
+        requestFormList.addAll(requestFormRepository.findByDepartment(department));
+        return sortCreateDate(requestFormList);
+    }
+
+    private List<RequestForm> sortCreateDate(List<RequestForm> requestFormList){
+        requestFormList.sort(Comparator.comparing(RequestForm::getCreated).reversed());
+        return requestFormList;
     }
 }

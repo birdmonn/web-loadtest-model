@@ -52,7 +52,7 @@ public class FormController implements WebMvcConfigurer {
     }
 
     @GetMapping("formEdit/{id}")
-    public String test(@PathVariable long id, Model model, HttpServletRequest request) {
+    public String test(@PathVariable     long id, Model model, HttpServletRequest request) {
         RequestForm requestForm = requestFormService.findById(id);
         if (requestForm == null || (request.isUserInRole("USER") && !request.getRemoteUser().equals(requestForm.getCreateByUser().getUsername()))) {
             return "redirect:" + PathView.index;
@@ -60,7 +60,6 @@ public class FormController implements WebMvcConfigurer {
         model.addAttribute("requestForm", requestForm);
         return PathView.formEdit;
     }
-
 
     @PostMapping()
     public String createForm(@Valid RequestForm requestForm, BindingResult bindingResult, HttpServletRequest request) {

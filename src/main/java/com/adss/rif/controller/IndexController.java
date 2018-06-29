@@ -2,6 +2,7 @@ package com.adss.rif.controller;
 
 import com.adss.rif.entities.RequestForm;
 import com.adss.rif.service.RequestFormService;
+import com.adss.rif.service.UserWebService;
 import com.adss.rif.utils.PathView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,29 +18,32 @@ import java.util.List;
 public class IndexController {
 
     private RequestFormService requestFormService;
+    private UserWebService userWebService;
 
     @Autowired
-    public IndexController(RequestFormService requestFormService) {
+    public IndexController(RequestFormService requestFormService,
+                           UserWebService userWebService) {
         this.requestFormService = requestFormService;
+        this.userWebService = userWebService;
     }
 
     @GetMapping("/index")
     public String myCaseShowIndex(Model model, HttpServletRequest request) {
-        List<RequestForm> requestFormList = requestFormService.findByCreateByUser(request.getRemoteUser());
+        List<RequestForm> requestFormList = requestFormService.findByCrateByUserAndDepartment(request.getRemoteUser(),userWebService.findByUsername(request.getRemoteUser()).getDepartment());
         model.addAttribute("caseList", requestFormList);
         return PathView.index;
     }
 
     @GetMapping("/")
     public String myCaseShowIndex2(Model model, HttpServletRequest request) {
-        List<RequestForm> requestFormList = requestFormService.findByCreateByUser(request.getRemoteUser());
+        List<RequestForm> requestFormList = requestFormService.findByCrateByUserAndDepartment(request.getRemoteUser(),userWebService.findByUsername(request.getRemoteUser()).getDepartment());
         model.addAttribute("caseList", requestFormList);
         return PathView.index;
     }
 
     @GetMapping()
     public String myCaseShow(Model model, HttpServletRequest request) {
-        List<RequestForm> requestFormList = requestFormService.findByCreateByUser(request.getRemoteUser());
+        List<RequestForm> requestFormList = requestFormService.findByCrateByUserAndDepartment(request.getRemoteUser(),userWebService.findByUsername(request.getRemoteUser()).getDepartment());
         model.addAttribute("caseList", requestFormList);
         return PathView.index;
     }

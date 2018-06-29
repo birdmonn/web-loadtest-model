@@ -25,7 +25,7 @@ public class RegisterController {
 
     @GetMapping()
     public String openview() {
-        return "register";
+        return PathView.register;
     }
 
     @PostMapping()

@@ -19,6 +19,7 @@ public class UserWeb {
     private String firstName;
     private String lastName;
     private String role;
+    private String department;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
@@ -74,5 +75,29 @@ public class UserWeb {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    public Date getModified() {
+        return modified;
+    }
+
+    public void setModified(Date modified) {
+        this.modified = modified;
     }
 }
