@@ -12,6 +12,8 @@ public interface RequestFormService {
 
     List<RequestForm> findByCreateByUser(String createByUser);
 
+    List<RequestForm> findByCrateByUserAndDepartment(String createByUser,String department);
+
     List<RequestForm> findByProjectIdAndProjectNameAndContact(String projectId, String projectName, String contact);
 
     RequestForm create(RequestForm requestForm);

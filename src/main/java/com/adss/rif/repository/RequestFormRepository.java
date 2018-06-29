@@ -36,4 +36,7 @@ public interface RequestFormRepository extends JpaRepository<RequestForm, Long> 
 
     @Query("SELECT rf FROM RequestForm rf WHERE rf.projectName Like %?1% And rf.contact Like %?2% ")
     List<RequestForm> findByProjectNameAndContact(String projectName, String contact);
+
+    @Query("SELECT rf FROM RequestForm rf WHERE rf.department = ?1")
+    List<RequestForm> findByDepartment(String department);
 }
