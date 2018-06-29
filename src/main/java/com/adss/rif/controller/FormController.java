@@ -61,7 +61,6 @@ public class FormController implements WebMvcConfigurer {
         return PathView.formEdit;
     }
 
-
     @PostMapping()
     public String createForm(@Valid RequestForm requestForm, BindingResult bindingResult, HttpServletRequest request) {
         UserWeb userWeb = userWebService.findByUsername(request.getRemoteUser());

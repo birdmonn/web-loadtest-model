@@ -28,6 +28,7 @@ public class RequestForm {
     @NotNull(message = "Contact cannot be empty")
     @NotEmpty(message = "ProjectName cannot be empty")
     private String contact;
+    private String department;
     private String mobilePhone;
     private String objective;
     //  application information
@@ -457,6 +458,14 @@ public class RequestForm {
 
     public void setFileReportList(List<FileReport> fileReportList) {
         this.fileReportList = fileReportList;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
     }
 }
 

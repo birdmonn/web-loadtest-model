@@ -117,6 +117,18 @@
         <div class="row">
             <div class="col-10"></div>
             <div class="col-15">
+                <label>Department<star>*</star></label>
+            </div>
+            <div class="col-65">
+                <input  name="department" type="text" th:field="*{department}">
+                <text-error class="text-error" th:if="${#fields.hasErrors('department')}" th:errors="*{department}">
+                    กรุณากรอก
+                </text-error>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-10"></div>
+            <div class="col-15">
                 <label for="mobilePhone" th:text="#{label.phone}">Phone
                     <star>*</star>
                 </label>
@@ -220,61 +232,41 @@
                 <label th:text="#{label.systemImpact}">SystemImpact</label>
             </div>
             <div class="col-15">
-                <label>
-                    <input id="systemImpactF5" name="systemImpactF5" type="checkbox" th:field="*{systemImpactF5}">
-                    F5</label>
+                <label><input id="systemImpactF5" name="systemImpactF5" type="checkbox" th:field="*{systemImpactF5}">F5</label>
             </div>
             <div class="col-15">
-                <label>
-                    <input id="systemImpactLdap" name="systemImpactLdap" type="checkbox" th:field="*{systemImpactLdap}">
-                    LDAP</label>
+                <label><input id="systemImpactLdap" name="systemImpactLdap" type="checkbox" th:field="*{systemImpactLdap}">LDAP</label>
             </div>
             <div class="col-15">
-                <label>
-                    <input id="systemImpactFirewall" name="systemImpactFirewall" type="checkbox"
-                           th:field="*{systemImpactFirewall}">
-                    Firewall</label>
+                <label><input id="systemImpactFirewall" name="systemImpactFirewall" type="checkbox"
+                           th:field="*{systemImpactFirewall}">Firewall</label>
             </div>
             <div class="col-15">
-                <label>
-                    <input id="systemImpactProxy" name="systemImpactProxy" type="checkbox"
-                           th:field="*{systemImpactProxy}">
-                    Proxy</label>
+                <label><input id="systemImpactProxy" name="systemImpactProxy" type="checkbox"
+                           th:field="*{systemImpactProxy}">Proxy</label>
             </div>
             <div class="col-15">
-                <label>
-                    <input id="systemImpactAd" name="systemImpactAd" type="checkbox" th:field="*{systemImpactAd}">
-                    AD</label>
+                <label><input id="systemImpactAd" name="systemImpactAd" type="checkbox" th:field="*{systemImpactAd}">AD</label>
             </div>
         </div>
         <div class="row">
             <div class="col-tab-10"></div>
             <div class="col-15"></div>
             <div class="col-15">
-                <label>
-                    <input id="systemImpactSff" name="systemImpactSff" type="checkbox" th:field="*{systemImpactSff}">
-                    SFF</label>
+                <label><input id="systemImpactSff" name="systemImpactSff" type="checkbox" th:field="*{systemImpactSff}">SFF</label>
             </div>
             <div class="col-15">
-                <label>
-                    <input id="systemImpactSeibel" name="systemImpactSiebel" type="checkbox"
-                           th:field="*{systemImpactSiebel}">
-                    Siebel</label>
+                <label><input id="systemImpactSeibel" name="systemImpactSiebel" type="checkbox"
+                           th:field="*{systemImpactSiebel}">Siebel</label>
             </div>
             <div class="col-15">
-                <label>
-                    <input id="systemImpactSap" name="systemImpactSap" type="checkbox" th:field="*{systemImpactSap}">
-                    SAP</label>
+                <label><input id="systemImpactSap" name="systemImpactSap" type="checkbox" th:field="*{systemImpactSap}">SAP</label>
             </div>
             <div class="col-15">
-                <label>
-                    <input id="systemImpactEai" name="systemImpactEai" type="checkbox" th:field="*{systemImpactEai}">
-                    EAI</label>
+                <label><input id="systemImpactEai" name="systemImpactEai" type="checkbox" th:field="*{systemImpactEai}">EAI</label>
             </div>
             <div class="col-15">
-                <label>
-                    <input id="systemImpactIvr" name="systemImpactIvr" type="checkbox" th:field="*{systemImpactIvr}">
-                    IVR/USSD</label>
+                <label><input id="systemImpactIvr" name="systemImpactIvr" type="checkbox" th:field="*{systemImpactIvr}">IVR/USSD</label>
             </div>
         </div>
         <div class="row">
@@ -291,19 +283,15 @@
         <div class="row">
             <div class="col-tab-10"></div>
             <div class="col-15">
-                <label th:text="#{label.impactassessment}">Impact Assessment(User ที่ใช้งานระบบ) </label>
+                <label>Impact Assessment(User ที่ใช้งานระบบ) </label>
             </div>
             <div class="col-25">
-                <label>
-                    <input id="impactAssessmentEx" name="impactAssessmentEx" type="checkbox"
-                           th:field="*{impactAssessmentEx}">
-                    External Impacts(External User)</label>
+                <label><input id="impactAssessmentEx" name="impactAssessmentEx" type="checkbox"
+                           th:field="*{impactAssessmentEx}">External Impacts(External User)</label>
             </div>
             <div class="col-25">
-                <label>
-                    <input id="impactAssessmentIh" name="impactAssessmentIh" type="checkbox"
-                           th:field="*{impactAssessmentIh}">
-                    Organization Impacts(In House)</label>
+                <label><input id="impactAssessmentIh" name="impactAssessmentIh" type="checkbox"
+                           th:field="*{impactAssessmentIh}">Organization Impacts(In House)</label>
             </div>
         </div>
         <div class="row">
@@ -324,22 +312,16 @@
                 <label>Test Scenarios</label>
             </div>
             <div class="col-15">
-                <label>
-                    <input id="loadTestTypeLoadTest" name="loadTestTypeLoadTest" type="checkbox"
-                           th:field="*{loadTestTypeLoadTest}">
-                    Load Test</label>
+                <label><input id="loadTestTypeLoadTest" name="loadTestTypeLoadTest" type="checkbox"
+                           th:field="*{loadTestTypeLoadTest}">Load Test</label>
             </div>
             <div class="col-15">
-                <label>
-                    <input id="loadTestTypeStressTest" name="loadTestTypeStressTest" type="checkbox"
-                           th:field="*{loadTestTypeStressTest}">
-                    Stress Test</label>
+                <label><input id="loadTestTypeStressTest" name="loadTestTypeStressTest" type="checkbox"
+                           th:field="*{loadTestTypeStressTest}">Stress Test</label>
             </div>
             <div class="col-15">
-                <label>
-                    <input id="loadTestTypeReliabilityTest" name="loadTestTypeReliabilityTest" type="checkbox"
-                           th:field="*{loadTestTypeReliabilityTest}">
-                    Reliability Test</label>
+                <label><input id="loadTestTypeReliabilityTest" name="loadTestTypeReliabilityTest" type="checkbox"
+                           th:field="*{loadTestTypeReliabilityTest}">Reliability Test</label>
             </div>
         </div>
         <h3>Load Test : Date</h3>
