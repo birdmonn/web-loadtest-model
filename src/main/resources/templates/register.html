@@ -1,22 +1,61 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-    <head>
-        <title>Spring Security Example </title>
-    </head>
-    <body>
-        <!--<div th:if="${param.error}">-->
-            <!--Invalid username and password.-->
-        <!--</div>-->
-        <!--<div th:if="${param.logout}">-->
-            <!--You have been logged out.-->
-        <!--</div>-->
-        <form th:action="@{/register}" method="post">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Register</title>
+    <div th:include="fragments/head :: head" th:remove="tag">Global Header</div>
+    <link rel="stylesheet" type="text/css" href="css/table-case-css.css" th:href="@{/css/table-case-css.css}">
+</head>
+<body style="font-family:Verdana;">
+<div th:replace="fragments/banner :: .banner"> menu Bar</div>
+<!--<div th:if="${param.error}">-->
+<!--Invalid username and password.-->
+<!--</div>-->
+<!--<div th:if="${param.logout}">-->
+<!--You have been logged out.-->
+<!--</div>-->
+<form th:action="@{/register}" method="post">
+    <div class="row">
+        <div class="col-tab-10"></div>
+        <div class="col-25">
             <div><label> User Name : <input type="text" name="username"/> </label></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-tab-10"></div>
+        <div class="col-25">
             <div><label> Password: <input type="password" name="password"/> </label></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-tab-10"></div>
+        <div class="col-25">
             <div><label> First Name: <input type="text" name="firstName"/> </label></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-tab-10"></div>
+        <div class="col-25">
             <div><label> Last Name: <input type="text" name="lastName"/> </label></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-tab-10"></div>
+        <div class="col-25">
             <div><label> Department: <input type="text" name="department"/> </label></div>
-            <div><input type="submit" value="Sign In"/></div>
-        </form>
-    </body>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-tab-10"></div>
+        <div class="col-25">
+            <div><input class="buttonGreen" type="submit" value="Sign In"/></div>
+        </div>
+    </div>
+    <p>
+        <h3>
+
+        </h3>
+    </p>
+</form>
+<div th:replace="fragments/footer :: .footer"> menu Bar</div>
+</body>
 </html>
