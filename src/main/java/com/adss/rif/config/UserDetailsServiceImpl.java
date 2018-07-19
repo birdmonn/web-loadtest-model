@@ -27,6 +27,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserWeb userWeb = userWebService.findByUsername(username);
+
         return new User(userWeb.getUsername(), userWeb.getPassword(), getRole(userWeb.getRole()));
     }
 

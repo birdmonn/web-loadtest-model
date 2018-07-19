@@ -38,5 +38,7 @@ dependencies {
 	compile ('org.postgresql:postgresql')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	testCompile('org.springframework.restdocs:spring-restdocs-mockmvc')
+	// https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-springsecurity4
+	compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity4', version: '2.1.2.RELEASE'
 	compile 'com.google.guava:guava:21.0'
 }

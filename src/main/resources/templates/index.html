@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
 <head>
 	<title>Index</title>
 	<div th:include="fragments/head :: head" th:remove="tag">Global Header</div>
@@ -11,8 +12,11 @@
 <!--  menu -->
 <div th:replace="fragments/menuBar :: menuBar('index')">menuBar</div>
 <!-- <h2>index [[${#httpServletRequest.remoteUser}]]</h2> -->
-</div>
+
 <div class="container">
+	<div th:if="${user} == 'USER'">Text visible to user.</div>
+	<div sec:authorize="hasRole('USER')">Has Role USER</div>
+	<div sec:authorize="hasRole('ADMIN')">Has Role ADMIN</div>
 	<h2>My Case </h2>
 	<h5 th:text="${#lists.size(caseList)+ 'ทั้งหมด'}">ทั้งหมด</h5>
 	<table id="table-case">
