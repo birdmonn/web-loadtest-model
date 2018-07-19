@@ -9,11 +9,11 @@
 <!--  Banner -->
 <div th:replace="fragments/banner :: .banner"> menu Bar</div>
 <!--  menu -->
-<div th:replace="fragments/menuBar :: menuBar('index')">menuBar</div>
+<div th:replace="fragments/menuBar :: menuBar('userManagement',*{role})">menuBar</div>
 
 
 <div class="container">
-    <h2>My Case </h2>
+    <h2>User</h2>
     <h5 th:text="${#lists.size(userList)+ 'ทั้งหมด'}">ทั้งหมด</h5>
     <table id="table-case">
         <tr>
@@ -23,12 +23,12 @@
             <th>Role</th>
         </tr>
         <tr th:each="user,rowStat : *{userList}">
-            <td><a th:text="*{userList[__${rowStat.index}__].username}" th:href="*{'/form/formView/'}"></a></td>
-            <td><a th:text="*{user.firstName}" th:href="*{'/form/formView/'}"></a></td>
-            <td><a th:text="*{user.lastName}" th:href="*{'/form/formView/'}"></a></td>
-            <!--<td><select name="userRole" th:field="*{userList[__${rowStat.index}__].role}">-->
-                <!--<option value="ADMIN">ADMIN</option>-->
-                <!--<option value="USER">USER</option></select></td>-->
+           <a>
+               <td><a th:text="*{userList[__${rowStat.index}__].username}" th:href="*{'/form/formView/'+user.id}"></a></td>
+               <td><a th:text="*{user.firstName}" th:href="*{'/form/formView/'+user.id}"></a></td>
+               <td><a th:text="*{user.lastName}" th:href="*{'/form/formView/'+user.id}"></a></td>
+               <td><a th:text="*{user.lastName}" th:href="*{'/userView/'+user.id}"></a></td>
+           </a>
         </tr>
     </table>
 </div>

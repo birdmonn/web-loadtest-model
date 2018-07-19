@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <body>
-<ul class="menuBar" th:fragment="menuBar(activeTab)">
+<ul class="menuBar" th:fragment="menuBar(activeTab,roleUser)">
     <li th:class="${activeTab == 'index'}? 'active' : null"><a href="/index">Home</a></li>
     <li th:class="${activeTab == 'form'}? 'active' : null"><a href="/form/formCreate">Form</a></li>
-    <li th:class="${activeTab == 'searchCase'}? 'active' : null"><a href="/searchCase">Search Case</a></li>
-    <!--<li th:class="${activeTab == 'report'}? 'active' : null"><a href="#">Report</a></li>-->
+    <li th:if="${roleUser=='ADMIN'}" th:class="${activeTab == 'userManagement'}? 'active' : null"><a href="/userManagement">User Management</a></li>
     <li style="float:right"><a href="/logout">[[${#httpServletRequest.remoteUser}]] [Logout]</a></li>
 </ul>
 </body>

@@ -4,9 +4,11 @@ import com.adss.rif.entities.FileReport;
 import com.adss.rif.entities.RequestForm;
 import com.adss.rif.service.FileReportService;
 import com.adss.rif.service.RequestFormService;
+import com.adss.rif.service.UserWebService;
 import com.adss.rif.storage.StorageFileNotFoundException;
 import com.adss.rif.storage.StorageService;
 import com.adss.rif.utils.PathView;
+import com.adss.rif.utils.RoleToViewPage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -24,14 +26,17 @@ public class FileUploadController {
     private final StorageService storageService;
     private final FileReportService fileReportService;
     private final RequestFormService requestFormService;
+    private final UserWebService userWebService;
 
     @Autowired
     public FileUploadController(StorageService storageService,
                                 FileReportService fileReportService,
+                                UserWebService userWebService,
                                 RequestFormService requestFormService) {
         this.storageService = storageService;
         this.fileReportService = fileReportService;
         this.requestFormService = requestFormService;
+        this.userWebService = userWebService;
     }
 
     @GetMapping("/report/{pathId}/{filename:.+}")
@@ -63,6 +68,7 @@ public class FileUploadController {
         storageService.deleteFileByPath(fileReport.getPath());
         fileReportService.deleteById(fileReport.getId());
         model.addAttribute("requestForm", requestFormService.findById(requestFormId));
+        RoleToViewPage.getInstance().roleUser(model,request.getRemoteUser(),userWebService);
         return PathView.formViewAdmin;
     }
 

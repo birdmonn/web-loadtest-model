@@ -9,7 +9,8 @@
 <!--  Banner -->
 <div th:replace="fragments/banner :: .banner"> menu Bar</div>
 <!--  menu -->
-<div th:replace="fragments/menuBar :: menuBar('index')">menuBar</div>
+
+<div th:replace="fragments/menuBar :: menuBar('userManagement',*{role})">menuBar</div>
 
 
 <!--<div class="container">-->

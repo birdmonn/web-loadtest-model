@@ -35,7 +35,7 @@
 <!--  Banner -->
 <div th:replace="fragments/banner :: .banner"> menu Bar</div>
 <!--  menu -->
-<div th:replace="fragments/menuBar :: menuBar('')">menuBar</div>
+<div th:replace="fragments/menuBar :: menuBar('',${role})">menuBar</div>
 <div class="container">
     <form th:action="@{/form/formViewAdmin/}+*{id}" enctype="multipart/form-data" method="post">
         <div class="row">
