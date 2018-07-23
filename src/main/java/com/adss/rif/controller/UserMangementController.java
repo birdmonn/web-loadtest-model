@@ -6,6 +6,7 @@ import com.adss.rif.entities.UserWeb;
 import com.adss.rif.service.RequestFormService;
 import com.adss.rif.service.UserWebService;
 import com.adss.rif.utils.PathView;
+import com.adss.rif.utils.RoleToViewPage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,15 +36,7 @@ public class UserMangementController {
         }
         List<UserWeb> userWebList = userWebService.findAll();
         model.addAttribute("userList", userWebService.findAll());
+        RoleToViewPage.getInstance().roleUser(model,request.getRemoteUser(),userWebService);
         return PathView.userManagement;
-    }
-
-    @PostMapping()
-    public String updateRole(@RequestParam String role,
-                             @RequestParam Long id,
-                             Model model) {
-
-//        model.addAttribute("caseList", requestFormService.findByProjectIdAndProjectNameAndContact(searchForm.getProjectId(), searchForm.getProjectName(), searchForm.getContact()));
-        return PathView.searchCase;
     }
 }

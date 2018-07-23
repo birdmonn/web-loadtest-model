@@ -50,19 +50,16 @@ public class FormViewController {
             return "redirect:" + PathView.index;
         }
         model.addAttribute("requestForm", requestForm);
-        if (request.isUserInRole("ADMIN")) {
+        if (userWebService.findByUsername(request.getRemoteUser()).getRole().equals("ADMIN")) {
             RoleToViewPage.getInstance().roleUser(model, request.getRemoteUser(), userWebService);
-
             return PathView.formViewAdmin;
-
         }
         RoleToViewPage.getInstance().roleUser(model, request.getRemoteUser(), userWebService);
-
         return PathView.formView;
     }
 
     @PostMapping("/formViewAdmin/{id}")
-    public String editFormStatus(@RequestParam("file") MultipartFile[] fileList,@PathVariable Long id, RequestForm requestForm, Model model, HttpServletRequest request) {
+    public String editFormStatus(@RequestParam("file") MultipartFile[] fileList, @PathVariable Long id, RequestForm requestForm, Model model, HttpServletRequest request) {
         if (!request.isUserInRole("ADMIN") || (requestFormService.findById(id) == null)) {
             return "redirect:" + PathView.index;
         }

@@ -38,7 +38,7 @@ public class FormController implements WebMvcConfigurer {
     }
 
     @GetMapping("/formCreate")
-    public String showForm(RequestForm requestForm, Model model, HttpServletRequest request) {
+    public String showForm(Model model, HttpServletRequest request) {
         RoleToViewPage.getInstance().roleUser(model, request.getRemoteUser(), userWebService);
         return PathView.formCreate;
     }

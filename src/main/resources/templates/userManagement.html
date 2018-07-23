@@ -13,8 +13,7 @@
 
 
 <div class="container">
-    <h2>User</h2>
-    <h5 th:text="${#lists.size(userList)+ 'ทั้งหมด'}">ทั้งหมด</h5>
+    <h3>User <h5 th:text="${#lists.size(userList)+ 'ทั้งหมด'}">ทั้งหมด</h5> </h3>
     <table id="table-case">
         <tr>
             <th>Username</th>
@@ -23,12 +22,10 @@
             <th>Role</th>
         </tr>
         <tr th:each="user,rowStat : *{userList}">
-           <a>
-               <td><a th:text="*{userList[__${rowStat.index}__].username}" th:href="*{'/form/formView/'+user.id}"></a></td>
-               <td><a th:text="*{user.firstName}" th:href="*{'/form/formView/'+user.id}"></a></td>
-               <td><a th:text="*{user.lastName}" th:href="*{'/form/formView/'+user.id}"></a></td>
+               <td><a th:text="*{userList[__${rowStat.index}__].username}" th:href="*{'/userView/'+user.id}"></a></td>
+               <td><a th:text="*{user.firstName}" th:href="*{'/userView/'+user.id}"></a></td>
                <td><a th:text="*{user.lastName}" th:href="*{'/userView/'+user.id}"></a></td>
-           </a>
+               <td><a th:text="*{user.role}" th:href="*{'/userView/'+user.id}"></a></td>
         </tr>
     </table>
 </div>
