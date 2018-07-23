@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>UserView</title>
+    <div th:include="fragments/head :: head" th:remove="tag">Global Header</div>
+    <link rel="stylesheet" type="text/css" href="css/table-case-css.css" th:href="@{/css/table-case-css.css}">
+</head>
+<script th:inline="javascript">
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
+    function reqChangeRole(userId,roleChange){
+        $.ajax({
+                type : "POST",
+                url : "/userView/changeRole?userId="+userId+"&role="+roleChange,
+                headers : { 'X-CSRF-TOKEN':token },
+                data : $('form').serialize(),
+                success : function(response){
+                $('#form').html(response)
+                                            }
+        });
+    }
+</script>
+<body style="font-family:Verdana;">
+<!--  Banner -->
+<div th:replace="fragments/banner :: .banner"> menu Bar</div>
+<!--  menu -->
+
+<div th:replace="fragments/menuBar :: menuBar('userManagement',*{role})">menuBar</div>
+
+
+<div class="container" th:fragment="form">
+    <div class="row">
+        <div class="col-tab-10"></div>
+        <div class="col-10">
+            <label>Username : </label>
+        </div>
+        <div class="col-65">
+            <label th:text="*{user.username}">username</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-tab-10"></div>
+        <div class="col-10">
+            <label>FirstName : </label>
+        </div>
+        <div class="col-65">
+            <label th:text="*{user.firstName}">firstName</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-tab-10"></div>
+        <div class="col-10">
+            <label>LastName : </label>
+        </div>
+        <div class="col-65">
+            <label th:text="*{user.lastName}">lastName</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-10"></div>
+        <div class="col-10">
+            <label>Role :</label>
+        </div>
+        <div class="col-15">
+            <select id="userRole" th:field="*{user.role}" th:onchange="|showModalConfirmChangeRole('*{user.id}')|">
+                <option value="ADMIN">Admin</option>
+                <option value="USER">User</option>
+            </select>
+        </div>
+    </div>
+    <h2>My Case </h2>
+    <h5 th:text="${#lists.size(caseList)+ 'ทั้งหมด'}">ทั้งหมด</h5>
+    <table id="table-case">
+        <tr>
+            <th>Project Id</th>
+            <th>Project Name</th>
+            <th>Contact</th>
+            <th>Status</th>
+            <!--<th>User</th>-->
+        </tr>
+        <tr th:each="case : ${caseList}">
+            <td><a th:text="${case.projectId}" th:href="${'/form/formView/' + case.id}"></a></td>
+            <td><a th:text="${case.projectName}" th:href="${'/form/formView/' + case.id}"></a></td>
+            <td><a th:text="${case.contact}" th:href="${'/form/formView/' + case.id}"></a></td>
+            <td><a th:text="${case.statusRequest}" th:href="${'/form/formView/' + case.id}"></a></td>
+        </tr>
+    </table>
+</div>
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close" onclick="cancel();">&times;</span>
+            <!--<h2>Modal Header</h2>-->
+        </div>
+        <div class="modal-body">
+            <p>you want to delete file ?</p>
+            <!--<p>Some other text...</p>-->
+        </div>
+        <div class="modal-footer">
+            <!--<h3>Modal Footer</h3>-->
+            <button th:class="buttonGreen" onclick="confirmChangeRole();" th:text="Confirm"></button>
+            <button th:class="buttonGreen" onclick="cancel();" th:text="Cancel"></button>
+        </div>
+    </div>
+
+</div>
+<script src="./js/modalDelete.js" th:src="@{/js/modalChangeRole.js}"></script>
+<!--  footer -->
+<div th:replace="fragments/footer :: .footer"> menu Bar</div>
+</body>
+</html>

@@ -3,6 +3,7 @@ package com.adss.rif.controller;
 import com.adss.rif.entities.*;
 import com.adss.rif.service.*;
 import com.adss.rif.utils.PathView;
+import com.adss.rif.utils.RoleToViewPage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,13 +38,15 @@ public class FormController implements WebMvcConfigurer {
     }
 
     @GetMapping("/formCreate")
-    public String showForm(RequestForm requestForm) {
+    public String showForm(Model model, HttpServletRequest request) {
+        RoleToViewPage.getInstance().roleUser(model, request.getRemoteUser(), userWebService);
         return PathView.formCreate;
     }
 
     @GetMapping("/formCreate/{id}")
-    public String showForm(@PathVariable long id, Model model) {
+    public String showForm(@PathVariable long id, Model model, HttpServletRequest request) {
         RequestForm requestForm = requestFormService.findById(id);
+        RoleToViewPage.getInstance().roleUser(model, request.getRemoteUser(), userWebService);
         if (requestForm == null) {
             return PathView.formCreate;
         }
@@ -52,18 +55,20 @@ public class FormController implements WebMvcConfigurer {
     }
 
     @GetMapping("formEdit/{id}")
-    public String test(@PathVariable     long id, Model model, HttpServletRequest request) {
+    public String test(@PathVariable long id, Model model, HttpServletRequest request) {
         RequestForm requestForm = requestFormService.findById(id);
         if (requestForm == null || (request.isUserInRole("USER") && !request.getRemoteUser().equals(requestForm.getCreateByUser().getUsername()))) {
             return "redirect:" + PathView.index;
         }
         model.addAttribute("requestForm", requestForm);
+        RoleToViewPage.getInstance().roleUser(model, request.getRemoteUser(), userWebService);
         return PathView.formEdit;
     }
 
     @PostMapping()
-    public String createForm(@Valid RequestForm requestForm, BindingResult bindingResult, HttpServletRequest request) {
+    public String createForm(@Valid RequestForm requestForm, BindingResult bindingResult, HttpServletRequest request, Model model) {
         UserWeb userWeb = userWebService.findByUsername(request.getRemoteUser());
+        RoleToViewPage.getInstance().roleUser(model, request.getRemoteUser(), userWebService);
         if (bindingResult.hasErrors() || userWeb == null) {
             return PathView.formCreate;
         }
@@ -79,8 +84,9 @@ public class FormController implements WebMvcConfigurer {
     }
 
     @PostMapping("formEdit/{id}")
-    public String updateRequestForm(@PathVariable long id, @Valid RequestForm requestForm, BindingResult bindingResult, Model model) {
+    public String updateRequestForm(@PathVariable long id, @Valid RequestForm requestForm, BindingResult bindingResult, Model model, HttpServletRequest request) {
         if (bindingResult.hasErrors() || null == requestFormService.findById(id) || requestForm.getProjectName().equals("")) {
+            RoleToViewPage.getInstance().roleUser(model, request.getRemoteUser(), userWebService);
             return PathView.formEdit;
         }
         requestFormService.update(id, requestForm);
@@ -88,23 +94,26 @@ public class FormController implements WebMvcConfigurer {
     }
 
     @PostMapping(value = "", params = {"addRowLoadTest"})
-    public String addRowLoadTest(@RequestParam String page, RequestForm requestForm, Model model, final BindingResult bindingResult, HttpServletRequest request) {
+    public String addRowLoadTest(@RequestParam String page, RequestForm requestForm, Model model, HttpServletRequest request) {
         requestForm.getLoadTestScenarioList().add(new LoadTestScenario());
         model.addAttribute("requestForm", requestForm);
+        RoleToViewPage.getInstance().roleUser(model, request.getRemoteUser(), userWebService);
         return "/form/" + page;
     }
 
     @PostMapping(value = "", params = {"addRowReliTest"})
-    public String addRowReliTest(@RequestParam String page, RequestForm requestForm, Model model, final BindingResult bindingResult, HttpServletRequest request) {
+    public String addRowReliTest(@RequestParam String page, RequestForm requestForm, Model model, HttpServletRequest request) {
         requestForm.getReliabilityTestScenarioList().add(new ReliabilityTestScenario());
         model.addAttribute("requestForm", requestForm);
+        RoleToViewPage.getInstance().roleUser(model, request.getRemoteUser(), userWebService);
         return "/form/" + page;
     }
 
     @PostMapping(value = "", params = {"addRowStressTest"})
-    public String addRowStressTest(@RequestParam String page, RequestForm requestForm, Model model, final BindingResult bindingResult, HttpServletRequest request) {
+    public String addRowStressTest(@RequestParam String page, RequestForm requestForm, Model model, HttpServletRequest request) {
         requestForm.getStressTestScenarioList().add(new StressTestScenario());
         model.addAttribute("requestForm", requestForm);
+        RoleToViewPage.getInstance().roleUser(model, request.getRemoteUser(), userWebService);
         return "/form/" + page;
     }
 }

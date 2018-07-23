@@ -17,6 +17,8 @@ public class PathView {
 
     //register
     public static final String register = "/register";
-
-
+    //userManagement
+    public static final String userManagement = "/userManagement";
+    //userView
+    public static final String userView = "/userView";
 }

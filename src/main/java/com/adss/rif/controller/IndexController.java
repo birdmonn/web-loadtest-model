@@ -4,6 +4,7 @@ import com.adss.rif.entities.RequestForm;
 import com.adss.rif.service.RequestFormService;
 import com.adss.rif.service.UserWebService;
 import com.adss.rif.utils.PathView;
+import com.adss.rif.utils.RoleToViewPage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,6 +32,7 @@ public class IndexController {
     public String myCaseShowIndex(Model model, HttpServletRequest request) {
         List<RequestForm> requestFormList = requestFormService.findByCrateByUserAndDepartment(request.getRemoteUser(),userWebService.findByUsername(request.getRemoteUser()).getDepartment());
         model.addAttribute("caseList", requestFormList);
+        RoleToViewPage.getInstance().roleUser(model,request.getRemoteUser(),userWebService);
         return PathView.index;
     }
 
@@ -38,6 +40,7 @@ public class IndexController {
     public String myCaseShowIndex2(Model model, HttpServletRequest request) {
         List<RequestForm> requestFormList = requestFormService.findByCrateByUserAndDepartment(request.getRemoteUser(),userWebService.findByUsername(request.getRemoteUser()).getDepartment());
         model.addAttribute("caseList", requestFormList);
+        RoleToViewPage.getInstance().roleUser(model,request.getRemoteUser(),userWebService);
         return PathView.index;
     }
 
@@ -45,6 +48,7 @@ public class IndexController {
     public String myCaseShow(Model model, HttpServletRequest request) {
         List<RequestForm> requestFormList = requestFormService.findByCrateByUserAndDepartment(request.getRemoteUser(),userWebService.findByUsername(request.getRemoteUser()).getDepartment());
         model.addAttribute("caseList", requestFormList);
+        RoleToViewPage.getInstance().roleUser(model,request.getRemoteUser(),userWebService);
         return PathView.index;
     }
 

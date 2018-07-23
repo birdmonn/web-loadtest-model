@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Index</title>
+    <div th:include="fragments/head :: head" th:remove="tag">Global Header</div>
+    <link rel="stylesheet" type="text/css" href="css/table-case-css.css" th:href="@{/css/table-case-css.css}">
+</head>
+<body style="font-family:Verdana;">
+<!--  Banner -->
+<div th:replace="fragments/banner :: .banner"> menu Bar</div>
+<!--  menu -->
+<div th:replace="fragments/menuBar :: menuBar('userManagement',*{role})">menuBar</div>
+
+
+<div class="container">
+    <h3>User <h5 th:text="${#lists.size(userList)+ 'ทั้งหมด'}">ทั้งหมด</h5> </h3>
+    <table id="table-case">
+        <tr>
+            <th>Username</th>
+            <th>FirstName</th>
+            <th>Department</th>
+            <th>Role</th>
+        </tr>
+        <tr th:each="user,rowStat : *{userList}">
+               <td><a th:text="*{userList[__${rowStat.index}__].username}" th:href="*{'/userView/'+user.id}"></a></td>
+               <td><a th:text="*{user.firstName}" th:href="*{'/userView/'+user.id}"></a></td>
+               <td><a th:text="*{user.lastName}" th:href="*{'/userView/'+user.id}"></a></td>
+               <td><a th:text="*{user.role}" th:href="*{'/userView/'+user.id}"></a></td>
+        </tr>
+    </table>
+</div>
+
+<!--  footer -->
+<div th:replace="fragments/footer :: .footer"> menu Bar</div>
+</body>
+</html>

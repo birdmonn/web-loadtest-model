@@ -5,6 +5,7 @@ import com.adss.rif.entities.RequestForm;
 import com.adss.rif.service.*;
 import com.adss.rif.storage.StorageService;
 import com.adss.rif.utils.PathView;
+import com.adss.rif.utils.RoleToViewPage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +24,7 @@ public class FormViewController {
     private StressTestScenarioService stressTestScenarioService;
     private final StorageService storageService;
     private final FileReportService fileReportService;
+    private final UserWebService userWebService;
 
     @Autowired
     public FormViewController(RequestFormService requestFormService,
@@ -30,6 +32,7 @@ public class FormViewController {
                               ReliabilityTestScenarioService reliabilityTestScenarioService,
                               StressTestScenarioService stressTestScenarioService,
                               StorageService storageService,
+                              UserWebService userWebService,
                               FileReportService fileReportService) {
         this.requestFormService = requestFormService;
         this.loadTestScenarioService = loadTestScenarioService;
@@ -37,23 +40,26 @@ public class FormViewController {
         this.stressTestScenarioService = stressTestScenarioService;
         this.storageService = storageService;
         this.fileReportService = fileReportService;
+        this.userWebService = userWebService;
     }
 
     @GetMapping("/formView/{id}")
     public String viewFormById(@PathVariable Long id, Model model, HttpServletRequest request) {
         RequestForm requestForm = requestFormService.findById(id);
         if (requestForm == null) {
-            return PathView.index;
+            return "redirect:" + PathView.index;
         }
         model.addAttribute("requestForm", requestForm);
-        if (request.isUserInRole("ADMIN")) {
+        if (userWebService.findByUsername(request.getRemoteUser()).getRole().equals("ADMIN")) {
+            RoleToViewPage.getInstance().roleUser(model, request.getRemoteUser(), userWebService);
             return PathView.formViewAdmin;
         }
+        RoleToViewPage.getInstance().roleUser(model, request.getRemoteUser(), userWebService);
         return PathView.formView;
     }
 
     @PostMapping("/formViewAdmin/{id}")
-    public String editFormStatus(@RequestParam("file") MultipartFile[] fileList,@PathVariable Long id, RequestForm requestForm, Model model, HttpServletRequest request) {
+    public String editFormStatus(@RequestParam("file") MultipartFile[] fileList, @PathVariable Long id, RequestForm requestForm, Model model, HttpServletRequest request) {
         if (!request.isUserInRole("ADMIN") || (requestFormService.findById(id) == null)) {
             return "redirect:" + PathView.index;
         }
