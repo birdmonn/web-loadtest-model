@@ -6,9 +6,9 @@ import com.adss.rif.service.RequestFormService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class RequestFormServiceImpl implements RequestFormService {
@@ -86,6 +86,7 @@ public class RequestFormServiceImpl implements RequestFormService {
     public List<RequestForm> findByCrateByUserAndDepartment(String createByUser, String department) {
         List<RequestForm> requestFormList = requestFormRepository.findByCreateByUser(createByUser);
         requestFormList.addAll(requestFormRepository.findByDepartment(department));
+        requestFormList = requestFormList.stream().distinct().collect(Collectors.toList());
         return sortCreateDate(requestFormList);
     }
 
