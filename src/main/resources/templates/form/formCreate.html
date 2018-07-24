@@ -39,7 +39,7 @@
 <!--  Banner -->
 <div th:replace="fragments/banner :: .banner"> menu Bar</div>
 <!--  menu -->
-<div th:replace="fragments/menuBar :: menuBar('form',*{role}== null ? '' : *{role})">menuBar</div>
+<div th:replace="fragments/menuBar :: menuBar('form',${role}== null ? '' : *{role})">menuBar</div>
 <!--  container -->
 <div class="container" th:fragment="form">
     <h3>แบบฟอร์มการขอใช้บริการ</h3>

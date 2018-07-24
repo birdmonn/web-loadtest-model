@@ -10,7 +10,7 @@
 <!--  Banner -->
 <div th:replace="fragments/banner :: .banner"> menu Bar</div>
 <!--  menu -->
-<div th:replace="fragments/menuBar :: menuBar(' ',*{role}== null ? '' : *{role})">menuBar</div>
+<div th:replace="fragments/menuBar :: menuBar(' ',${role}== null ? '' : *{role})">menuBar</div>
 <div class="container" th:object="${requestForm}">
     <div class="row">
         <div class="col-tab-80"></div>
