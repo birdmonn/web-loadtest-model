@@ -6,42 +6,76 @@
     <link rel="stylesheet" type="text/css" href="css/table-case-css.css" th:href="@{/css/table-case-css.css}">
 </head>
 <body style="font-family:Verdana;">
-<div th:replace="fragments/banner :: .banner"> menu Bar</div>
+<div th:replace="fragments/banner :: .banner">Banner</div>
 <form th:action="@{/register}" method="post">
+    <div class="row" >
+        <div class="col-tab-35"></div>
+        <div class="col-30">
+            <div ><label> User Name :</label></div>
+        </div>
+    </div>
+    <div class="row" >
+        <div class="col-tab-35"></div>
+        <div class="col-30">
+            <div ><input type="text" name="username"/></div>
+        </div>
+    </div>
     <div class="row">
-        <div class="col-tab-10"></div>
-        <div class="col-25">
-            <div><label> User Name : <input type="text" name="username"/> </label></div>
+        <div class="col-tab-35"></div>
+        <div class="col-30">
+            <div><label> Password:</label></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-tab-35"></div>
+        <div class="col-30">
+            <div><input type="password" name="password"/></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-tab-35"></div>
+        <div class="col-30">
+            <div><label> First Name:</label></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-tab-35"></div>
+        <div class="col-30">
+            <div><input type="text" name="firstName"/></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-tab-35"></div>
+        <div class="col-30">
+            <div><label> Last Name: </label></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-tab-35"></div>
+        <div class="col-30">
+            <div><input type="text" WIDTH="100%" name="lastName"/></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-tab-35"></div>
+        <div class="col-30">
+            <div><label> Department:</label></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-tab-35"></div>
+        <div class="col-30">
+            <div><input type="text" name="department"/></div>
         </div>
     </div>
     <div class="row">
         <div class="col-tab-10"></div>
-        <div class="col-25">
-            <div><label> Password: <input type="password" name="password"/> </label></div>
+        <div class="col-10">
+        <button align="left" class="buttonGreen width-100" type="button" onclick="location.href='./login'">Back</button>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-tab-10"></div>
-        <div class="col-25">
-            <div><label> First Name: <input type="text" name="firstName"/> </label></div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-tab-10"></div>
-        <div class="col-25">
-            <div><label> Last Name: <input type="text" name="lastName"/> </label></div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-tab-10"></div>
-        <div class="col-25">
-            <div><label> Department: <input type="text" name="department"/> </label></div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-tab-10"></div>
-        <div class="col-25">
-            <div><input class="buttonGreen" type="submit" value="Sign In"/></div>
+        <div class="col-tab-60"></div>
+        <div class="col-10">
+        <input align="right" class="buttonGreen width-100"  type="submit" value="Register"/>
         </div>
     </div>
     <p>
