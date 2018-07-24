@@ -4,6 +4,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
@@ -13,12 +15,16 @@ public class UserWeb {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Size(min = 6, message = "username is short")
+    @Size(min = 6, message = "Username is short")
     private String username;
+    @NotNull(message = "Password cannot be empty")
+    @NotEmpty(message = "Password cannot be empty")
     private String password;
     private String firstName;
     private String lastName;
     private String role;
+    @NotNull(message = "Department cannot be empty")
+    @NotEmpty(message = "Department cannot be empty")
     private String department;
 
     @CreationTimestamp
