@@ -26,7 +26,7 @@ public class RequestForm {
     private String significantLevel;
     private String requestType;
     @NotNull(message = "Contact cannot be empty")
-    @NotEmpty(message = "ProjectName cannot be empty")
+    @NotEmpty(message = "Contact cannot be empty")
     private String contact;
     private String department;
     private String mobilePhone;

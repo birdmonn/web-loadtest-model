@@ -25,7 +25,7 @@ public class RegisterController {
     }
 
     @GetMapping()
-    public String openview() {
+    public String openview(UserWeb userWeb, Model model) {
         return PathView.register;
     }
 
