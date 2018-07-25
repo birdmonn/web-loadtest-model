@@ -28,9 +28,7 @@
         </div>
     </div>
     <div class="row">
-        <button class="buttonGreen width-10" type="button">
-            <a th:href="${'/form/formEdit/'} + *{id}" th:text="#{label.edit}"> แก้ไข </a>
-        </button>
+        <button class="buttonGreen width-10" type="button" th:onclick="|location.href='../formEdit/'+'*{id}'|">แก้ไข</button>
     </div>
     <div class="row">
         <div class="col-tab-10"></div>
