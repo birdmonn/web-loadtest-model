@@ -9,7 +9,7 @@
 <!--  Banner -->
 <div th:replace="fragments/banner :: .banner"> menu Bar</div>
 <!--  menu -->
-<div th:replace="fragments/menuBar :: menuBar('searchCase')">menuBar</div>
+<div th:replace="fragments/menuBar :: menuBar('searchCase',${role}== null ? '' : *{role})">menuBar</div>
 <div class="search-case">
     <form method="post" action="/searchCase#" th:action="@{/searchCase}" th:object="${requestForm}">
         <div class="row">
