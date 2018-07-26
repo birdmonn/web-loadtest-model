@@ -6,17 +6,13 @@
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <div th:include="fragments/head :: head" th:remove="tag">Global Header</div>
     <link rel="stylesheet" type="text/css" href="css/table-sc-css.css" th:href="@{/css/table-sc-css.css}">
+    <script src="./js/datePickerChangeStartDate.js" th:src="@{/js/datePickerChangeStartDate.js}"></script>
+
     <script th:inline="javascript">
        var token = $("meta[name='_csrf']").attr("content");
         var header = $("meta[name='_csrf_header']").attr("content");
         var objHeader = {};
         objHeader[header] = token;
-         $(document).ready(function () {
-            $('.datepicker').datepicker({
-                format: 'dd/mm/yyyy',
-                todayBtn: true
-            }).datepicker("setDate", "0");  //กำหนดเป็นวันปัจุบัน
-        });
         function addChild(type,page){
         $.ajax({
             type : "POST",
@@ -324,8 +320,8 @@
                 <label>On Test/Staging Deploy</label>
             </div>
             <div class="col-65">
-                <input id="targetStartDate" name="targetStartDate" th:class="datepicker" data-date-format="dd/mm/yyyy"
-                       th:field="*{targetStartDate}"> dd/mm/yyyy
+                <input id="targetStartDate" name="targetStartDate" data-date-format="dd/mm/yyyy"
+                       th:field="*{targetStartDate}" /> dd/mm/yyyy
                 <!--        <input id="onTest" name="onTest" type="text" >-->
             </div>
         </div>
@@ -335,7 +331,7 @@
                 <label>Target Finish Date</label>
             </div>
             <div class="col-65">
-                <input id="targetFinishDate" name="targetFinishDate" th:class="datepicker" data-date-format="dd/mm/yyyy"
+                <input id="targetFinishDate" name="targetFinishDate" data-date-format="dd/mm/yyyy"
                        th:field="*{targetFinishDate}"> dd/mm/yyyy
             </div>
         </div>
