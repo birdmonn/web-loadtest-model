@@ -5,6 +5,20 @@
 	<title>Index</title>
 	<div th:include="fragments/head :: head" th:remove="tag">Global Header</div>
 	<link rel="stylesheet" type="text/css" href="css/table-case-css.css" th:href="@{/css/table-case-css.css}">
+	<style>
+.pagination-centered {
+	text-align: center;
+}
+
+.disabled {
+	pointer-events: none;
+	opacity: 0.5;
+}
+
+.pointer-disabled {
+	pointer-events: none;
+}
+</style>
 </head>
 <body style="font-family:Verdana;">
 <!--  Banner -->
@@ -15,7 +29,7 @@
 
 <div class="container">
 	<h2>My Case </h2>
-	<h5 th:text="${#lists.size(caseList)+ 'ทั้งหมด'}">ทั้งหมด</h5>
+	<h5 th:text="${#lists.size(formList)+ 'ทั้งหมด'}">ทั้งหมด</h5>
 	<table id="table-case">
 		<tr>
 			<th>Project Id</th>
@@ -24,16 +38,68 @@
 			<th>Status</th>
 			<!--<th>User</th>-->
 		</tr>
-		<tr th:each="case : ${caseList}">
-			<td><a th:text="${case.projectId}" th:href="${'/form/formView/' + case.id}"></a></td>
-			<td><a th:text="${case.projectName}" th:href="${'/form/formView/' + case.id}"></a></td>
-			<td><a th:text="${case.contact}" th:href="${'/form/formView/' + case.id}"></a></td>
-			<td><a th:text="${case.statusRequest}" th:href="${'/form/formView/' + case.id}"></a></td>
+		<tr th:each="form : ${formList}">
+			<td><a th:text="${form.projectId}" th:href="${'/form/formView/' + form.id}"></a></td>
+			<td><a th:text="${form.projectName}" th:href="${'/form/formView/' + form.id}"></a></td>
+			<td><a th:text="${form.contact}" th:href="${'/form/formView/' + form.id}"></a></td>
+			<td><a th:text="${form.statusRequest}" th:href="${'/form/formView/' + form.id}"></a></td>
 			<!--<td><a th:text="${case.userWeb.username}" th:href="${'/form/edit/' + case.id}"></a></td>-->
 		</tr>
 	</table>
+	<div class="row">
+		<div class="form-group col-md-1">
+			<select class="form-control pagination" id="pageSizeSelect">
+				<option th:each="pageSize : ${pageSizes}" th:text="${pageSize}"
+						th:value="${pageSize}"
+						th:selected="${pageSize} == ${selectedPageSize}"></option>
+			</select>
+		</div>
+		<div th:if="${formList.totalPages != 1}"
+			 class="form-group col-md-11 pagination-centered">
+			<ul class="pagination">
+				<li th:class="${formList.number == 0} ? disabled"><a
+						class="pageLink"
+						th:href="@{${#httpServletRequest.requestURI}(pageSize=${selectedPageSize}, page=1)}">&laquo;</a>
+				</li>
+				<li th:class="${formList.number == 0} ? disabled"><a
+						class="pageLink"
+						th:href="@{${#httpServletRequest.requestURI}(pageSize=${selectedPageSize}, page=${formList.number})}">&larr;</a>
+				</li>
+				<li
+						th:class="${formList.number == (page - 1)} ? 'active pointer-disabled'"
+						th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
+					<a class="pageLink"
+					   th:href="@{${#httpServletRequest.requestURI}(pageSize=${selectedPageSize}, page=${page})}"
+					   th:text="${page}"></a>
+				</li>
+				<li
+						th:class="${formList.number + 1 == formList.totalPages} ? disabled">
+					<a class="pageLink"
+					   th:href="@{${#httpServletRequest.requestURI}(pageSize=${selectedPageSize}, page=${formList.number + 2},q=${#request.getParameter('q')})}">&rarr;</a>
+				</li>
+				<li
+						th:class="${formList.number + 1 == formList.totalPages} ? disabled">
+					<a class="pageLink"
+					   th:href="@{${#httpServletRequest.requestURI}(pageSize=${selectedPageSize}, page=${formList.totalPages})}">&raquo;</a>
+				</li>
+			</ul>
+		</div>
+	</div>
 </div>
 <!--  footer -->
 <div th:replace="fragments/footer :: .footer"> menu Bar</div>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    $(document).ready(function() {
+    changePageAndSize();
+    });
+
+    function changePageAndSize() {
+    $('#pageSizeSelect').change(function(evt) {
+    window.location.replace("/?pageSize=" + this.value + "&page=1");
+    });
+    }
+    /*]]>*/
+</script>
 </body>
 </html>
