@@ -29,7 +29,7 @@
 
 <div class="container">
 	<h2>My Case </h2>
-	<h5 th:text="${#lists.size(formList)+ 'ทั้งหมด'}">ทั้งหมด</h5>
+	<h5 th:text="${formList.getTotalElements()+ 'ทั้งหมด'}">ทั้งหมด</h5>
 	<table id="table-case">
 		<tr>
 			<th>Project Id</th>
