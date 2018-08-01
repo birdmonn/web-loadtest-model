@@ -7,15 +7,30 @@
 </head>
 <body>
 <div th:replace="fragments/banner :: .banner">Banner</div>
-<div th:if="${param.error}">
-    Invalid username and password.
+<div th:if="${param.error}" align="center">
+    <br/>
+    <star>Invalid username and password.</star>
 </div>
-<div th:if="${param.logout}">
-    You have been logged out.
+<div th:if="${param.logout}" align="center">
+    <br/>
+    <star>You have been logged out.</star>
 </div>
 <form th:action="@{/login}" method="post">
-    <div align="center"><label> User Name : <input type="text" name="username"/> </label></div>
-    <div align="center"><label> Password: <input type="password" name="password"/> </label></div>
+    <div align="center" class="row"><label> User Name :</label></div>
+    <div class="row">
+        <div class="col-tab-35"></div>
+        <div class="col-30">
+            <input type="text" name="username"/>
+        </div>
+    </div>
+    <div align="center" class="row"><label> Password :</label></div>
+    <div align="center" class="row">
+        <div class="col-tab-35"></div>
+        <div class="col-30">
+            <input type="password" name="password"/>
+        </div>
+    </div>
+    <br/>
     <div align="center">
         <input class="buttonGreen width-100px" type="submit" value="Sign In"/>
         <button class="buttonGreen width-100px" type="button" onclick="location.href='./register'">Register</button>
