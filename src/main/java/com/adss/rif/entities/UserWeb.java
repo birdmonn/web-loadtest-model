@@ -16,6 +16,7 @@ public class UserWeb {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Size(min = 6, message = "Username is short")
+    @Column(unique=true)
     private String username;
     @NotNull(message = "Password cannot be empty")
     @NotEmpty(message = "Password cannot be empty")

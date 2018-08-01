@@ -8,6 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +33,14 @@ public class RegisterController {
     @PostMapping()
     public String createUser(@Valid UserWeb userWeb, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("userWeb", userWeb);
+            return PathView.register;
+        }
+        UserWeb checkUserName = userWebService.findByUsername(userWeb.getUsername());
+        if (checkUserName != null) {
+            FieldError fieldError = new FieldError("username", "username", "User Duplicate.");
+            bindingResult.addError(fieldError);
+            model.addAttribute("userWeb", userWeb);
             return PathView.register;
         }
         userWeb.setRole("USER");
