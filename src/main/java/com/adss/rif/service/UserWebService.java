@@ -18,4 +18,6 @@ public interface UserWebService {
 
     UserWeb deleteById(Long id);
 
+    List<String> findListDepartment();
+
 }

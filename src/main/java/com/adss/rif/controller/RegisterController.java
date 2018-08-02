@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping("/register")
@@ -27,6 +28,8 @@ public class RegisterController {
 
     @GetMapping()
     public String openview(UserWeb userWeb, Model model) {
+        List<String> sds =  userWebService.findListDepartment();
+        model.addAttribute("departmentList",sds);
         return PathView.register;
     }
 
