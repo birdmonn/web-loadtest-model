@@ -39,9 +39,10 @@
 <div class="container">
     <form th:action="@{/form/formViewAdmin/}+*{id}" enctype="multipart/form-data" method="post">
         <div class="row">
-            <div class="col-tab-80"></div>
-            <div class="col-20-right">
-                <label th:text="#{label.status}">status</label>:
+            <div class="col-tab-60"></div>
+            <div class="col-10"></div>
+            <div class="col-10"><label>Status : </label></div>
+            <div class="col-20">
                 <select name="statusRequest" th:field="*{statusRequest}">
                     <option value="wait">Wait</option>
                     <option value="inProcess">In Process</option>
@@ -53,7 +54,7 @@
 
             <div class="col-tab-60"></div>
             <div class="col-40-right">
-                <label th:text="#{label.dateReceived}">Date Received :</label>:
+                <label th:text="#{label.dateReceived}">Date Received :</label>
                 <label th:text="*{created}"></label>
             </div>
         </div>
