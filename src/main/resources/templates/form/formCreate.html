@@ -31,9 +31,6 @@
             }
         });
         }
-
-
-
     </script>
 </head>
 <body style="font-family:Verdana;" th:id="form">
@@ -60,9 +57,7 @@
         <div class="row">
             <div class="col-10"></div>
             <div class="col-15">
-                <label for="pName" th:text="#{label.projectName}">Project Name
-                    <star>*</star>
-                </label>
+                <label for="pName">Project Name<star>*</star></label>
             </div>
             <div class="col-65">
                 <input type="text" id="pName" name="projectName" th:field="*{projectName}">
@@ -104,9 +99,7 @@
         <div class="row">
             <div class="col-10"></div>
             <div class="col-15">
-                <label for="contact" th:text="#{label.contact}">Contact
-                    <star>*</star>
-                </label>
+                <label for="contact">Contact<star>*</star></label>
             </div>
             <div class="col-65">
                 <input id="contact" name="contact" type="text" th:field="*{contact}">
@@ -130,12 +123,13 @@
         <div class="row">
             <div class="col-10"></div>
             <div class="col-15">
-                <label for="mobilePhone" th:text="#{label.phone}">Phone
-                    <star>*</star>
-                </label>
+                <label for="mobilePhone">Phone<star>*</star></label>
             </div>
             <div class="col-65">
                 <input id="mobilePhone" name="mobilePhone" type="text" th:field="*{mobilePhone}">
+                <text-error class="text-error" th:if="${#fields.hasErrors('mobilePhone')}" th:errors="*{mobilePhone}">
+                    กรุณากรอก
+                </text-error>
             </div>
         </div>
         <div class="row">
@@ -363,9 +357,9 @@
                     <thead>
                     <tr>
                         <th width="5%">No.</th>
-                        <th width="20%" th:text="#{label.detail}">Commend</th>
+                        <th width="20%" th:text="#{label.detail}">Commend</th>test case
                         <th width="10%" th:text="#{label.concurrent}">Concurrent</th>
-                        <th width="45%" th:text="#{label.dataTest}">Data Test</th>
+                        <th width="45%" th:text="#{label.dataTest}">Data Test</th>detail
                         <th width="20%" th:text="#{label.other}">Other</th>
                     </tr>
                     </thead>

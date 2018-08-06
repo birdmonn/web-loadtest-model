@@ -21,7 +21,7 @@ public class RequestFormServiceImpl implements RequestFormService {
 
     @Override
     public List<RequestForm> findAll() {
-        return requestFormRepository.findAll();
+        return sortCreateDate(requestFormRepository.findAll());
     }
 
     @Override
@@ -31,30 +31,30 @@ public class RequestFormServiceImpl implements RequestFormService {
 
     @Override
     public List<RequestForm> findByCreateByUser(String createByUser) {
-        return requestFormRepository.findByCreateByUser(createByUser);
+        return sortCreateDate(requestFormRepository.findByCreateByUser(createByUser));
     }
 
     @Override
     public List<RequestForm> findByProjectIdAndProjectNameAndContact(String projectId, String projectName, String contact) {
         if (projectId.trim().equals("") && projectName.trim().equals("") && !contact.trim().equals("")) {
-            return requestFormRepository.findByContact(contact);
+            return sortCreateDate(requestFormRepository.findByContact(contact));
         }
         if (projectId.trim().equals("") && !projectName.trim().equals("") && contact.trim().equals("")) {
-            return requestFormRepository.findByProjectName(projectName);
+            return sortCreateDate(requestFormRepository.findByProjectName(projectName));
         }
         if (!projectId.trim().equals("") && projectName.trim().equals("") && contact.trim().equals("")) {
-            return requestFormRepository.findByProjectId(projectId);
+            return sortCreateDate(requestFormRepository.findByProjectId(projectId));
         }
         if (projectId.trim().equals("") && !projectName.trim().equals("") && !contact.trim().equals("")) {
-            return requestFormRepository.findByProjectNameAndContact(projectName, contact);
+            return sortCreateDate(requestFormRepository.findByProjectNameAndContact(projectName, contact));
         }
         if (!projectId.trim().equals("") && !projectName.trim().equals("") && contact.trim().equals("")) {
-            return requestFormRepository.findByProjectIdAndProjectName(projectId, projectName);
+            return sortCreateDate(requestFormRepository.findByProjectIdAndProjectName(projectId, projectName));
         }
         if (!projectId.trim().equals("") && projectName.trim().equals("") && !contact.trim().equals("")) {
-            return requestFormRepository.findByProjectIdAndContact(projectId, contact);
+            return sortCreateDate(requestFormRepository.findByProjectIdAndContact(projectId, contact));
         }
-        return requestFormRepository.findByProjectIdAndProjectNameAndContact(projectId, projectName, contact);
+        return sortCreateDate(requestFormRepository.findByProjectIdAndProjectNameAndContact(projectId, projectName, contact));
     }
 
     @Override

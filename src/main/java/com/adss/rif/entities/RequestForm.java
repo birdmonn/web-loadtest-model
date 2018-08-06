@@ -28,7 +28,11 @@ public class RequestForm {
     @NotNull(message = "Contact cannot be empty")
     @NotEmpty(message = "Contact cannot be empty")
     private String contact;
+    @NotNull(message = "Department cannot be empty")
+    @NotEmpty(message = "Department cannot be empty")
     private String department;
+    @NotNull(message = "MobilePhone cannot be empty")
+    @NotEmpty(message = "MobilePhone cannot be empty")
     private String mobilePhone;
     private String objective;
     //  application information

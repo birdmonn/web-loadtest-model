@@ -39,9 +39,10 @@
 <div class="container">
     <form th:action="@{/form/formViewAdmin/}+*{id}" enctype="multipart/form-data" method="post">
         <div class="row">
-            <div class="col-tab-80"></div>
-            <div class="col-20-right">
-                <label th:text="#{label.status}">status</label>:
+            <div class="col-tab-60"></div>
+            <div class="col-10"></div>
+            <div class="col-10"><label>Status : </label></div>
+            <div class="col-20">
                 <select name="statusRequest" th:field="*{statusRequest}">
                     <option value="wait">Wait</option>
                     <option value="inProcess">In Process</option>
@@ -53,7 +54,7 @@
 
             <div class="col-tab-60"></div>
             <div class="col-40-right">
-                <label th:text="#{label.dateReceived}">Date Received :</label>:
+                <label th:text="#{label.dateReceived}">Date Received :</label>
                 <label th:text="*{created}"></label>
             </div>
         </div>
@@ -252,7 +253,7 @@
                         </td>
                         <td width="30%">
                             <textarea name="*{fileReportList[__${rowStat.index}__].detail}"
-                                   th:field="*{fileReportList[__${rowStat.index}__].detail}"/>
+                                      th:field="*{fileReportList[__${rowStat.index}__].detail}"/>
                         </td>
                         <td width="10%">
                             <button class="buttonGreen width-100" type="button" name="addRowLoadTest"
@@ -265,13 +266,17 @@
                 </table>
             </div>
         </div>
-        <p></p>
+        <br/>
         <div class="row">
-            <input id="fileInput" type="file" name="file" onchange="updateSize();" multiple>
+            <div class="fileUpload buttonGreen">
+                <span>Upload</span>
+                <input id="fileInput" type="file" name="file" class="upload" onchange="updateSize();" multiple>
+            </div>
+            <br/>
             selected files: <span id="fileNum">0</span>;
             total size: <span id="fileSize">0</span>
         </div>
-        <p></p>
+        <br/>
         <div class="row">
             <input class="buttonGreen width-10" type="submit" value="Submit" onclick="waitingDialog.show();">
         </div>

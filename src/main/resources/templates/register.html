@@ -18,13 +18,13 @@
     <div class="row" >
         <div class="col-tab-35"></div>
         <div class="col-30">
-            <div ><input type="text" name="username"/></div>
+            <div ><input type="text" name="username" th:field="*{username}"/></div>
         </div>
     </div>
     <div class="row">
         <div class="col-tab-35"></div>
         <div class="col-30">
-            <div><label> Password:</label></div>
+            <div><label> Password :</label></div>
             <text-error class="text-error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"/>
         </div>
     </div>
@@ -37,40 +37,47 @@
     <div class="row">
         <div class="col-tab-35"></div>
         <div class="col-30">
-            <div><label> First Name:</label></div>
+            <div><label> First Name :</label></div>
         </div>
     </div>
     <div class="row">
         <div class="col-tab-35"></div>
         <div class="col-30">
-            <div><input type="text" name="firstName"/></div>
+            <div><input type="text" name="firstName" th:field="*{firstName}"/></div>
         </div>
     </div>
     <div class="row">
         <div class="col-tab-35"></div>
         <div class="col-30">
-            <div><label> Last Name: </label></div>
+            <div><label> Last Name :</label></div>
         </div>
     </div>
     <div class="row">
         <div class="col-tab-35"></div>
         <div class="col-30">
-            <div><input type="text" WIDTH="100%" name="lastName"/></div>
+            <div><input type="text" WIDTH="100%" name="lastName" th:field="*{lastName}"/></div>
         </div>
     </div>
     <div class="row">
         <div class="col-tab-35"></div>
         <div class="col-30">
-            <div><label> Department:</label></div>
+            <div><label> Department :</label></div>
             <text-error class="text-error" th:if="${#fields.hasErrors('department')}" th:errors="*{department}"/>
         </div>
     </div>
     <div class="row">
         <div class="col-tab-35"></div>
         <div class="col-30">
-            <div><input type="text" name="department"/></div>
+            <div>
+                <input type="text" name="department" th:field="*{department}" list="departmentList"/>
+                <datalist id="departmentList" th:each="dept : ${departmentList}">
+                    <option data-value="${dept}" th:text="${dept}">The answer</option>
+                </datalist>
+            </div>
         </div>
     </div>
+    <br/>
+    <br/>
     <div class="row">
         <div class="col-tab-10"></div>
         <div class="col-10">
@@ -81,11 +88,8 @@
         <input align="right" class="buttonGreen width-100"  type="submit" value="Register"/>
         </div>
     </div>
-    <p>
-        <h3>
-
-        </h3>
-    </p>
+    <br/>
+    <br/>
 </form>
 <div th:replace="fragments/footer :: .footer"> menu Bar</div>
 </body>

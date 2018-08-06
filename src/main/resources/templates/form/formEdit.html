@@ -119,12 +119,13 @@
         <div class="row">
             <div class="col-10"></div>
             <div class="col-15">
-                <label for="mobilePhone" th:text="#{label.phone}">Phone
-                    <star>*</star>
-                </label>
+                <label for="mobilePhone">Phone<star>*</star></label>
             </div>
             <div class="col-65">
                 <input id="mobilePhone" name="mobilePhone" type="text" th:field="*{mobilePhone}">
+                <text-error class="text-error" th:if="${#fields.hasErrors('mobilePhone')}" th:errors="*{mobilePhone}">
+                    กรุณากรอก
+                </text-error>
             </div>
         </div>
         <div class="row">

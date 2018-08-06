@@ -18,6 +18,11 @@ public class UserWebServiceImpl implements UserWebService {
     }
 
     @Override
+    public List<String> findListDepartment() {
+        return userWebRepository.findListDepartment();
+    }
+
+    @Override
     public List<UserWeb> findAll() {
         return userWebRepository.findAll();
     }
