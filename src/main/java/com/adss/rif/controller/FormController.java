@@ -89,7 +89,13 @@ public class FormController implements WebMvcConfigurer {
             RoleToViewPage.getInstance().roleUser(model, request.getRemoteUser(), userWebService);
             return PathView.formEdit;
         }
-        requestFormService.update(id, requestForm);
+        RequestForm formSave = requestFormService.update(id, requestForm);
+        if (formSave != null) {
+            loadTestScenarioService.createAllList(requestForm.getLoadTestScenarioList(), formSave);
+            reliabilityTestScenarioService.createAllList(requestForm.getReliabilityTestScenarioList(), formSave);
+            stressTestScenarioService.createAllList(requestForm.getStressTestScenarioList(), formSave);
+            return "redirect:" + PathView.formView + "/" + formSave.getId();
+        }
         return "redirect:" + PathView.formView + "/" + id;
     }
 
