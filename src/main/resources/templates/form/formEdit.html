@@ -456,13 +456,13 @@
                                    th:field="*{stressTestScenarioList[__${rowStat.index}__].id}">
                         </td>
                         <td>
-                            <input type="text" th:field="*{stressTestScenarioList[__${rowStat.index}__].detail}"/>
+                            <input type="text" th:field="*{stressTestScenarioList[__${rowStat.index}__].testCase}"/>
                         </td>
                         <td>
                             <input type="text" th:field="*{stressTestScenarioList[__${rowStat.index}__].concurrent}"/>
                         </td>
                         <td>
-                            <textarea type="text" th:field="*{stressTestScenarioList[__${rowStat.index}__].dataTest}"/>
+                            <textarea type="text" th:field="*{stressTestScenarioList[__${rowStat.index}__].detail}"/>
                         </td>
                         <td>
                             <input type="text" th:field="*{stressTestScenarioList[__${rowStat.index}__].other}"/>
