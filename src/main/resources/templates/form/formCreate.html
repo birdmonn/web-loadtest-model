@@ -358,9 +358,9 @@
                     <thead>
                     <tr>
                         <th width="5%">No.</th>
-                        <th width="20%" th:text="#{label.detail}">Commend</th>test case
+                        <th width="20%" th:text="#{label.testCase}">Test Case</th>
                         <th width="10%" th:text="#{label.concurrent}">Concurrent</th>
-                        <th width="45%" th:text="#{label.dataTest}">Data Test</th>detail
+                        <th width="45%" th:text="#{label.detail}">Detail</th>
                         <th width="20%" th:text="#{label.other}">Other</th>
                     </tr>
                     </thead>
@@ -372,13 +372,13 @@
                                    th:field="*{loadTestScenarioList[__${rowStat.index}__].id}">
                         </td>
                         <td>
-                            <input type="text" th:field="*{loadTestScenarioList[__${rowStat.index}__].detail}"/>
+                            <input type="text" th:field="*{loadTestScenarioList[__${rowStat.index}__].testCase}"/>
                         </td>
                         <td>
                             <input type="text" th:field="*{loadTestScenarioList[__${rowStat.index}__].concurrent}"/>
                         </td>
                         <td>
-                            <textarea type="text" th:field="*{loadTestScenarioList[__${rowStat.index}__].dataTest}"/>
+                            <textarea type="text" th:field="*{loadTestScenarioList[__${rowStat.index}__].detail}"/>
                         </td>
                         <td>
                             <input type="text" th:field="*{loadTestScenarioList[__${rowStat.index}__].other}"/>
@@ -402,9 +402,9 @@
                     <thead>
                     <tr>
                         <th width="5%">No.</th>
-                        <th width="20%" th:text="#{label.detail}">Commend</th>
+                        <th width="20%" th:text="#{label.testCase}">Test Case</th>
                         <th width="10%" th:text="#{label.concurrent}">Concurrent</th>
-                        <th width="45%" th:text="#{label.dataTest}">Data Test</th>
+                        <th width="45%" th:text="#{label.detail}">Detail</th>
                         <th width="20%" th:text="#{label.other}">Other</th>
                     </tr>
                     </thead>
@@ -416,7 +416,7 @@
                                    th:field="*{reliabilityTestScenarioList[__${rowStat.index}__].id}">
                         </td>
                         <td>
-                            <input type="text" th:field="*{reliabilityTestScenarioList[__${rowStat.index}__].detail}"/>
+                            <input type="text" th:field="*{reliabilityTestScenarioList[__${rowStat.index}__].testCase}"/>
                         </td>
                         <td>
                             <input type="text"
@@ -424,7 +424,7 @@
                         </td>
                         <td>
                             <textarea type="text"
-                                      th:field="*{reliabilityTestScenarioList[__${rowStat.index}__].dataTest}"/>
+                                      th:field="*{reliabilityTestScenarioList[__${rowStat.index}__].detail}"/>
                         </td>
                         <td>
                             <input type="text" th:field="*{reliabilityTestScenarioList[__${rowStat.index}__].other}"/>
@@ -447,9 +447,9 @@
                     <thead>
                     <tr>
                         <th width="5%">No.</th>
-                        <th width="20%" th:text="#{label.detail}">Commend</th>
+                        <th width="20%" th:text="#{label.testCase}">Test Case</th>
                         <th width="10%" th:text="#{label.concurrent}">Concurrent</th>
-                        <th width="45%" th:text="#{label.dataTest}">Data Test</th>
+                        <th width="45%" th:text="#{label.detail}">Detail</th>
                         <th width="20%" th:text="#{label.other}">Other</th>
                     </tr>
                     </thead>
@@ -461,13 +461,13 @@
                                    th:field="*{stressTestScenarioList[__${rowStat.index}__].id}">
                         </td>
                         <td>
-                            <input type="text" th:field="*{stressTestScenarioList[__${rowStat.index}__].detail}"/>
+                            <input type="text" th:field="*{stressTestScenarioList[__${rowStat.index}__].testCase}"/>
                         </td>
                         <td>
                             <input type="text" th:field="*{stressTestScenarioList[__${rowStat.index}__].concurrent}"/>
                         </td>
                         <td>
-                            <textarea type="text" th:field="*{stressTestScenarioList[__${rowStat.index}__].dataTest}"/>
+                            <textarea type="text" th:field="*{stressTestScenarioList[__${rowStat.index}__].detail}"/>
                         </td>
                         <td>
                             <input type="text" th:field="*{stressTestScenarioList[__${rowStat.index}__].other}"/>

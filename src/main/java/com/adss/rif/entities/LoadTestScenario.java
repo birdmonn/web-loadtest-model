@@ -15,8 +15,9 @@ public class LoadTestScenario {
     @Column(columnDefinition = "text")
     private String detail;
     @Column(columnDefinition = "text")
-    private String dataTest;
+    private String testCase;
     private String concurrent;
+    @Column(columnDefinition = "text")
     private String other;
     private boolean scenarioPass;
 
@@ -46,12 +47,12 @@ public class LoadTestScenario {
         this.detail = detail;
     }
 
-    public String getDataTest() {
-        return dataTest;
+    public String getTestCase() {
+        return testCase;
     }
 
-    public void setDataTest(String dataTest) {
-        this.dataTest = dataTest;
+    public void setTestCase(String testCase) {
+        this.testCase = testCase;
     }
 
     public String getConcurrent() {
