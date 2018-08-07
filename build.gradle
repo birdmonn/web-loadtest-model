@@ -43,4 +43,9 @@ dependencies {
 	compile 'com.google.guava:guava:21.0'
 	compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.11.0'
 	compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.11.0'
+	// https://mvnrepository.com/artifact/com.microsoft.sqlserver/sqljdbc4
+//	testCompile group: 'com.microsoft.sqlserver', name: 'sqljdbc4', version: '4.0'
+// https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc
+	compile group: 'com.microsoft.sqlserver', name: 'mssql-jdbc', version: '6.4.0.jre8'
+
 }

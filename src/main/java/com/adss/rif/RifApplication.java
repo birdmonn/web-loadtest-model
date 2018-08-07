@@ -35,6 +35,7 @@ public class RifApplication {
             userWeb.setUsername("superadmin");
             userWeb.setPassword(new BCryptPasswordEncoder().encode("superadmin"));
             userWeb.setFirstName("superadmin");
+            userWeb.setDepartment("admin");
             userWeb.setLastName("admin");
             userWeb.setRole("ADMIN");
             userWebService.create(userWeb);
