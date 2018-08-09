@@ -104,7 +104,7 @@ public class FormController implements WebMvcConfigurer {
         requestForm.getLoadTestScenarioList().add(new LoadTestScenario());
         model.addAttribute("requestForm", requestForm);
         RoleToViewPage.getInstance().roleUser(model, request.getRemoteUser(), userWebService);
-        return "/form/" + page;
+        return "form/" + page;
     }
 
     @PostMapping(value = "", params = {"addRowReliTest"})
@@ -112,7 +112,7 @@ public class FormController implements WebMvcConfigurer {
         requestForm.getReliabilityTestScenarioList().add(new ReliabilityTestScenario());
         model.addAttribute("requestForm", requestForm);
         RoleToViewPage.getInstance().roleUser(model, request.getRemoteUser(), userWebService);
-        return "/form/" + page;
+        return "form/" + page;
     }
 
     @PostMapping(value = "", params = {"addRowStressTest"})
@@ -120,6 +120,6 @@ public class FormController implements WebMvcConfigurer {
         requestForm.getStressTestScenarioList().add(new StressTestScenario());
         model.addAttribute("requestForm", requestForm);
         RoleToViewPage.getInstance().roleUser(model, request.getRemoteUser(), userWebService);
-        return "/form/" + page;
+        return "form/" + page;
     }
 }

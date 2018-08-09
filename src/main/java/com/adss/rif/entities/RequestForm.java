@@ -41,45 +41,29 @@ public class RequestForm {
     private String envDetail;
     private String languageDev;
     private String languageDevDetail;
-    @Column(columnDefinition = "BOOLEAN default false")
     private boolean browserIe;
-    @Column(columnDefinition = "BOOLEAN default false")
     private boolean browserFirefox;
     private String securitySupport;
-    @Column(columnDefinition = "BOOLEAN default false", name = "is_system_impact_f5")
+
     private boolean systemImpactF5;
-    @Column(columnDefinition = "BOOLEAN default false", name = "is_system_impact_ldap")
     private boolean isSystemImpactLdap;
-    @Column(columnDefinition = "BOOLEAN default false", name = "is_system_impact_firewall")
     private boolean systemImpactFirewall;
-    @Column(columnDefinition = "BOOLEAN default false", name = "is_system_impact_proxy")
     private boolean systemImpactProxy;
-    @Column(columnDefinition = "BOOLEAN default false", name = "is_system_impact_ad")
     private boolean systemImpactAd;
-    @Column(columnDefinition = "BOOLEAN default false", name = "is_system_impact_sff")
     private boolean systemImpactSff;
-    @Column(columnDefinition = "BOOLEAN default false", name = "is_system_impact_siebel")
     private boolean systemImpactSiebel;
-    @Column(columnDefinition = "BOOLEAN default false", name = "is_system_impact_sap")
     private boolean systemImpactSap;
-    @Column(columnDefinition = "BOOLEAN default false", name = "is_system_impact_eai")
     private boolean systemImpactEai;
-    @Column(columnDefinition = "BOOLEAN default false", name = "is_system_impact_Ivr")
     private boolean systemImpactIvr;
     private String systemImpactEtc;
     // load test : user concurrent
-    @Column(columnDefinition = "BOOLEAN default false", name = "is_impact_Assessment_ex")
     private boolean impactAssessmentEx;
-    @Column(columnDefinition = "BOOLEAN default false", name = "is_impact_Assessment_ih")
     private boolean impactAssessmentIh;
     private String userConcurrent;
-    @Column(columnDefinition = "BOOLEAN default false", name = "is_loadtest_type_loadtest")
     private boolean loadTestTypeLoadTest;
-    @Column(columnDefinition = "BOOLEAN default false", name = "is_loadtest_type_StressTest")
     private boolean loadTestTypeStressTest;
-    @Column(columnDefinition = "BOOLEAN default false", name = "is_loadtest_type_reliabilitytest")
     private boolean loadTestTypeReliabilityTest;
-    // loadTest Date
+    //     loadTest Date
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date targetStartDate;
