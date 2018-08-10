@@ -38,7 +38,7 @@ public class FormController implements WebMvcConfigurer {
     }
 
     @GetMapping("/formCreate")
-    public String showForm(RequestForm requestForm,Model model, HttpServletRequest request) {
+    public String showForm(RequestForm requestForm, Model model, HttpServletRequest request) {
         RoleToViewPage.getInstance().roleUser(model, request.getRemoteUser(), userWebService);
         return PathView.formCreate;
     }
@@ -84,7 +84,7 @@ public class FormController implements WebMvcConfigurer {
     }
 
     @PostMapping("formEdit/{id}")
-    public String updateRequestForm(@PathVariable long id, @Valid RequestForm requestForm, BindingResult bindingResult, Model model, HttpServletRequest request) {
+    public String updateRequestForm(@PathVariable long id, @Valid RequestForm requestForm, BindingResult bindingResult, HttpServletRequest request, Model model) {
         if (bindingResult.hasErrors() || null == requestFormService.findById(id) || requestForm.getProjectName().equals("")) {
             RoleToViewPage.getInstance().roleUser(model, request.getRemoteUser(), userWebService);
             return PathView.formEdit;
@@ -94,9 +94,9 @@ public class FormController implements WebMvcConfigurer {
             loadTestScenarioService.createAllList(requestForm.getLoadTestScenarioList(), formSave);
             reliabilityTestScenarioService.createAllList(requestForm.getReliabilityTestScenarioList(), formSave);
             stressTestScenarioService.createAllList(requestForm.getStressTestScenarioList(), formSave);
-            return "redirect:" + PathView.formView + "/" + formSave.getId();
+            return "redirect:/" + PathView.formView + "/" + formSave.getId();
         }
-        return "redirect:" + PathView.formView + "/" + id;
+        return "redirect:/" + PathView.formView + "/" + id;
     }
 
     @PostMapping(value = "", params = {"addRowLoadTest"})
@@ -122,4 +122,6 @@ public class FormController implements WebMvcConfigurer {
         RoleToViewPage.getInstance().roleUser(model, request.getRemoteUser(), userWebService);
         return "form/" + page;
     }
+
+
 }
