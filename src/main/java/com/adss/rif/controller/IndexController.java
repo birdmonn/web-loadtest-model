@@ -39,17 +39,7 @@ public class IndexController {
                                   HttpServletRequest request,
                                   @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
                                   @RequestParam(value = "page", required = false, defaultValue = "0") int page) {
-        List<RequestForm> requestFormList = requestFormService.findByCrateByUserAndDepartment(request.getRemoteUser(), userWebService.findByUsername(request.getRemoteUser()).getDepartment());
-        Page formList = ListToPaging.getInstance().Paging(requestFormList, page, pageSize);
-        PagerModel pageModel = new PagerModel(formList.getTotalPages(), formList.getNumber(), 3);
-        //add model
-        // add ListData
-        model.addAttribute("formList", formList);
-        RoleToViewPage.getInstance().roleUser(model, request.getRemoteUser(), userWebService);
-        model.addAttribute("pager", pageModel);
-        // evaluate page size
-        model.addAttribute("selectedPageSize", pageSize);
-        model.addAttribute("pageSizes", PAGE_SIZES_SELECTION);
+        this.setModelIndex(model, request, pageSize, page);
         return PathView.index;
     }
 
@@ -58,17 +48,7 @@ public class IndexController {
                                    HttpServletRequest request,
                                    @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
                                    @RequestParam(value = "page", required = false, defaultValue = "0") int page) {
-        List<RequestForm> requestFormList = requestFormService.findByCrateByUserAndDepartment(request.getRemoteUser(), userWebService.findByUsername(request.getRemoteUser()).getDepartment());
-        Page formList = ListToPaging.getInstance().Paging(requestFormList, page, pageSize);
-        PagerModel pageModel = new PagerModel(formList.getTotalPages(), formList.getNumber(), 3);
-        //add model
-        // add ListData
-        model.addAttribute("formList", formList);
-        RoleToViewPage.getInstance().roleUser(model, request.getRemoteUser(), userWebService);
-        model.addAttribute("pager", pageModel);
-        // evaluate page size
-        model.addAttribute("selectedPageSize", pageSize);
-        model.addAttribute("pageSizes", PAGE_SIZES_SELECTION);
+        this.setModelIndex(model, request, pageSize, page);
         return PathView.index;
     }
 
@@ -77,6 +57,12 @@ public class IndexController {
                              HttpServletRequest request,
                              @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
                              @RequestParam(value = "page", required = false, defaultValue = "0") int page) {
+
+        this.setModelIndex(model, request, pageSize, page);
+        return PathView.index;
+    }
+
+    private void setModelIndex(Model model,HttpServletRequest request,int page,int pageSize){
         List<RequestForm> requestFormList = requestFormService.findByCrateByUserAndDepartment(request.getRemoteUser(), userWebService.findByUsername(request.getRemoteUser()).getDepartment());
         Page formList = ListToPaging.getInstance().Paging(requestFormList, page, pageSize);
         PagerModel pageModel = new PagerModel(formList.getTotalPages(), formList.getNumber(), 3);
@@ -88,7 +74,5 @@ public class IndexController {
         // evaluate page size
         model.addAttribute("selectedPageSize", pageSize);
         model.addAttribute("pageSizes", PAGE_SIZES_SELECTION);
-        return PathView.index;
     }
-
 }

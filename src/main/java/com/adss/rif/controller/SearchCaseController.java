@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Locale;
 
 import static com.adss.rif.utils.ListToPaging.PAGE_SIZES_SELECTION;
 
@@ -59,8 +61,10 @@ public class SearchCaseController {
     }
 
     @PostMapping()
-    public String qurey(@Valid SearchForm searchForm) {
-        return "redirect:" + PathView.searchCase + "?projectId=" + searchForm.getProjectId() + "&projectName=" +
-                searchForm.getProjectName() + "&contact=" + searchForm.getContact();
+    public String qurey(@Valid SearchForm searchForm ,HttpServletResponse response) {
+        response.setContentType("text/html; charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        response.setLocale(Locale.ROOT);
+        return "redirect:/" + PathView.searchCase + "?projectId=" + searchForm.getProjectId() + "&projectName="+searchForm.getProjectName() + "&contact=" + searchForm.getContact();
     }
 }

@@ -47,7 +47,7 @@ public class FormViewController {
     public String viewFormById(@PathVariable Long id, Model model, HttpServletRequest request) {
         RequestForm requestForm = requestFormService.findById(id);
         if (requestForm == null) {
-            return "redirect:" + PathView.index;
+            return "redirect:/" + PathView.index;
         }
         model.addAttribute("requestForm", requestForm);
         if (userWebService.findByUsername(request.getRemoteUser()).getRole().equals("ADMIN")) {
@@ -61,7 +61,7 @@ public class FormViewController {
     @PostMapping("/formViewAdmin/{id}")
     public String editFormStatus(@RequestParam("file") MultipartFile[] fileList, @PathVariable Long id, RequestForm requestForm, Model model, HttpServletRequest request) {
         if (!request.isUserInRole("ADMIN") || (requestFormService.findById(id) == null)) {
-            return "redirect:" + PathView.index;
+            return "redirect:/" + PathView.index;
         }
         stressTestScenarioService.updateStatusAllList(requestForm.getStressTestScenarioList());
         loadTestScenarioService.updateStatusAllList(requestForm.getLoadTestScenarioList());
@@ -75,6 +75,6 @@ public class FormViewController {
                 fileReportService.create(new FileReport(pathFile, file.getOriginalFilename(), requestFormUpdate));
             }
         }
-        return "redirect:" + PathView.formView + "/" + id;
+        return "redirect:/" + PathView.formView + "/" + id;
     }
 }

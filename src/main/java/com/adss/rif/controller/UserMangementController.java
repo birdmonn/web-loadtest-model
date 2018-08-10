@@ -32,7 +32,7 @@ public class UserMangementController {
     @GetMapping()
     public String allList(Model model, HttpServletRequest request) {
         if (!request.isUserInRole("ADMIN")) {
-            return "redirect:" + PathView.index;
+            return "redirect:/" + PathView.index;
         }
         List<UserWeb> userWebList = userWebService.findAll();
         model.addAttribute("userList", userWebService.findAll());

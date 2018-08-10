@@ -31,7 +31,7 @@ public class UserViewController {
     @GetMapping("/{id}")
     public String allList(@PathVariable long id, Model model, HttpServletRequest request) {
         if (!userWebService.findByUsername(request.getRemoteUser()).getRole().equals("ADMIN")) {
-            return "redirect:" + PathView.index;
+            return "redirect:/" + PathView.index;
         }
         UserWeb userWeb = userWebService.findById(id);
         List<RequestForm> requestFormList = requestFormService.findByCreateByUser(userWeb.getUsername());
@@ -44,11 +44,11 @@ public class UserViewController {
     @PostMapping("/changeRole")
     public String changeRoleUser(@RequestParam String role, @RequestParam Long userId, HttpServletRequest request) {
         if (!userWebService.findByUsername(request.getRemoteUser()).getRole().equals("ADMIN")) {
-            return "redirect:" + PathView.index;
+            return "redirect:/" + PathView.index;
         }
         UserWeb userWeb = userWebService.findById(userId);
         userWeb.setRole(role);
         userWebService.update(userId, userWeb);
-        return "redirect:" + PathView.userView + "/" + userId;
+        return "redirect:/" + PathView.userView + "/" + userId;
     }
 }
