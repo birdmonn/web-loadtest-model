@@ -68,12 +68,4 @@ public class RifApplication {
             storageService.init();
         };
     }
-
-    @Bean
-    public org.springframework.web.filter.CharacterEncodingFilter characterEncodingFilter() {
-        CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
-        characterEncodingFilter.setEncoding("UTF-8");
-        characterEncodingFilter.setForceEncoding(true);
-        return characterEncodingFilter;
-    }
 }
