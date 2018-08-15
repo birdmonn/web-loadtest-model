@@ -20,8 +20,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Locale;
+import java.util.Base64;
 
 import static com.adss.rif.utils.ListToPaging.PAGE_SIZES_SELECTION;
 
@@ -45,8 +47,8 @@ public class SearchCaseController {
                           @RequestParam(value = "projectName", required = false, defaultValue = "") String projectName,
                           @RequestParam(value = "contact", required = false, defaultValue = "") String contact,
                           @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
-                          @RequestParam(value = "page", required = false, defaultValue = "0") int page) {
-        List<RequestForm> requestFormList = requestFormService.findByProjectIdAndProjectNameAndContact(projectId, projectName, contact);
+                          @RequestParam(value = "page", required = false, defaultValue = "0") int page) throws UnsupportedEncodingException {
+        List<RequestForm> requestFormList = requestFormService.findByProjectIdAndProjectNameAndContact(decodeThai(projectId), decodeThai(projectName), decodeThai(contact));
         Page formList = ListToPaging.getInstance().Paging(requestFormList, page, pageSize);
         PagerModel pageModel = new PagerModel(formList.getTotalPages(), formList.getNumber(), 3);
         //add model
@@ -61,10 +63,15 @@ public class SearchCaseController {
     }
 
     @PostMapping()
-    public String qurey(@Valid SearchForm searchForm ,HttpServletResponse response) {
-        response.setContentType("text/html; charset=UTF-8");
-        response.setCharacterEncoding("UTF-8");
-        response.setLocale(Locale.ROOT);
-        return "redirect:/" + PathView.searchCase + "?projectId=" + searchForm.getProjectId() + "&projectName="+searchForm.getProjectName() + "&contact=" + searchForm.getContact();
+    public String qurey(@Valid SearchForm searchForm, HttpServletResponse response) throws UnsupportedEncodingException {
+        return "redirect:/" + PathView.searchCase + "?projectId=" + encodeThai(searchForm.getProjectId()) + "&projectName=" + encodeThai(searchForm.getProjectName()) + "&contact=" + encodeThai(searchForm.getContact());
+    }
+
+    private String encodeThai(String encodeString) throws UnsupportedEncodingException {
+        return Base64.getEncoder().encodeToString(encodeString.getBytes("UTF-8"));
+    }
+
+    private String decodeThai(String decodeString) throws UnsupportedEncodingException {
+        return new String(Base64.getDecoder().decode(decodeString), "UTF-8");
     }
 }
