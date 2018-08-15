@@ -62,7 +62,7 @@ public class IndexController {
         return PathView.index;
     }
 
-    private void setModelIndex(Model model,HttpServletRequest request,int page,int pageSize){
+    private void setModelIndex(Model model, HttpServletRequest request, int page, int pageSize) {
         List<RequestForm> requestFormList = requestFormService.findByCrateByUserAndDepartment(request.getRemoteUser(), userWebService.findByUsername(request.getRemoteUser()).getDepartment());
         Page formList = ListToPaging.getInstance().Paging(requestFormList, page, pageSize);
         PagerModel pageModel = new PagerModel(formList.getTotalPages(), formList.getNumber(), 3);
