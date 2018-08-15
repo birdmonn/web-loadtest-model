@@ -17,11 +17,11 @@ public class ListToPaging {
         return instance;
     }
 
-    public Page Paging(List result, int page, int size) {
+    public Page Paging(List result, int page, int pageSize) {
         if (page != 0) {
             page = page-1;
         }
-        Pageable pageable = PageRequest.of(page, size);
+        Pageable pageable = PageRequest.of(page, pageSize);
         int start = Math.toIntExact(pageable.getOffset());
         int end = (start + pageable.getPageSize()) > result.size() ? result.size() : (start + pageable.getPageSize());
         if (start > end) {

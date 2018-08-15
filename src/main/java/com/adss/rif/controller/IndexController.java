@@ -39,7 +39,7 @@ public class IndexController {
                                   HttpServletRequest request,
                                   @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
                                   @RequestParam(value = "page", required = false, defaultValue = "0") int page) {
-        this.setModelIndex(model, request, pageSize, page);
+        this.setModelIndex(model, request, page, pageSize);
         return PathView.index;
     }
 
@@ -48,7 +48,7 @@ public class IndexController {
                                    HttpServletRequest request,
                                    @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
                                    @RequestParam(value = "page", required = false, defaultValue = "0") int page) {
-        this.setModelIndex(model, request, pageSize, page);
+        this.setModelIndex(model, request, page, pageSize);
         return PathView.index;
     }
 
@@ -58,7 +58,7 @@ public class IndexController {
                              @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
                              @RequestParam(value = "page", required = false, defaultValue = "0") int page) {
 
-        this.setModelIndex(model, request, pageSize, page);
+        this.setModelIndex(model, request, page, pageSize);
         return PathView.index;
     }
 
