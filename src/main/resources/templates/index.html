@@ -27,7 +27,6 @@
 <!--  menu -->
 <div th:replace="fragments/menuBar :: menuBar('index',*{role}== null ? '' : *{role})">menuBar</div>
 <!-- <h2>index [[${#httpServletRequest.remoteUser}]]</h2> -->
-
 <div class="container">
 	<h2>My Case </h2>
 	<h5 th:text="${formList.getTotalElements()+ 'ทั้งหมด'}">ทั้งหมด</h5>
