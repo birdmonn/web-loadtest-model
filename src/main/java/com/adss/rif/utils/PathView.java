@@ -21,4 +21,7 @@ public class PathView {
     public static final String userManagement = "userManagement";
     //userView
     public static final String userView = "userView";
+
+    //report
+    public static  final String report = "report";
 }
