@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -39,4 +40,7 @@ public interface RequestFormRepository extends JpaRepository<RequestForm, Long> 
 
     @Query("SELECT rf FROM RequestForm rf WHERE rf.department = ?1")
     List<RequestForm> findByDepartment(String department);
+
+    @Query("SELECT rf FROM RequestForm rf WHERE rf.created BETWEEN ?1 AND ?2")
+    List<RequestForm> findByCreatedBetween(Date firstDate, Date lastDate);
 }

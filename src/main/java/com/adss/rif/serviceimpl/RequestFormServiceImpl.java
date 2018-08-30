@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -94,6 +95,12 @@ public class RequestFormServiceImpl implements RequestFormService {
 
     private List<RequestForm> sortCreateDate(List<RequestForm> requestFormList){
         requestFormList.sort(Comparator.comparing(RequestForm::getCreated).reversed());
+        return requestFormList;
+    }
+
+    @Override
+    public List<RequestForm> findByCreatedBetween(Date firstDate, Date lastDate) {
+        List<RequestForm> requestFormList = requestFormRepository.findByCreatedBetween(firstDate, lastDate);
         return requestFormList;
     }
 }
