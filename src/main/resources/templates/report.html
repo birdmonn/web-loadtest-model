@@ -15,7 +15,7 @@
             $('.datepicker').datepicker({
                 format: 'dd/mm/yyyy',
                 todayBtn: true
-            }).datepicker("setDate", "0");  //กำหนดเป็นวันปัจุบัน
+            });  //กำหนดเป็นวันปัจุบัน
         });
 	</script>
 	<style>
@@ -134,24 +134,24 @@
 				</li>
 				<li th:class="${formList.number == 0} ? disabled"><a
 						class="pageLink"
-						th:href="@{${#httpServletRequest.requestURI}(pageSize=${selectedPageSize}, page=${formList.number})}">&larr;</a>
+						th:href="@{${#httpServletRequest.requestURI}(pageSize=${selectedPageSize}, page=${formList.number} ,startDate=${#request.getParameter('startDate')},endDate=${#request.getParameter('endDate')})}">&larr;</a>
 				</li>
 				<li
 						th:class="${formList.number == (page - 1)} ? 'active pointer-disabled'"
 						th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
 					<a class="pageLink"
-					   th:href="@{${#httpServletRequest.requestURI}(pageSize=${selectedPageSize}, page=${page})}"
+					   th:href="@{${#httpServletRequest.requestURI}(pageSize=${selectedPageSize}, page=${page},startDate=${#request.getParameter('startDate')},endDate=${#request.getParameter('endDate')})}"
 					   th:text="${page}"></a>
 				</li>
 				<li
 						th:class="${formList.number + 1 == formList.totalPages} ? disabled">
 					<a class="pageLink"
-					   th:href="@{${#httpServletRequest.requestURI}(pageSize=${selectedPageSize}, page=${formList.number + 2},q=${#request.getParameter('q')})}">&rarr;</a>
+					   th:href="@{${#httpServletRequest.requestURI}(pageSize=${selectedPageSize}, page=${formList.number + 2},startDate=${#request.getParameter('startDate')},endDate=${#request.getParameter('endDate')})}">&rarr;</a>
 				</li>
 				<li
 						th:class="${formList.number + 1 == formList.totalPages} ? disabled">
 					<a class="pageLink"
-					   th:href="@{${#httpServletRequest.requestURI}(pageSize=${selectedPageSize}, page=${formList.totalPages})}">&raquo;</a>
+					   th:href="@{${#httpServletRequest.requestURI}(pageSize=${selectedPageSize}, page=${formList.totalPages},startDate=${#request.getParameter('startDate')},endDate=${#request.getParameter('endDate')})}">&raquo;</a>
 				</li>
 			</ul>
 		</div>
@@ -160,14 +160,18 @@
 <div th:replace="fragments/footer :: .footer"> menu Bar</div>
 <script th:inline="javascript">
     /*<![CDATA[*/
+    var url_string = window.location.href;
+    var url = new URL(url_string);
+    var startDate = (url.searchParams.get("startDate")==null) ? "" :url.searchParams.get("startDate") ;
+    var endDate = (url.searchParams.get("endDate")==null) ? "" :url.searchParams.get("endDate");
     $(document).ready(function() {
-    changePageAndSize();
+        changePageAndSize();
     });
 
     function changePageAndSize() {
-    $('#pageSizeSelect').change(function(evt) {
-    window.location.replace("/?pageSize=" + this.value + "&page=1");
-    });
+        $('#pageSizeSelect').change(function(evt) {
+            window.location.replace("/report?pageSize=" + this.value + "&page=1&startDate="+startDate+"&endDate="+endDate);
+        });
     }
     /*]]>*/
 </script>

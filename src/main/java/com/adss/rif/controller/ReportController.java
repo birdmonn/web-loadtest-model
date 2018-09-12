@@ -1,33 +1,26 @@
 package com.adss.rif.controller;
 
 import com.adss.rif.entities.DateQueryReport;
-import com.adss.rif.entities.PagerModel;
 import com.adss.rif.entities.RequestForm;
 import com.adss.rif.service.RequestFormService;
 import com.adss.rif.service.UserWebService;
-import com.adss.rif.utils.ListToPaging;
 import com.adss.rif.utils.PathView;
 import com.adss.rif.utils.RequestFormToTable;
 import com.adss.rif.utils.RoleToViewPage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-import java.text.DateFormat;
-import java.text.ParseException;
+import javax.validation.Valid;
 import java.text.SimpleDateFormat;
-import java.time.Month;
-import java.time.MonthDay;
-import java.time.Year;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static com.adss.rif.utils.ListToPaging.PAGE_SIZES_SELECTION;
 import static java.time.LocalDate.now;
 
 @Controller
@@ -46,16 +39,23 @@ public class ReportController {
     }
 
     @GetMapping()
-    public String myCaseShow(Model model,
+    public String ShowDefaultReport(Model model,
                              HttpServletRequest request,
+                             @RequestParam(value = "startDate", required = false, defaultValue = "0") long startDate,
+                             @RequestParam(value = "endDate", required = false, defaultValue = "0") long endDate,
                              @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
                              @RequestParam(value = "page", required = false, defaultValue = "0") int page) {
 
         // set dateSearch
-        DateQueryReport dq = new DateQueryReport();
-        model.addAttribute("dateQueryReport", dq);
-        Date searchStartDate = new GregorianCalendar(now().getYear(), now().getMonthValue() - 1, 1).getTime();
-        Date searchEndDate = new GregorianCalendar(now().getYear(), now().getMonthValue(), 1).getTime();
+        Date searchStartDate,searchEndDate;
+        if (startDate !=0 && endDate !=0){
+            searchStartDate = new Date(startDate);
+            searchEndDate = new Date(endDate);
+        } else {
+            searchStartDate = new GregorianCalendar(now().getYear(), now().getMonthValue() - 1, 1).getTime();
+            searchEndDate = new GregorianCalendar(now().getYear(), now().getMonthValue(), 1).getTime();
+        }
+        model.addAttribute("dateQueryReport", new DateQueryReport(searchStartDate,searchEndDate));
         model.addAttribute("searchStartDate", new SimpleDateFormat("dd/MM/yyyy").format(searchStartDate));
         model.addAttribute("searchEndDate", new SimpleDateFormat("dd/MM/yyyy").format(searchEndDate));
         // add data
@@ -64,6 +64,11 @@ public class ReportController {
         RequestFormToTable.getInstance().setRequestFormListToTable(model, requestFormList, page, pageSize);
         RoleToViewPage.getInstance().roleUser(model, request.getRemoteUser(), userWebService);
         return PathView.report;
+    }
+
+    @PostMapping()
+    public String showReportByDateSelect(@Valid DateQueryReport dateQueryReport){
+        return "redirect:/"+ PathView.report+"?startDate=" +(dateQueryReport.getStartDate().getTime())+"&endDate="+(dateQueryReport.getEndDate().getTime());
     }
 
     private void setConJob(Model model, List<RequestForm> requestFormList) {
