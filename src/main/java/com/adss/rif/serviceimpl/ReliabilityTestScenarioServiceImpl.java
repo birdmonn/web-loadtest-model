@@ -36,7 +36,7 @@ public class ReliabilityTestScenarioServiceImpl implements ReliabilityTestScenar
     @Override
     public void createAllList(List<ReliabilityTestScenario> reliabilityTestScenarioList, RequestForm requestForm) {
         for (ReliabilityTestScenario reliItem : reliabilityTestScenarioList) {
-            if (!reliItem.getDetail().equals("") && reliItem.getDetail() != null) {
+            if (!reliItem.getTestCase().equals("") && reliItem.getTestCase() != null) {
                 reliItem.setRequestForm(requestForm);
                 reliabilityTestScenarioRepository.saveAndFlush(reliItem);
             }
