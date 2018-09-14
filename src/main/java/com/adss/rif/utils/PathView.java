@@ -24,4 +24,7 @@ public class PathView {
 
     //report
     public static  final String report = "report";
+
+    //report
+    public static  final String reportRawData = "reportRawData";
 }
