@@ -45,7 +45,7 @@ public class LoadTestScenarioServiceImpl implements LoadTestScenarioService {
     @Override
     public void createAllList(List<LoadTestScenario> loadTestScenarioList, RequestForm requestForm) {
         for (LoadTestScenario loadItem : loadTestScenarioList) {
-            if (!loadItem.getDetail().equals("") && loadItem.getDetail() != null) {
+            if (!loadItem.getTestCase().equals("") && loadItem.getTestCase() != null) {
                 loadItem.setRequestForm(requestForm);
                 loadTestScenarioRepository.saveAndFlush(loadItem);
             }
