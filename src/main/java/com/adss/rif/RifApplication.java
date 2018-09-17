@@ -36,7 +36,7 @@ public class RifApplication {
         if (userWebService.findByUsername("superadmin") == null) {
             UserWeb userWeb = new UserWeb();
             userWeb.setUsername("superadmin");
-            userWeb.setPassword(new BCryptPasswordEncoder().encode("superadmin"));
+            userWeb.setPassword(new BCryptPasswordEncoder().encode("apspassword"));
             userWeb.setFirstName("superadmin");
             userWeb.setDepartment("admin");
             userWeb.setLastName("admin");
