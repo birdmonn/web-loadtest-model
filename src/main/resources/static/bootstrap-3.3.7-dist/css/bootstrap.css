@@ -200,7 +200,7 @@ th {
   }
   a,
   a:visited {
-
+    text-decoration: underline;
   }
   a[href]:after {
     content: " (" attr(href) ")";
@@ -1102,6 +1102,8 @@ a {
 }
 a:hover,
 a:focus {
+  color: #23527c;
+  text-decoration: underline;
 }
 a:focus {
   outline: 5px auto -webkit-focus-ring-color;
@@ -4756,8 +4758,8 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
   z-index: 3;
   color: #fff;
   cursor: default;
-  background-color: #337ab7;
-  border-color: #337ab7;
+  background-color: #8dc63f;
+  border-color: #83ba37;
 }
 .pagination > .disabled > span,
 .pagination > .disabled > span:hover,

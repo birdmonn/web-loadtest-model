@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login</title>
+    <div th:include="fragments/head :: head" th:remove="tag">Global Header</div>
+    <link rel="stylesheet" type="text/css" href="css/table-case-css.css" th:href="@{/css/table-case-css.css}">
+</head>
+<body>
+<div th:replace="fragments/banner :: .banner">Banner</div>
+<div th:if="${param.error}" align="center">
+    <br/>
+    <star>Invalid username and password.</star>
+</div>
+<div th:if="${param.logout}" align="center">
+    <br/>
+    <star>You have been logged out.</star>
+</div>
+<form th:action="@{/login}" method="post">
+    <div align="center" class="row"><label> User Name :</label></div>
+    <div class="row">
+        <div class="col-tab-35"></div>
+        <div class="col-30">
+            <input type="text" name="username"/>
+        </div>
+    </div>
+    <div align="center" class="row"><label> Password :</label></div>
+    <div align="center" class="row">
+        <div class="col-tab-35"></div>
+        <div class="col-30">
+            <input type="password" name="password"/>
+        </div>
+    </div>
+    <br/>
+    <div align="center">
+        <input class="buttonGreen width-100px" type="submit" value="Sign In"/>
+        <button class="buttonGreen width-100px" type="button" onclick="location.href='./register'">Register</button>
+    </div>
+</form>
+<div th:replace="fragments/footer :: .footer"> menu Bar</div>
+</body>
+</html>

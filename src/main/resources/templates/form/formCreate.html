@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Form Create</title>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <div th:include="fragments/head :: head" th:remove="tag">Global Header</div>
+    <link rel="stylesheet" type="text/css" href="css/table-sc-css.css" th:href="@{/css/table-sc-css.css}">
+    <script th:inline="javascript">
+       var token = $("meta[name='_csrf']").attr("content");
+        var header = $("meta[name='_csrf_header']").attr("content");
+        var objHeader = {};
+        objHeader[header] = token;
+         $(document).ready(function () {
+            $('.datepicker').datepicker({
+                format: 'dd/mm/yyyy',
+                startDate: new Date(),
+                todayBtn: true
+            }).datepicker("setDate", "0");  //กำหนดเป็นวันปัจุบัน
+        });
+        function addChild(type,page){
+        $.ajax({
+            type : "POST",
+            url : "/form?"+type+"&page="+page,
+            headers : { 'X-CSRF-TOKEN':token
+            },
+            data : $('form').serialize(),
+
+            success : function(response){
+                $('#form').html(response)
+            }
+        });
+        }
+    </script>
+</head>
+<body style="font-family:Verdana;" th:id="form">
+<!--  Banner -->
+<div th:replace="fragments/banner :: .banner"> menu Bar</div>
+<!--  menu -->
+<div th:replace="fragments/menuBar :: menuBar('form',${role}== null ? '' : *{role})">menuBar</div>
+<!--  container -->
+<div class="container" th:fragment="form">
+    <h3>แบบฟอร์มการขอใช้บริการ</h3>
+    <h5 th:text="#{label.projectDetail}">Project Detail</h5>
+    <form action="/form#" th:action="@{/form}" th:object="${requestForm}" method="post">
+        <input type="hidden" id="id" name="id" th:field="*{id}">
+        <div class="row">
+            <div class="col-10"></div>
+            <div class="col-15">
+                <label for="pId" th:text="#{label.projectId}">Project ID</label>
+            </div>
+            <div class="col-65">
+                <input type="text" id="pId" name="projectId" th:field="*{projectId}">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-10"></div>
+            <div class="col-15">
+                <label for="pName">Project Name<star>*</star></label>
+            </div>
+            <div class="col-65">
+                <input type="text" id="pName" name="projectName" th:field="*{projectName}">
+                <text-error class="text-error" th:if="${#fields.hasErrors('projectName')}" th:errors="*{projectName}">
+                    กรุณากรอก
+                </text-error>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-10"></div>
+            <div class="col-15">
+                <label th:text="#{label.significantLevel}">Significant Level</label>
+            </div>
+            <div class="col-65">
+                <select id="significantLevel" name="significantLevel" th:field="*{significantLevel}">
+                    <option value="PS">PS</option>
+                    <option value="P1">P1</option>
+                    <option value="P2">P2</option>
+                    <option value="P3">P3</option>
+                    <option value="U1">U1</option>
+                    <option value="U2">U2</option>
+                    <option value="U3">U3</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-10"></div>
+            <div class="col-15">
+                <label th:text="#{label.requestType}">Request Type</label>
+            </div>
+            <div class="col-65">
+                <select id="requestType" name="requestType" th:field="*{requestType}">
+                    <option value="New">New</option>
+                    <option value="modify">Modify</option>
+                    <option value="Enhance">Enhance</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-10"></div>
+            <div class="col-15">
+                <label for="contact">Contact<star>*</star></label>
+            </div>
+            <div class="col-65">
+                <input id="contact" name="contact" type="text" th:field="*{contact}">
+                <text-error class="text-error" th:if="${#fields.hasErrors('contact')}" th:errors="*{contact}">
+                    กรุณากรอก
+                </text-error>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-10"></div>
+            <div class="col-15">
+                <label>Department<star>*</star></label>
+            </div>
+            <div class="col-65">
+                <input  name="department" type="text" th:field="*{department}">
+                <text-error class="text-error" th:if="${#fields.hasErrors('department')}" th:errors="*{department}">
+                    กรุณากรอก
+                </text-error>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-10"></div>
+            <div class="col-15">
+                <label for="mobilePhone">Phone<star>*</star></label>
+            </div>
+            <div class="col-65">
+                <input id="mobilePhone" name="mobilePhone" type="text" th:field="*{mobilePhone}">
+                <text-error class="text-error" th:if="${#fields.hasErrors('mobilePhone')}" th:errors="*{mobilePhone}">
+                    กรุณากรอก
+                </text-error>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-10"></div>
+            <div class="col-15">
+                <label for="objective" th:text="#{label.objective}">Objective</label>
+            </div>
+            <div class="col-65">
+                <textarea id="objective" name="objective" th:field="*{objective}" style="height:80px"></textarea>
+            </div>
+        </div>
+        <h3>Application Information</h3>
+        <div class="row">
+            <div class="col-10"></div>
+            <div class="col-15">
+                <label for="url" th:text="#{label.url}">URL</label>
+            </div>
+            <div class="col-65">
+                <input id="url" name="url" type="text" th:field="*{url}">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-10"></div>
+            <div class="col-15">
+                <label for="env" th:text="#{label.envForLoadTest}">Env. For Load Test</label>
+            </div>
+            <div class="col-25">
+                <select id="env" name="env" th:field="*{env}">
+                    <option value="Test">Test</option>
+                    <option value="Developing">Developing</option>
+                    <option value="Staging">Staging</option>
+                    <option value="Production">Production</option>
+                </select>
+            </div>
+            <div class="col-tab-5"></div>
+            <div class="col-10">
+                <label for="envDetail" th:text="#{label.detail}">Detail</label>
+            </div>
+            <div class="col-25">
+                <input id="envDetail" name="envDetail" th:field="*{envDetail}" type="text">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-tab-10"></div>
+            <div class="col-15">
+                <label for="languageDev" th:text="#{label.languageProtocol}">Language/Protocol</label>
+            </div>
+            <div class="col-25">
+                <select id="languageDev" name="languageDev" th:field="*{languageDev}">
+                    <option value="Java">Java</option>
+                    <option value=".Net">.Net</option>
+                    <option value="HTML">HTML</option>
+                    <option value="WebService">Webservice</option>
+                </select>
+            </div>
+            <div class="col-tab-5"></div>
+            <div class="col-10">
+                <label for="languageDevDetail" th:text="#{label.detail}">Detail</label>
+            </div>
+            <div class="col-25">
+                <input id="languageDevDetail" name="languageDevDetail" th:field="*{languageDevDetail}" type="text">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-tab-10"></div>
+            <div class="col-15">
+                <label th:text="#{label.browserSupport}">Browser Support</label>
+            </div>
+            <div class="col-15">
+                <label><input id="browserIe" name="browserIe" type="checkbox" th:field="*{browserIe}"
+                              th:value="${browserIe}"> Internet Explorer</label>
+
+            </div>
+            <div class="col-15">
+                <label><input id="browserFirefox" name="browserFirefox" type="checkbox" th:field="*{browserFirefox}"
+                              th:value="${browserFirefox}">FireFox</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-tab-10"></div>
+            <div class="col-15">
+                <label th:text="#{label.security}">Security </label>
+            </div>
+            <div class="col-25">
+                <select id="securitySupport" name="securitySupport" th:field="*{securitySupport}">
+                    <option value="SSL 2.x">SSL 2.x</option>
+                    <option value="SSL 3.x">SSL 3.x</option>
+                    <option value="TLS 1.0">TLS 1.0</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-tab-10"></div>
+            <div class="col-15">
+                <label th:text="#{label.systemImpact}">SystemImpact</label>
+            </div>
+            <div class="col-15">
+                <label><input id="systemImpactF5" name="systemImpactF5" type="checkbox" th:field="*{systemImpactF5}">F5</label>
+            </div>
+            <div class="col-15">
+                <label><input id="systemImpactLdap" name="systemImpactLdap" type="checkbox" th:field="*{systemImpactLdap}">LDAP</label>
+            </div>
+            <div class="col-15">
+                <label><input id="systemImpactFirewall" name="systemImpactFirewall" type="checkbox"
+                           th:field="*{systemImpactFirewall}">Firewall</label>
+            </div>
+            <div class="col-15">
+                <label><input id="systemImpactProxy" name="systemImpactProxy" type="checkbox"
+                           th:field="*{systemImpactProxy}">Proxy</label>
+            </div>
+            <div class="col-15">
+                <label><input id="systemImpactAd" name="systemImpactAd" type="checkbox" th:field="*{systemImpactAd}">AD</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-tab-10"></div>
+            <div class="col-15"></div>
+            <div class="col-15">
+                <label><input id="systemImpactSff" name="systemImpactSff" type="checkbox" th:field="*{systemImpactSff}">SFF</label>
+            </div>
+            <div class="col-15">
+                <label><input id="systemImpactSeibel" name="systemImpactSiebel" type="checkbox"
+                           th:field="*{systemImpactSiebel}">Siebel</label>
+            </div>
+            <div class="col-15">
+                <label><input id="systemImpactSap" name="systemImpactSap" type="checkbox" th:field="*{systemImpactSap}">SAP</label>
+            </div>
+            <div class="col-15">
+                <label><input id="systemImpactEai" name="systemImpactEai" type="checkbox" th:field="*{systemImpactEai}">EAI</label>
+            </div>
+            <div class="col-15">
+                <label><input id="systemImpactIvr" name="systemImpactIvr" type="checkbox" th:field="*{systemImpactIvr}">IVR/USSD</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-tab-10"></div>
+            <div class="col-15"></div>
+            <div class="col-5">
+                <label th:text="#{label.etc}">ETC</label>
+            </div>
+            <div class="col-25">
+                <input id="systemImpactEtc" name="systemImpactEtc" type="text" th:field="*{systemImpactEtc}">
+            </div>
+        </div>
+        <h3>Load Test : User Concurrent</h3>
+        <div class="row">
+            <div class="col-tab-10"></div>
+            <div class="col-15">
+                <label>Impact Assessment(User ที่ใช้งานระบบ) </label>
+            </div>
+            <div class="col-25">
+                <label><input id="impactAssessmentEx" name="impactAssessmentEx" type="checkbox"
+                           th:field="*{impactAssessmentEx}">External Impacts(External User)</label>
+            </div>
+            <div class="col-25">
+                <label><input id="impactAssessmentIh" name="impactAssessmentIh" type="checkbox"
+                           th:field="*{impactAssessmentIh}">Organization Impacts(In House)</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-tab-10"></div>
+            <div class="col-15">
+                <label for="userConcurrent" th:text="#{label.userConcurrent}">User Concurrent
+                    <star>*</star>
+                </label>
+            </div>
+            <div class="col-65">
+                <input id="userConcurrent" name="userConcurrent" type="text" th:field="*{userConcurrent}">
+            </div>
+        </div>
+        <h3>Load Test : Scenario</h3>
+        <div class="row">
+            <div class="col-tab-10"></div>
+            <div class="col-15">
+                <label>Test Scenarios</label>
+            </div>
+            <div class="col-15">
+                <label><input id="loadTestTypeLoadTest" name="loadTestTypeLoadTest" type="checkbox"
+                           th:field="*{loadTestTypeLoadTest}">Load Test</label>
+            </div>
+            <div class="col-15">
+                <label><input id="loadTestTypeStressTest" name="loadTestTypeStressTest" type="checkbox"
+                           th:field="*{loadTestTypeStressTest}">Stress Test</label>
+            </div>
+            <div class="col-15">
+                <label><input id="loadTestTypeReliabilityTest" name="loadTestTypeReliabilityTest" type="checkbox"
+                           th:field="*{loadTestTypeReliabilityTest}">Reliability Test</label>
+            </div>
+        </div>
+        <h3>Load Test : Date</h3>
+        <div class="row">
+            <div class="col-tab-10"></div>
+            <div class="col-15">
+                <label>On Test/Staging Deploy</label>
+            </div>
+            <div class="col-65">
+                <input id="targetStartDate" name="targetStartDate" th:class="datepicker" data-date-format="dd/mm/yyyy"
+                       th:field="*{targetStartDate}"> dd/mm/yyyy
+                <!--        <input id="onTest" name="onTest" type="text" >-->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-tab-10"></div>
+            <div class="col-15">
+                <label>Target Finish Date</label>
+            </div>
+            <div class="col-65">
+                <input id="targetFinishDate" name="targetFinishDate" th:class="datepicker" data-date-format="dd/mm/yyyy"
+                       th:field="*{targetFinishDate}"> dd/mm/yyyy
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-tab-10"></div>
+            <div class="col-15">
+                <label for="remark" th:text="#{label.remark}">Remark</label>
+            </div>
+            <div class="col-65">
+                <textarea id="remark" name="remark" th:field="*{remark}" style="height:80px"></textarea>
+            </div>
+        </div>
+        <h3>Load Test SC: </h3>
+        <h5>เพื่อใช้ในการดูการทำงานของระบบ เมื่ออยู่ในสภาวะที่คาดว่าจะ เกิดขึ้นเมื่อมีการใช้งานจริง เช่น เราคาดไว้ว่า จะมีคนเข้ามาใช้งาน app เราประมาณ 100 คน เราก็สร้าง user เพื่อเข้าไปใช้พร้อมๆกัน แล้วดูว่าระบบจะทำงานได้หรือช้าลง เมื่อมี user เข้ามาใช้งานพร้อมๆกัน 100 คนหรือไม่</h5>
+        <div class="row">
+            <div class="col-100">
+                <table class="table-sc" width="100%">
+                    <thead>
+                    <tr>
+                        <th width="5%">No.</th>
+                        <th width="20%" th:text="#{label.testCase}">Test Case</th>
+                        <th width="10%" th:text="#{label.concurrent}">Concurrent</th>
+                        <th width="45%" th:text="#{label.detail}">Detail</th>
+                        <th width="20%" th:text="#{label.other}">Other</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="loadtest,rowStat : *{loadTestScenarioList}">
+                        <td>
+                            <label th:text="${rowStat.count}">1</label>
+                            <input type="hidden" name="*{loadTestScenarioList[__${rowStat.index}__].id}"
+                                   th:field="*{loadTestScenarioList[__${rowStat.index}__].id}">
+                        </td>
+                        <td>
+                            <input type="text" th:field="*{loadTestScenarioList[__${rowStat.index}__].testCase}"/>
+                        </td>
+                        <td>
+                            <input type="text" th:field="*{loadTestScenarioList[__${rowStat.index}__].concurrent}"/>
+                        </td>
+                        <td>
+                            <textarea type="text" th:field="*{loadTestScenarioList[__${rowStat.index}__].detail}"/>
+                        </td>
+                        <td>
+                            <input type="text" th:field="*{loadTestScenarioList[__${rowStat.index}__].other}"/>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-10">
+                <button class="buttonGreen" type="button" name="addRowLoadTest"
+                        onclick="addChild('addRowLoadTest','formCreate')"
+                        th:text="#{label.addRow}">Add row
+                </button>
+            </div>
+        </div>
+        <h3>Reliability Test SC: </h3>
+        <h5>เป็นการเทสระบบแบบต่อเนื่องเพื่อทดสอบความน่าเชื่อถือซอฟแวร์ว่าสามารถทำงานได้อย่างต่อเนื่อง หรือเมื่อเกิดปัญหาระบบก็ยังสามารถกลับมาทำงานได้อย่างปรกติได้</h5>
+        <div class="row">
+            <div class="col-100">
+                <table class="table-sc" width="100%">
+                    <thead>
+                    <tr>
+                        <th width="5%">No.</th>
+                        <th width="20%" th:text="#{label.testCase}">Test Case</th>
+                        <th width="10%" th:text="#{label.concurrent}">Concurrent</th>
+                        <th width="45%" th:text="#{label.detail}">Detail</th>
+                        <th width="20%" th:text="#{label.other}">Other</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="reliTest,rowStat : *{reliabilityTestScenarioList}">
+                        <td>
+                            <label th:text="${rowStat.count}">1</label>
+                            <input type="hidden" name="*{reliabilityTestScenarioList[__${rowStat.index}__].id}"
+                                   th:field="*{reliabilityTestScenarioList[__${rowStat.index}__].id}">
+                        </td>
+                        <td>
+                            <input type="text" th:field="*{reliabilityTestScenarioList[__${rowStat.index}__].testCase}"/>
+                        </td>
+                        <td>
+                            <input type="text"
+                                   th:field="*{reliabilityTestScenarioList[__${rowStat.index}__].concurrent}"/>
+                        </td>
+                        <td>
+                            <textarea type="text"
+                                      th:field="*{reliabilityTestScenarioList[__${rowStat.index}__].detail}"/>
+                        </td>
+                        <td>
+                            <input type="text" th:field="*{reliabilityTestScenarioList[__${rowStat.index}__].other}"/>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-10">
+                <button class="buttonGreen" type="button" onclick="addChild('addRowReliTest','formCreate')"
+                        th:text="#{label.addRow}">Add row
+                </button>
+            </div>
+        </div>
+        <h3>Stress Test SC: </h3>
+        <h5>เป็นการเทสที่เราจะดูจำนวนมากที่สุดที่ระบบรับได้ หรือ จำนวนที่ user ที่รองรับได้สูงสุดจนกว่าระบบจะล่ม</h5>
+        <div class="row">
+            <div class="col-100">
+                <table class="table-sc" width="100%">
+                    <thead>
+                    <tr>
+                        <th width="5%">No.</th>
+                        <th width="20%" th:text="#{label.testCase}">Test Case</th>
+                        <th width="10%" th:text="#{label.concurrent}">Concurrent</th>
+                        <th width="45%" th:text="#{label.detail}">Detail</th>
+                        <th width="20%" th:text="#{label.other}">Other</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="stressTest,rowStat : *{stressTestScenarioList}">
+                        <td>
+                            <label th:text="${rowStat.count}">1</label>
+                            <input type="hidden" name="*{stressTestScenarioList[__${rowStat.index}__].id}"
+                                   th:field="*{stressTestScenarioList[__${rowStat.index}__].id}">
+                        </td>
+                        <td>
+                            <input type="text" th:field="*{stressTestScenarioList[__${rowStat.index}__].testCase}"/>
+                        </td>
+                        <td>
+                            <input type="text" th:field="*{stressTestScenarioList[__${rowStat.index}__].concurrent}"/>
+                        </td>
+                        <td>
+                            <textarea type="text" th:field="*{stressTestScenarioList[__${rowStat.index}__].detail}"/>
+                        </td>
+                        <td>
+                            <input type="text" th:field="*{stressTestScenarioList[__${rowStat.index}__].other}"/>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-10">
+                <button class="buttonGreen" type="button" onclick="addChild('addRowStressTest','formCreate')"
+                        th:text="#{label.addRow}">Add row
+                </button>
+            </div>
+        </div>
+        <div class="lineSpace"></div>
+        <div class="row">
+            <input class="buttonGreen width-10" type="submit" value="Submit" onclick="waitingDialog.show();">
+        </div>
+    </form>
+</div>
+<!--  footer -->
+<div th:replace="fragments/footer :: .footer"> menu Bar</div>
+</body>
+</html>

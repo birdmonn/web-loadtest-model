@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="th" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>View</title>
+    <div th:include="fragments/head :: head" th:remove="tag">Global Header</div>
+    <link rel="stylesheet" type="text/css" href="css/table-sc-css.css" th:href="@{/css/table-sc-css.css}">
+</head>
+<body>
+<!--  Banner -->
+<div th:replace="fragments/banner :: .banner"> menu Bar</div>
+<!--  menu -->
+<div th:replace="fragments/menuBar :: menuBar(' ',${role}== null ? '' : *{role})">menuBar</div>
+<div class="container" th:object="${requestForm}">
+    <div class="row">
+        <div class="col-tab-80"></div>
+        <div class="col-20-right">
+            <label th:text="#{label.status}">status</label>
+            <label th:text="*{statusRequest}">status</label>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-tab-60"></div>
+        <div class="col-40-right">
+            <label th:text="#{label.dateReceived}">Date Received</label>
+            <label th:text="*{created}"></label>
+        </div>
+    </div>
+    <div class="row">
+        <button class="buttonGreen width-10" type="button" th:onclick="|location.href='../formEdit/'+'*{id}'|">แก้ไข</button>
+    </div>
+    <div class="row">
+        <div class="col-tab-10"></div>
+        <div class="col-15">
+            <label th:text="#{label.own}">own</label>
+        </div>
+        <div class="col-25">
+            <label th:text="*{createByUser.username}">own</label>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-tab-10"></div>
+        <div class="col-15">
+            <label th:text="#{label.projectId}">projectId</label>
+        </div>
+        <div class="col-25">
+            <label th:text="*{projectId}">data projectId</label>
+        </div>
+        <div class="col-15">
+            <label th:text="#{label.projectName}">projectName</label>
+        </div>
+        <div class="col-25">
+            <label th:text="*{projectName}">data projectName</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-tab-10"></div>
+        <div class="col-15">
+            <label th:text="#{label.contact}">contact</label>
+        </div>
+        <div class="col-25">
+            <label th:text="*{contact}">data contact</label>
+        </div>
+    </div>
+
+    <h3>Load Test SC: </h3>
+    <div class="row">
+        <div class="col-100">
+            <table class="table-sc">
+                <thead>
+                <tr>
+                    <th width="5%">No.</th>
+                    <th width="20%" th:text="#{label.testCase}">Test Case</th>
+                    <th width="10%" th:text="#{label.concurrent}">Concurrent</th>
+                    <th width="45%" th:text="#{label.detail}">Detail</th>
+                    <th width="20%" th:text="#{label.other}">Other</th>
+                    <th width="20%" th:text="#{label.scenarioPass}">Other</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="loadtest,rowStat : *{loadTestScenarioList}">
+                    <td th:text="${rowStat.count}">1</td>
+                    <td>
+                        <label th:text="*{loadTestScenarioList[__${rowStat.index}__].testCase}"/>
+                    </td>
+                    <td>
+                        <label th:text="*{loadTestScenarioList[__${rowStat.index}__].concurrent}"/>
+                    </td>
+                    <td>
+                        <label th:text="*{loadTestScenarioList[__${rowStat.index}__].detail}"/>
+                    </td>
+                    <td>
+                        <label th:text="*{loadTestScenarioList[__${rowStat.index}__].other}"/>
+                    </td>
+                    <td>
+                        <input name="*{loadTestScenarioList[__${rowStat.index}__].scenarioPass}" type="checkbox"
+                               th:field="*{loadTestScenarioList[__${rowStat.index}__].scenarioPass}" disabled>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <h3>Reliability Test SC: </h3>
+    <div class="row">
+        <div class="col-100">
+            <table class="table-sc">
+                <thead>
+                <tr>
+                    <th width="5%">No.</th>
+                    <th width="20%" th:text="#{label.testCase}">Test Case</th>
+                    <th width="10%" th:text="#{label.concurrent}">Concurrent</th>
+                    <th width="45%" th:text="#{label.detail}">Detail</th>
+                    <th width="20%" th:text="#{label.other}">Other</th>
+                    <th width="20%" th:text="#{label.scenarioPass}">Other</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="reliTest,rowStat : *{reliabilityTestScenarioList}">
+                    <td th:text="${rowStat.count}">1</td>
+                    <td>
+                        <label th:text="*{reliabilityTestScenarioList[__${rowStat.index}__].testCase}"/>
+                    </td>
+                    <td>
+                        <label th:text="*{reliabilityTestScenarioList[__${rowStat.index}__].concurrent}"/>
+                    </td>
+                    <td class="width-100px">
+                        <label class="width-100px"
+                               th:text="*{reliabilityTestScenarioList[__${rowStat.index}__].detail}"/>
+                    </td>
+                    <td>
+                        <label th:text="*{reliabilityTestScenarioList[__${rowStat.index}__].other}"/>
+                    </td>
+                    <td>
+                        <input name="*{reliabilityTestScenarioList[__${rowStat.index}__].scenarioPass}" type="checkbox"
+                               th:field="*{reliabilityTestScenarioList[__${rowStat.index}__].scenarioPass}" disabled>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <h3>Stress Test SC: </h3>
+    <div class="row">
+        <div class="col-100">
+            <table class="table-sc">
+                <thead>
+                <tr>
+                    <th width="5%">No.</th>
+                    <th width="20%" th:text="#{label.testCase}">Test Case</th>
+                    <th width="10%" th:text="#{label.concurrent}">Concurrent</th>
+                    <th width="45%" th:text="#{label.detail}">Detail</th>
+                    <th width="20%" th:text="#{label.other}">Other</th>
+                    <th width="20%" th:text="#{label.scenarioPass}">Other</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="stressTest,rowStat : *{stressTestScenarioList}">
+                    <td th:text="${rowStat.count}">1</td>
+                    <td>
+                        <label th:text="*{stressTestScenarioList[__${rowStat.index}__].testCase}"/>
+                    </td>
+                    <td>
+                        <label th:text="*{stressTestScenarioList[__${rowStat.index}__].concurrent}"/>
+                    </td>
+                    <td>
+                        <label th:text="*{stressTestScenarioList[__${rowStat.index}__].testCase}"/>
+                    </td>
+                    <td>
+                        <label th:text="*{stressTestScenarioList[__${rowStat.index}__].other}"/>
+                    </td>
+                    <td>
+                        <input name="*{stressTestScenarioList[__${rowStat.index}__].scenarioPass}" type="checkbox"
+                               th:field="*{stressTestScenarioList[__${rowStat.index}__].scenarioPass}" disabled>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <h3>File: </h3>
+    <div class="row">
+        <div class="col-100">
+            <table class="table-sc" width="100%">
+                <thead>
+                <tr>
+                    <th width="10%">No.</th>
+                    <th width="30%">File</th>
+                    <th width="20%">SLA Pass</th>
+                    <th width="30px">Detail</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="fileReport,rowStat : *{fileReportList}">
+                    <td width="10%">
+                        <label th:text="${rowStat.count}">1</label>
+                        <input type="hidden" name="fileReportList[__${rowStat.index}__].id"
+                               th:field="*{fileReportList[__${rowStat.index}__].id}">
+                    </td>
+                    <td width="30%">
+                        <a target="_blank" th:href="*{fileReportList[__${rowStat.index}__].path}"
+                           th:text="*{fileReportList[__${rowStat.index}__].fileName}"></a>
+                    </td>
+                    <td width="20%">
+                        <input type="checkbox" name="*{fileReportList[__${rowStat.index}__].slaPass}"
+                               th:field="*{fileReportList[__${rowStat.index}__].slaPass}" disabled/>
+                    </td>
+                    <td width="30px">
+                        <label th:text="*{fileReportList[__${rowStat.index}__].detail}"></label>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!--  footer -->
+<div th:replace="fragments/footer :: .footer"> menu Bar</div>
+</body>
+
+</html>

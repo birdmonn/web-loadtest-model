@@ -1,98 +1,151 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta charset="utf-8">
-<title>Form</title>
-<script src="./jquery-3.3.1.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/Form-css.css" th:href="@{/css/Form-css.css}">
-    <link rel="stylesheet" type="text/css" href="css/menu-bar-css.css" th:href="@{/css/menu-bar-css.css}">
-    <link rel="stylesheet" type="text/css" href="css/row-col.css" th:href="@{/css/row-col.css}">
-	<link rel="stylesheet" type="text/css" href="css/table-case-css.css" th:href="@{/css/table-case-css.css}">
-    <link rel="stylesheet" type="text/css" href="css/button.css" th:href="@{/css/button.css}">
-    <link href="bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet" th:href="@{/bootstrap-3.3.7-dist/css/bootstrap.css}" />
+    <title>Search Case</title>
+    <div th:include="fragments/head :: head" th:remove="tag">Global Header</div>
+    <link rel="stylesheet" type="text/css" href="css/table-case-css.css" th:href="@{/css/table-case-css.css}">
+    <style>
+        .pagination-centered {
+	        text-align: center;
+        }
+
+        .disabled {
+	        pointer-events: none;
+	        opacity: 0.5;
+        }
+
+        .pointer-disabled {
+	        pointer-events: none;
+        }
+    </style>
 </head>
 <body style="font-family:Verdana;">
-<div class="Banner" style="background-color:#f1f1f1;padding:15px;">
-  <h1>Banner web</h1>
+<!--  Banner -->
+<div th:replace="fragments/banner :: .banner"> menu Bar</div>
+<!--  menu -->
+<div th:replace="fragments/menuBar :: menuBar('searchCase',${role}== null ? '' : *{role})">menuBar</div>
+<div class="search-case">
+    <form method="post" action="/searchCase#" th:action="@{/searchCase}" th:object="${requestForm}">
+        <div class="row">
+            <div class="col-tab-10"></div>
+            <div class="col-10">
+                <label th:text="#{label.search}">Search</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-tab-10"></div>
+            <div class="col-10">
+                <label th:text="#{label.projectId}">Project ID</label>
+            </div>
+            <div class="col-25">
+                <input type="text" id="pId" name="projectId">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-tab-10"></div>
+            <div class="col-10">
+                <label th:text="#{label.projectName}">Project Name</label>
+            </div>
+            <div class="col-25">
+                <input type="text" id="pName" name="projectName">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-tab-10"></div>
+            <div class="col-10">
+                <label th:text="#{label.contact}">Contact</label>
+            </div>
+            <div class="col-25">
+                <input type="text" id="contact" name="contact">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-tab-10"></div>
+            <div class="col-tab-10"></div>
+            <div class="col-10">
+                <button class="buttonGreen width-100" type="submit" value="Submit">Search</button>
+            </div>
+        </div>
+    </form>
 </div>
-    <ul>
-        <li><a href="/form">Form</a></li>
-        <li><a class="active" href="/searchCase">All Case</a></li>
-        <li><a href="#">Report</a></li>
-    </ul>
-    <div class="search-case">
-        <form method="post" action="/searchCase#" th:action="@{/searchCase}" th:object="${requestForm}">
-            <div class="row">
-                <div class="col-tab-10"></div>
-                <div class="col-10">
-                    <label>Search</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-tab-10"></div>
-                <div class="col-10">
-                    <label>Project ID</label>
-                </div>
-                <div class="col-25">
-                    <input type="text" id="pId" name="projectId">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-tab-10"></div>
-                <div class="col-10">
-                    <label>Project Name</label>
-                </div>
-                <div class="col-25">
-                    <input type="text" id="pName" name="projectName">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-tab-10"></div>
-                <div class="col-10">
-                    <label>Contact</label>
-                </div>
-                <div class="col-25">
-                    <input type="text" id="contact" name="contact">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-tab-10"></div>
-                <div class="col-tab-10"></div>
-                <div class="col-10">
-                    <button class="button" type="submit" value="Submit">Search</button>
-                </div>
-            </div>
-
-        </form>
-    </div>
-  <div class="container">
+<div class="container">
     <h2>Search Case </h2>
-      <h5 th:text="${#lists.size(caseList)+ 'ทั้งหมด'}">ทั้งหมด</h5>
+    <h5 th:text="${formList.getTotalElements()+ 'ทั้งหมด'}">ทั้งหมด</h5>
     <table id="table-case">
-      <tr>
-        <th>Project Id</th>
-        <th>Project Name</th>
-          <th>Contact</th>
-          <th>Status</th>
-      </tr>
-        <tr th:each="case : ${caseList}">
-        <td><a th:text="${case.projectId}" th:href="${'/form/' + case.id}"></a></td>
-            <td><a th:text="${case.projectName}" th:href="${'/form/' + case.id}"></a></td>
-            <td><a th:text="${case.contact}" th:href="${'/form/' + case.id}"></a></td>
-            <td><a th:text="${case.statusRequest}" th:href="${'/form/' + case.id}"></a></td>
-      </tr>
+        <tr>
+            <th th:text="#{label.projectId}">Project Id</th>
+            <th th:text="#{label.projectName}">Project Name</th>
+            <th th:text="#{label.contact}">Contact</th>
+            <th th:text="#{label.status}">Status</th>
+            <th th:text="#{label.user}">User</th>
+        </tr>
+        <tr th:each="form : ${formList}">
+            <td><a th:text="${form.projectId}" th:href="${'/form/formView/' + form.id}"></a></td>
+            <td><a th:text="${form.projectName}" th:href="${'/form/formView/' + form.id}"></a></td>
+            <td><a th:text="${form.contact}" th:href="${'/form/formView/' + form.id}"></a></td>
+            <td><a th:text="${form.statusRequest}" th:href="${'/form/formView/' + form.id}"></a></td>
+            <td><a th:text="${form.createByUser.username}" th:href="${'/form/formView/'+form.id}"></a></td>
+        </tr>
     </table>
-  </div>
-<div style="background-color:#f1f1f1;text-align:center;padding:10px;margin-top:7px;font-size:12px;">
-  <div>
-    <h3> contact us </h3>
-    <div> Email : nattapoo@ais.co.th </div>
-    <div> phone : 02-2222222 </div>
-  </div>
+    <div class="row">
+        <div class="form-group col-md-1">
+            <select class="form-control pagination" id="pageSizeSelect">
+                <option th:each="pageSize : ${pageSizes}" th:text="${pageSize}"
+                        th:value="${pageSize}"
+                        th:selected="${pageSize} == ${selectedPageSize}"></option>
+            </select>
+        </div>
+        <div th:if="${formList.totalPages != 1}"
+             class="form-group col-md-11 pagination-centered">
+            <ul class="pagination">
+                <li th:class="${formList.number == 0} ? disabled"><a
+                        class="pageLink"
+                        th:href="@{${#httpServletRequest.requestURI}(pageSize=${selectedPageSize}, page=1,projectId=${#request.getParameter('projectId')},projectName=${#request.getParameter('projectName')},contact=${#request.getParameter('contact')})}">&laquo;</a>
+                </li>
+                <li th:class="${formList.number == 0} ? disabled"><a
+                        class="pageLink"
+                        th:href="@{${#httpServletRequest.requestURI}(pageSize=${selectedPageSize}, page=${formList.number},projectId=${#request.getParameter('projectId')},projectName=${#request.getParameter('projectName')},contact=${#request.getParameter('contact')})}">&larr;</a>
+                </li>
+                <li
+                        th:class="${formList.number == (page - 1)} ? 'active pointer-disabled'"
+                        th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
+                    <a class="pageLink"
+                       th:href="@{${#httpServletRequest.requestURI}(pageSize=${selectedPageSize}, page=${page},projectId=${#request.getParameter('projectId')},projectName=${#request.getParameter('projectName')},contact=${#request.getParameter('contact')})}"
+                       th:text="${page}"></a>
+                </li>
+                <li
+                        th:class="${formList.number + 1 == formList.totalPages} ? disabled">
+                    <a class="pageLink"
+                       th:href="@{${#httpServletRequest.requestURI}(pageSize=${selectedPageSize}, page=${formList.number + 2},projectId=${#request.getParameter('projectId')},projectName=${#request.getParameter('projectName')},contact=${#request.getParameter('contact')})}">&rarr;</a>
+                </li>
+                <li
+                        th:class="${formList.number + 1 == formList.totalPages} ? disabled">
+                    <a class="pageLink"
+                       th:href="@{${#httpServletRequest.requestURI}(pageSize=${selectedPageSize}, page=${formList.totalPages},projectId=${#request.getParameter('projectId')},projectName=${#request.getParameter('projectName')},contact=${#request.getParameter('contact')})}">&raquo;</a>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
-<script>
-w3IncludeHTML();
+<!--  footer -->
+<div th:replace="fragments/footer :: .footer"> menu Bar</div>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var url_string = window.location.href;
+    var url = new URL(url_string);
+    var projectId = (url.searchParams.get("projectId")==null) ? "" :url.searchParams.get("projectId") ;
+    var projectName = (url.searchParams.get("projectName")==null) ? "" :url.searchParams.get("projectName");
+    var contact = (url.searchParams.get("contact")==null) ? "" :url.searchParams.get("contact");
+    $(document).ready(function() {
+    changePageAndSize();
+    });
+
+    function changePageAndSize() {
+    $('#pageSizeSelect').change(function(evt) {
+    window.location.replace("/searchCase?pageSize=" + this.value + "&page=1&projectId="+projectId+"&projectName="+projectName+"&contact="+contact);
+    });
+    }
+    /*]]>*/
 </script>
 </body>
 </html>

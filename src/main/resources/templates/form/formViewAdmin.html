@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="th" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>View</title>
+    <div th:include="fragments/head :: head" th:remove="tag">Global Header</div>
+    <link rel="stylesheet" type="text/css" href="css/table-sc-css.css" th:href="@{/css/table-sc-css.css}">
+    <link rel="stylesheet" type="text/css" href="css/modal-delete.css" th:href="@{/css/modal-delete.css}">
+    <script src="./js/ShowFileNameUpload.js" th:src="@{/js/ShowFileNameUpload.js}"></script>
+    <script th:inline="javascript">
+       var token = $("meta[name='_csrf']").attr("content");
+        var header = $("meta[name='_csrf_header']").attr("content");
+        var objHeader = {};
+        objHeader[header] = token;
+        function reqDelete(fileId,requestFormId){
+        $.ajax({
+            type : "POST",
+            url : "/report/deleteFile?fileId="+fileId+"&requestFormId="+requestFormId,
+            headers : { 'X-CSRF-TOKEN':token
+            },
+            data : $('form').serialize(),
+
+            success : function(response){
+                $('#form').html(response)
+            }
+        });
+        }
+
+
+
+    </script>
+</head>
+<body th:id="form" th:object="${requestForm}">
+<!--  Banner -->
+<div th:replace="fragments/banner :: .banner"> menu Bar</div>
+<!--  menu -->
+<div th:replace="fragments/menuBar :: menuBar('',${role})">menuBar</div>
+<div class="container">
+    <form th:action="@{/form/formViewAdmin/}+*{id}" enctype="multipart/form-data" method="post">
+        <div class="row">
+            <div class="col-tab-60"></div>
+            <div class="col-10"></div>
+            <div class="col-10"><label>Status : </label></div>
+            <div class="col-20">
+                <select name="statusRequest" th:field="*{statusRequest}">
+                    <option value="wait">Wait</option>
+                    <option value="inProcess">In Process</option>
+                    <option value="success">Success</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-tab-60"></div>
+            <div class="col-40-right">
+                <label th:text="#{label.dateReceived}">Date Received :</label>
+                <label th:text="*{created}"></label>
+            </div>
+        </div>
+        <div class="row">
+            <button class="buttonGreen width-10" type="button" th:onclick="|location.href='../formEdit/'+'*{id}'|">แก้ไข</button>
+        </div>
+        <div class="row">
+            <div class="col-tab-10"></div>
+            <div class="col-15">
+                <label th:text="#{label.own}">own</label>
+            </div>
+            <div class="col-25">
+                <label th:text="*{createByUser.username}">own</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-tab-10"></div>
+            <div class="col-15">
+                <label th:text="#{label.projectId}">projectId :</label>
+            </div>
+            <div class="col-25">
+                <label th:text="*{projectId}">data projectId</label>
+            </div>
+            <div class="col-15">
+                <label th:text="#{label.projectName}">projectName</label>
+            </div>
+            <div class="col-25">
+                <label th:text="*{projectName}">data projectName</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-tab-10"></div>
+            <div class="col-15">
+                <label th:text="#{label.contact}">contact</label>
+            </div>
+            <div class="col-25">
+                <label th:text="*{contact}">data contact</label>
+            </div>
+        </div>
+
+        <h3>Load Test SC: </h3>
+        <div class="row">
+            <div class="col-100">
+                <table class="table-sc">
+                    <thead>
+                    <tr>
+                        <th width="5%">No.</th>
+                        <th width="20%" th:text="#{label.testCase}">Test Case</th>
+                        <th width="10%" th:text="#{label.concurrent}">Concurrent</th>
+                        <th width="45%" th:text="#{label.detail}">Detail</th>
+                        <th width="20%" th:text="#{label.other}">Other</th>
+                        <th width="20%" th:text="#{label.scenarioPass}">Other</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="loadtest,rowStat : *{loadTestScenarioList}">
+                        <td>
+                            <label th:text="${rowStat.count}">1</label>
+                            <input type="hidden" name="loadTestScenarioList[__${rowStat.index}__].id"
+                                   th:field="*{loadTestScenarioList[__${rowStat.index}__].id}">
+                        </td>
+
+                        <td>
+                            <label th:text="*{loadTestScenarioList[__${rowStat.index}__].testCase}"/>
+                        </td>
+                        <td>
+                            <label th:text="*{loadTestScenarioList[__${rowStat.index}__].concurrent}"/>
+                        </td>
+                        <td>
+                            <label th:text="*{loadTestScenarioList[__${rowStat.index}__].detail}"/>
+                        </td>
+                        <td>
+                            <label th:text="*{loadTestScenarioList[__${rowStat.index}__].other}"/>
+                        </td>
+                        <td>
+                            <input name="*{loadTestScenarioList[__${rowStat.index}__].scenarioPass}" type="checkbox"
+                                   th:field="*{loadTestScenarioList[__${rowStat.index}__].scenarioPass}">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <h3>Reliability Test SC: </h3>
+        <div class="row">
+            <div class="col-100">
+                <table class="table-sc">
+                    <thead>
+                    <tr>
+                        <th width="5%">No.</th>
+                        <th width="20%" th:text="#{label.testCase}">Test Case</th>
+                        <th width="10%" th:text="#{label.concurrent}">Concurrent</th>
+                        <th width="45%" th:text="#{label.detail}">Detail</th>
+                        <th width="20%" th:text="#{label.other}">Other</th>
+                        <th width="20%" th:text="#{label.scenarioPass}">Other</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="reliTest,rowStat : *{reliabilityTestScenarioList}">
+                        <td>
+                            <label th:text="${rowStat.count}">1</label>
+                            <input type="hidden" name="reliabilityTestScenarioList[__${rowStat.index}__].id"
+                                   th:field="*{reliabilityTestScenarioList[__${rowStat.index}__].id}">
+                        </td>
+                        <td>
+                            <label th:text="*{reliabilityTestScenarioList[__${rowStat.index}__].testCase}"/>
+                        </td>
+                        <td>
+                            <label th:text="*{reliabilityTestScenarioList[__${rowStat.index}__].concurrent}"/>
+                        </td>
+                        <td>
+                            <label th:text="*{reliabilityTestScenarioList[__${rowStat.index}__].detail}"/>
+                        </td>
+                        <td>
+                            <label th:text="*{reliabilityTestScenarioList[__${rowStat.index}__].other}"/>
+                        </td>
+                        <td>
+                            <input name="*{reliabilityTestScenarioList[__${rowStat.index}__].scenarioPass}"
+                                   type="checkbox"
+                                   th:field="*{reliabilityTestScenarioList[__${rowStat.index}__].scenarioPass}">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <h3>Stress Test SC: </h3>
+        <div class="row">
+            <div class="col-100">
+                <table class="table-sc">
+                    <thead>
+                    <tr>
+                        <th width="5%">No.</th>
+                        <th width="20%" th:text="#{label.testCase}">Test Case</th>
+                        <th width="10%" th:text="#{label.concurrent}">Concurrent</th>
+                        <th width="45%" th:text="#{label.detail}">Detail</th>
+                        <th width="20%" th:text="#{label.other}">Other</th>
+                        <th width="20%" th:text="#{label.scenarioPass}">Other</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="stressTest,rowStat : *{stressTestScenarioList}">
+                        <td>
+                            <label th:text="${rowStat.count}">1</label>
+                            <input type="hidden" name="stressTestScenarioList[__${rowStat.index}__].id"
+                                   th:field="*{stressTestScenarioList[__${rowStat.index}__].id}">
+                        </td>
+                        <td>
+                            <label th:text="*{stressTestScenarioList[__${rowStat.index}__].testCase}"/>
+                        </td>
+                        <td>
+                            <label th:text="*{stressTestScenarioList[__${rowStat.index}__].concurrent}"/>
+                        </td>
+                        <td>
+                            <label th:text="*{stressTestScenarioList[__${rowStat.index}__].detail}"/>
+                        </td>
+                        <td>
+                            <label th:text="*{stressTestScenarioList[__${rowStat.index}__].other}"/>
+                        </td>
+                        <td>
+                            <input name="*{stressTestScenarioList[__${rowStat.index}__].scenarioPass}" type="checkbox"
+                                   th:field="*{stressTestScenarioList[__${rowStat.index}__].scenarioPass}">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <h3>File: </h3>
+        <div class="row">
+            <div class="col-100">
+                <table class="table-sc" width="100%">
+                    <thead>
+                    <tr>
+                        <th width="10%">No.</th>
+                        <th width="30%">File</th>
+                        <th width="20%">SLA Pass</th>
+                        <th width="30%">Detail</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="fileReport,rowStat : *{fileReportList}">
+                        <td width="10%">
+                            <label th:text="${rowStat.count}">1</label>
+                            <input type="hidden" name="fileReportList[__${rowStat.index}__].id"
+                                   th:field="*{fileReportList[__${rowStat.index}__].id}">
+                        </td>
+                        <td width="30%">
+                            <a target="_blank" th:href="*{fileReportList[__${rowStat.index}__].path}"
+                               th:text="*{fileReportList[__${rowStat.index}__].fileName}"></a>
+                        </td>
+                        <td width="20%">
+                            <input type="checkbox" name="*{fileReportList[__${rowStat.index}__].slaPass}"
+                                   th:field="*{fileReportList[__${rowStat.index}__].slaPass}"/>
+                        </td>
+                        <td width="30%">
+                            <textarea name="*{fileReportList[__${rowStat.index}__].detail}"
+                                      th:field="*{fileReportList[__${rowStat.index}__].detail}"/>
+                        </td>
+                        <td width="10%">
+                            <button class="buttonGreen width-100" type="button" name="addRowLoadTest"
+                                    th:onclick="|showModalDelete('*{fileReportList[__${rowStat.index}__].id}','*{id}')|">
+                                delete row
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="fileUpload buttonGreen">
+                <span>Upload</span>
+                <input id="fileInput" type="file" name="file" class="upload" onchange="updateSize();" multiple>
+            </div>
+            <br/>
+            selected files: <span id="fileNum">0</span>;
+            total size: <span id="fileSize">0</span>
+        </div>
+        <br/>
+        <div class="row">
+            <input class="buttonGreen width-10" type="submit" value="Submit" onclick="waitingDialog.show();">
+        </div>
+    </form>
+</div>
+<!--<div th:replace="fragments/modalDelete :: .modalDelete"> modal Delete</div>-->
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close" onclick="cancelDelete();">&times;</span>
+            <!--<h2>Modal Header</h2>-->
+        </div>
+        <div class="modal-body">
+            <p>you want to delete file ?</p>
+            <!--<p>Some other text...</p>-->
+        </div>
+        <div class="modal-footer">
+            <!--<h3>Modal Footer</h3>-->
+            <button th:class="buttonGreen" onclick="confirmDelete();" th:text="Confirm"></button>
+            <button th:class="buttonGreen" onclick="cancelDelete();" th:text="Cancel"></button>
+        </div>
+    </div>
+
+</div>
+<script src="./js/modalDelete.js" th:src="@{/js/modalDelete.js}"></script>
+<!--  footer -->
+<div th:replace="fragments/footer :: .footer"> menu Bar</div>
+</body>
+
+</html>
