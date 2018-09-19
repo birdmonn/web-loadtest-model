@@ -24,7 +24,7 @@
         <tr th:each="user,rowStat : *{userList}">
                <td><a th:text="*{userList[__${rowStat.index}__].username}" th:href="*{'/userView/'+user.id}"></a></td>
                <td><a th:text="*{user.firstName}" th:href="*{'/userView/'+user.id}"></a></td>
-               <td><a th:text="*{user.lastName}" th:href="*{'/userView/'+user.id}"></a></td>
+               <td><a th:text="*{user.department}" th:href="*{'/userView/'+user.id}"></a></td>
                <td><a th:text="*{user.role}" th:href="*{'/userView/'+user.id}"></a></td>
         </tr>
     </table>
