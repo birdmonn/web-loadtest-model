@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Report Raw Data</title>
+	<div th:include="fragments/head :: head" th:remove="tag">Global Header</div>
+	<link rel="stylesheet" type="text/css" href="css/table-case-css.css" th:href="@{/css/table-case-css.css}">
+	<script th:inline="javascript">
+        var token = $("meta[name='_csrf']").attr("content");
+        var header = $("meta[name='_csrf_header']").attr("content");
+        var objHeader = {};
+        objHeader[header] = token;
+        $(document).ready(function () {
+            $('.datepicker').datepicker({
+                format: 'dd/mm/yyyy',
+                todayBtn: true
+            });  //กำหนดเป็นวันปัจุบัน
+        });
+	</script>
+	<style>
+.pagination-centered {
+	text-align: center;
+}
+
+.disabled {
+	pointer-events: none;
+	opacity: 0.5;
+}
+
+.pointer-disabled {
+	pointer-events: none;
+}
+</style>
+</head>
+<body style="font-family:Verdana;">
+<!--  Banner -->
+<div th:replace="fragments/banner :: .banner"> menu Bar</div>
+<!--  menu -->
+<div th:replace="fragments/menuBar :: menuBar('reportRawData',*{role}== null ? '' : *{role})">menuBar</div>
+<div class="container">
+
+	<form action="/reportRawData#" th:action="@{/reportRawData}" th:object="${dateQueryReport}" method="post">
+		<div class="row">
+			<div class="col-tab-10"></div>
+			<div class="col-20">
+				<input id="targetStartDate" name="targetStartDate" th:class="datepicker" th:field="*{startDate}" data-date-format="dd/mm/yyyy"> dd/mm/yyyy
+			</div>
+			<div class="col-10" th:align="center" >
+				<label> ถึง </label>
+			</div>
+			<div class="col-20">
+				<input id="targetFinishDate" name="targetFinishDate" th:class="datepicker" data-date-format="dd/mm/yyyy"
+					   th:field="*{endDate}"> dd/mm/yyyy
+			</div>
+			<div class="col-20">
+				<button class="buttonGreen width-100" type="submit" value="Submit">Search</button>
+			</div>
+		</div>
+	</form>
+	<div class="row">
+		<div class="col-tab-10"></div>
+		<div class="col-15">
+			<label>ผลการค้นหา</label>
+		</div>
+		<div class="col-20">
+			<label th:text="*{searchStartDate}">startDate</label>
+		</div>
+		<div class="col-10">
+			<label>ถึง</label>
+		</div>
+		<div class="col-20">
+			<label th:text="*{searchEndDate}">endDate</label>
+		</div>
+
+	</div>
+	<label>Form Request</label>
+	<table>
+		<tr>
+			<th>ID</th>
+			<th>Project Id</th>
+			<th>Project Name</th>
+			<th>Contact</th>
+			<th>Department</th>
+			<th>Status</th>
+			<th>Created</th>
+			<th>username</th>
+			<!--<th>User</th>-->
+		</tr>
+		<tr th:each="form : ${formList}">
+			<td><label th:text="${form.id}"></label></td>
+			<td><label th:text="${form.projectId}"></label></td>
+			<td><label th:text="${form.projectName}"></label></td>
+			<td><label th:text="${form.contact}"></label></td>
+			<td><label th:text="${form.department}"></label></td>
+			<td><label th:text="${form.statusRequest}"></label></td>
+			<td><label th:text="${form.created}"></label></td>
+			<td><label th:text="${form.createByUser.username}"></label></td>
+		</tr>
+	</table>
+	<label>Load Test scenario</label>
+	<table>
+		<tr>
+			<th>ID</th>
+			<th>FormRequestID</th>
+			<th>Test Case</th>
+			<th>Pass</th>
+			<!--<th>User</th>-->
+		</tr>
+		<tr th:each="loadtest : ${loadTestList}">
+			<td><label th:text="${loadtest.id}"></label></td>
+			<td><label th:text="${loadtest.requestForm.id}"></label></td>
+			<td><label th:text="${loadtest.testCase}"></label></td>
+			<td><label th:text="${loadtest.scenarioPass}"></label></td>
+		</tr>
+	</table>
+	<label>Stress Test scenario</label>
+	<table>
+		<tr>
+			<th>ID</th>
+			<th>FormRequestID</th>
+			<th>Test Case</th>
+			<th>Pass</th>
+			<!--<th>User</th>-->
+		</tr>
+		<tr th:each="stressTest : ${stressTestList}">
+			<td><label th:text="${stressTest.id}"></label></td>
+			<td><label th:text="${stressTest.requestForm.id}"></label></td>
+			<td><label th:text="${stressTest.testCase}"></label></td>
+			<td><label th:text="${stressTest.scenarioPass}"></label></td>
+		</tr>
+	</table>
+	<label>Reliability Test scenario</label>
+	<table>
+		<tr>
+			<th>ID</th>
+			<th>FormRequestID</th>
+			<th>Test Case</th>
+			<th>Pass</th>
+			<!--<th>User</th>-->
+		</tr>
+		<tr th:each="reliabilityTest : ${reliabilityTestList}">
+			<td><label th:text="${reliabilityTest.id}"></label></td>
+			<td><label th:text="${reliabilityTest.requestForm.id}"></label></td>
+			<td><label th:text="${reliabilityTest.testCase}"></label></td>
+			<td><label th:text="${reliabilityTest.scenarioPass}"></label></td>
+		</tr>
+	</table>
+</div>
+<div th:replace="fragments/footer :: .footer"> menu Bar</div>
+</body>
+</html>
