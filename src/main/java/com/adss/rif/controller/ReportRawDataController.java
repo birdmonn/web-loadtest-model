@@ -1,7 +1,6 @@
 package com.adss.rif.controller;
 
-import com.adss.rif.entities.DateQueryReport;
-import com.adss.rif.entities.RequestForm;
+import com.adss.rif.entities.*;
 import com.adss.rif.service.RequestFormService;
 import com.adss.rif.service.UserWebService;
 import com.adss.rif.utils.PathView;
@@ -18,10 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static java.time.LocalDate.now;
@@ -43,45 +39,47 @@ public class ReportRawDataController {
 
     @GetMapping()
     public String ShowDefaultReport(Model model,
-                             HttpServletRequest request,
-                             @RequestParam(value = "startDate", required = false, defaultValue = "0") long startDate,
-                             @RequestParam(value = "endDate", required = false, defaultValue = "0") long endDate
-                                ){
+                                    HttpServletRequest request,
+                                    @RequestParam(value = "startDate", required = false, defaultValue = "0") long startDate,
+                                    @RequestParam(value = "endDate", required = false, defaultValue = "0") long endDate
+    ) {
 
         // set dateSearch
-        Date searchStartDate,searchEndDate;
-        if (startDate !=0 && endDate !=0){
+        Date searchStartDate, searchEndDate;
+        if (startDate != 0 && endDate != 0) {
             searchStartDate = new Date(startDate);
             searchEndDate = new Date(endDate);
         } else {
             searchStartDate = new GregorianCalendar(now().getYear(), now().getMonthValue() - 1, 1).getTime();
             searchEndDate = new GregorianCalendar(now().getYear(), now().getMonthValue(), 1).getTime();
         }
-        model.addAttribute("dateQueryReport", new DateQueryReport(searchStartDate,searchEndDate));
+        model.addAttribute("dateQueryReport", new DateQueryReport(searchStartDate, searchEndDate));
         model.addAttribute("searchStartDate", new SimpleDateFormat("dd/MM/yyyy").format(searchStartDate));
         model.addAttribute("searchEndDate", new SimpleDateFormat("dd/MM/yyyy").format(searchEndDate));
         // add data
         List<RequestForm> requestFormList = requestFormService.findByCreatedBetween(searchStartDate, searchEndDate);
-        this.setConJob(model, requestFormList);
+        this.setScenario(model, requestFormList);
         RoleToViewPage.getInstance().roleUser(model, request.getRemoteUser(), userWebService);
         model.addAttribute("formList", requestFormList);
         return PathView.reportRawData;
     }
 
     @PostMapping()
-    public String showReportByDateSelect(@Valid DateQueryReport dateQueryReport){
-        return "redirect:/"+ PathView.report+"?startDate=" +(dateQueryReport.getStartDate().getTime())+"&endDate="+(dateQueryReport.getEndDate().getTime());
+    public String showReportByDateSelect(@Valid DateQueryReport dateQueryReport) {
+        return "redirect:/" + PathView.reportRawData + "?startDate=" + (dateQueryReport.getStartDate().getTime()) + "&endDate=" + (dateQueryReport.getEndDate().getTime());
     }
 
-    private void setConJob(Model model, List<RequestForm> requestFormList) {
-        List<RequestForm> formInProcess = requestFormList.stream()
-                .filter(a -> Objects.equals(a.getStatusRequest(), "inProcess"))
-                .collect(Collectors.toList());
-        List<RequestForm> formSuccess = requestFormList.stream()
-                .filter(a -> Objects.equals(a.getStatusRequest(), "success"))
-                .collect(Collectors.toList());
-        model.addAttribute("cJob", requestFormList.size());
-        model.addAttribute("pJob", formInProcess.size());
-        model.addAttribute("sJob", formSuccess.size());
+    private void setScenario(Model model, List<RequestForm> requestFormList) {
+        List<LoadTestScenario> loadTestScenarioList = new ArrayList<>();
+        List<StressTestScenario> stressTestScenarioList = new ArrayList<>();
+        List<ReliabilityTestScenario> reliabilityTestScenarioList = new ArrayList<>();
+        for (RequestForm item : requestFormList) {
+            loadTestScenarioList.addAll(item.getLoadTestScenarioList());
+            stressTestScenarioList.addAll(item.getStressTestScenarioList());
+            reliabilityTestScenarioList.addAll(item.getReliabilityTestScenarioList());
+        }
+        model.addAttribute("loadTestList", loadTestScenarioList);
+        model.addAttribute("stressTestList", stressTestScenarioList);
+        model.addAttribute("reliabilityTestList", reliabilityTestScenarioList);
     }
 }
