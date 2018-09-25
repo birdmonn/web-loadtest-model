@@ -63,7 +63,12 @@ public class IndexController {
     }
 
     private void setModelIndex(Model model, HttpServletRequest request, int page, int pageSize) {
-        List<RequestForm> requestFormList = requestFormService.findByCrateByUserAndDepartment(request.getRemoteUser(), userWebService.findByUsername(request.getRemoteUser()).getDepartment());
+        List<RequestForm> requestFormList;
+        if (request.getRemoteUser().equals("superadmin")){
+            requestFormList = requestFormService.findAll();
+        } else {
+            requestFormList = requestFormService.findByCrateByUserAndDepartment(request.getRemoteUser(), userWebService.findByUsername(request.getRemoteUser()).getDepartment());
+        }
         Page formList = ListToPaging.getInstance().Paging(requestFormList, page, pageSize);
         PagerModel pageModel = new PagerModel(formList.getTotalPages(), formList.getNumber(), 3);
         //add model
