@@ -28,14 +28,14 @@ import java.util.Base64;
 import static com.adss.rif.utils.ListToPaging.PAGE_SIZES_SELECTION;
 
 @Controller
-@RequestMapping("/searchCase")
-public class SearchCaseController {
+@RequestMapping("/searchProject")
+public class SearchProjectController {
     private RequestFormService requestFormService;
     private UserWebService userWebService;
 
     @Autowired
-    public SearchCaseController(RequestFormService requestFormService,
-                                UserWebService userWebService) {
+    public SearchProjectController(RequestFormService requestFormService,
+                                   UserWebService userWebService) {
         this.requestFormService = requestFormService;
         this.userWebService = userWebService;
     }
@@ -46,9 +46,10 @@ public class SearchCaseController {
                           @RequestParam(value = "projectId", required = false, defaultValue = "") String projectId,
                           @RequestParam(value = "projectName", required = false, defaultValue = "") String projectName,
                           @RequestParam(value = "contact", required = false, defaultValue = "") String contact,
+                          @RequestParam(value = "status", required = false, defaultValue = "") String status,
                           @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
                           @RequestParam(value = "page", required = false, defaultValue = "0") int page) throws UnsupportedEncodingException {
-        List<RequestForm> requestFormList = requestFormService.findByProjectIdAndProjectNameAndContact(decodeThai(projectId), decodeThai(projectName), decodeThai(contact));
+        List<RequestForm> requestFormList = requestFormService.findByProjectIdAndProjectNameAndContactAndStatus(decodeThai(projectId), decodeThai(projectName), decodeThai(contact),status);
         Page formList = ListToPaging.getInstance().Paging(requestFormList, page, pageSize);
         PagerModel pageModel = new PagerModel(formList.getTotalPages(), formList.getNumber(), 3);
         //add model
@@ -59,12 +60,12 @@ public class SearchCaseController {
         model.addAttribute("selectedPageSize", pageSize);
         model.addAttribute("pageSizes", PAGE_SIZES_SELECTION);
         RoleToViewPage.getInstance().roleUser(model, request.getRemoteUser(), userWebService);
-        return PathView.searchCase;
+        return PathView.searchProject;
     }
 
     @PostMapping()
-    public String qurey(@Valid SearchForm searchForm, HttpServletResponse response) throws UnsupportedEncodingException {
-        return "redirect:/" + PathView.searchCase + "?projectId=" + encodeThai(searchForm.getProjectId()) + "&projectName=" + encodeThai(searchForm.getProjectName()) + "&contact=" + encodeThai(searchForm.getContact());
+    public String qureyProject(@Valid SearchForm searchForm) throws UnsupportedEncodingException {
+        return "redirect:/" + PathView.searchProject + "?projectId=" + encodeThai(searchForm.getProjectId()) + "&projectName=" + encodeThai(searchForm.getProjectName()) + "&contact=" + encodeThai(searchForm.getContact())+ "&status=" + searchForm.getStatus();
     }
 
     private String encodeThai(String encodeString) throws UnsupportedEncodingException {

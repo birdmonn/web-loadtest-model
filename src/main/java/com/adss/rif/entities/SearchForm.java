@@ -4,6 +4,7 @@ public class SearchForm {
     private String projectId;
     private String projectName;
     private String contact;
+    private String status;
 
     public String getProjectId() {
         return projectId;
@@ -27,6 +28,14 @@ public class SearchForm {
 
     public void setContact(String contact) {
         this.contact = contact;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
 

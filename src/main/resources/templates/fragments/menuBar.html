@@ -4,7 +4,7 @@
 <ul class="menuBar" th:fragment="menuBar(activeTab,roleUser)">
     <li th:class="${activeTab == 'index'}? 'active' : null"><a href="/index">Home</a></li>
     <li th:class="${activeTab == 'form'}? 'active' : null"><a href="/form/formCreate">Form</a></li>
-    <li th:class="${activeTab == 'searchCase'}? 'active' : null"><a href="/searchCase">Search Case</a></li>
+    <li th:class="${activeTab == 'searchProject'}? 'active' : null"><a href="/searchProject">Search Project</a></li>
     <li th:if="${roleUser=='ADMIN'}" th:class="${activeTab == 'userManagement'}? 'active' : null"><a href="/userManagement">User Management</a></li>
     <li th:if="${roleUser=='ADMIN'}" th:class="${activeTab == 'report'}? 'active' : null"><a href="/report">Report</a></li>
     <li th:if="${roleUser=='ADMIN'}" th:class="${activeTab == 'reportRawData'}? 'active' : null"><a href="/reportRawData">Report Raw Data</a></li>
