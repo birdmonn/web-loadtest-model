@@ -36,27 +36,27 @@ public class RequestFormServiceImpl implements RequestFormService {
     }
 
     @Override
-    public List<RequestForm> findByProjectIdAndProjectNameAndContactAndStatus(String projectId, String projectName, String contact,String status) {
+    public List<RequestForm> findByProjectIdAndProjectNameAndContactAndStatus(String projectId, String projectName, String contact, String status) {
         if (projectId.trim().equals("") && projectName.trim().equals("") && !contact.trim().equals("")) {
-            return this.sortCreateDate(this.filterStatus(requestFormRepository.findByContact(contact),status));
+            return this.sortCreateDate(this.filterStatus(requestFormRepository.findByContact(contact), status));
         }
         if (projectId.trim().equals("") && !projectName.trim().equals("") && contact.trim().equals("")) {
-            return this.sortCreateDate(this.filterStatus(requestFormRepository.findByProjectName(projectName),status));
+            return this.sortCreateDate(this.filterStatus(requestFormRepository.findByProjectName(projectName), status));
         }
         if (!projectId.trim().equals("") && projectName.trim().equals("") && contact.trim().equals("")) {
 
-            return this.sortCreateDate(this.filterStatus(requestFormRepository.findByProjectId(projectId),status));
+            return this.sortCreateDate(this.filterStatus(requestFormRepository.findByProjectId(projectId), status));
         }
         if (projectId.trim().equals("") && !projectName.trim().equals("") && !contact.trim().equals("")) {
-            return this.sortCreateDate(this.filterStatus(requestFormRepository.findByProjectNameAndContact(projectName, contact),status));
+            return this.sortCreateDate(this.filterStatus(requestFormRepository.findByProjectNameAndContact(projectName, contact), status));
         }
         if (!projectId.trim().equals("") && !projectName.trim().equals("") && contact.trim().equals("")) {
-            return this.sortCreateDate(this.filterStatus(requestFormRepository.findByProjectIdAndProjectName(projectId, projectName),status));
+            return this.sortCreateDate(this.filterStatus(requestFormRepository.findByProjectIdAndProjectName(projectId, projectName), status));
         }
         if (!projectId.trim().equals("") && projectName.trim().equals("") && !contact.trim().equals("")) {
-            return this.sortCreateDate(this.filterStatus(requestFormRepository.findByProjectIdAndContact(projectId, contact),status));
+            return this.sortCreateDate(this.filterStatus(requestFormRepository.findByProjectIdAndContact(projectId, contact), status));
         }
-        return this.sortCreateDate(this.filterStatus(requestFormRepository.findByProjectIdAndProjectNameAndContact(projectId, projectName, contact),status));
+        return this.sortCreateDate(this.filterStatus(requestFormRepository.findByProjectIdAndProjectNameAndContact(projectId, projectName, contact), status));
     }
 
     @Override
@@ -94,22 +94,20 @@ public class RequestFormServiceImpl implements RequestFormService {
         return this.sortCreateDate(requestFormList);
     }
 
-    private List<RequestForm> sortCreateDate(List<RequestForm> requestFormList){
+    private List<RequestForm> sortCreateDate(List<RequestForm> requestFormList) {
         requestFormList.sort(Comparator.comparing(RequestForm::getCreated).reversed());
         return requestFormList;
     }
 
-    private List<RequestForm> filterStatus(List<RequestForm> requestFormList,String status){
-//        requestFormList.sort(Comparator.comparing(RequestForm::getCreated).reversed());
-        if (status.equals("all") || status.equals("")){
+    private List<RequestForm> filterStatus(List<RequestForm> requestFormList, String status) {
+        if (status.equals("all") || status.equals("")) {
             return requestFormList;
         }
-        return requestFormList.stream().filter(requestForm->requestForm.getStatusRequest().equals(status)).collect(Collectors.toList());
+        return requestFormList.stream().filter(requestForm -> requestForm.getStatusRequest().equals(status)).collect(Collectors.toList());
     }
 
     @Override
     public List<RequestForm> findByCreatedBetween(Date firstDate, Date lastDate) {
-        List<RequestForm> requestFormList = requestFormRepository.findByCreatedBetween(firstDate, lastDate);
-        return requestFormList;
+        return requestFormRepository.findByCreatedBetween(firstDate, lastDate);
     }
 }

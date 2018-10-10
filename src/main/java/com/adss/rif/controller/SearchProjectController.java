@@ -18,11 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
-import java.util.Locale;
 import java.util.Base64;
 
 import static com.adss.rif.utils.ListToPaging.PAGE_SIZES_SELECTION;
@@ -49,7 +47,7 @@ public class SearchProjectController {
                           @RequestParam(value = "status", required = false, defaultValue = "") String status,
                           @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize,
                           @RequestParam(value = "page", required = false, defaultValue = "0") int page) throws UnsupportedEncodingException {
-        List<RequestForm> requestFormList = requestFormService.findByProjectIdAndProjectNameAndContactAndStatus(decodeThai(projectId), decodeThai(projectName), decodeThai(contact),status);
+        List<RequestForm> requestFormList = requestFormService.findByProjectIdAndProjectNameAndContactAndStatus(decodeThai(projectId), decodeThai(projectName), decodeThai(contact), status);
         Page formList = ListToPaging.getInstance().Paging(requestFormList, page, pageSize);
         PagerModel pageModel = new PagerModel(formList.getTotalPages(), formList.getNumber(), 3);
         //add model
@@ -65,7 +63,7 @@ public class SearchProjectController {
 
     @PostMapping()
     public String qureyProject(@Valid SearchForm searchForm) throws UnsupportedEncodingException {
-        return "redirect:/" + PathView.searchProject + "?projectId=" + encodeThai(searchForm.getProjectId()) + "&projectName=" + encodeThai(searchForm.getProjectName()) + "&contact=" + encodeThai(searchForm.getContact())+ "&status=" + searchForm.getStatus();
+        return "redirect:/" + PathView.searchProject + "?projectId=" + encodeThai(searchForm.getProjectId()) + "&projectName=" + encodeThai(searchForm.getProjectName()) + "&contact=" + encodeThai(searchForm.getContact()) + "&status=" + searchForm.getStatus();
     }
 
     private String encodeThai(String encodeString) throws UnsupportedEncodingException {

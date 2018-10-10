@@ -1,10 +1,10 @@
 package com.adss.rif.entities;
 
 public class SearchForm {
-    private String projectId="";
-    private String projectName="";
-    private String contact="";
-    private String status="";
+    private String projectId = "";
+    private String projectName = "";
+    private String contact = "";
+    private String status = "";
 
     public String getProjectId() {
         return projectId;
