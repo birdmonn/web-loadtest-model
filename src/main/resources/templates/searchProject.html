@@ -23,9 +23,9 @@
 <!--  Banner -->
 <div th:replace="fragments/banner :: .banner"> menu Bar</div>
 <!--  menu -->
-<div th:replace="fragments/menuBar :: menuBar('searchCase',${role}== null ? '' : *{role})">menuBar</div>
+<div th:replace="fragments/menuBar :: menuBar('searchProject',${role}== null ? '' : *{role})">menuBar</div>
 <div class="search-case">
-    <form method="post" action="/searchCase#" th:action="@{/searchCase}" th:object="${requestForm}">
+    <form method="post" action="/searchProject#" th:action="@{/searchProject}" th:object="${requestForm}">
         <div class="row">
             <div class="col-tab-10"></div>
             <div class="col-10">
@@ -61,6 +61,20 @@
         </div>
         <div class="row">
             <div class="col-tab-10"></div>
+            <div class="col-10">
+                <label th:text="#{label.contact}">Status</label>
+            </div>
+            <div class="col-25">
+                <select name="status" id="status">
+                    <option value="all">All</option>
+                    <option value="wait">Wait</option>
+                    <option value="inProcess">In Process</option>
+                    <option value="success">Success</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-tab-10"></div>
             <div class="col-tab-10"></div>
             <div class="col-10">
                 <button class="buttonGreen width-100" type="submit" value="Submit">Search</button>
@@ -69,7 +83,7 @@
     </form>
 </div>
 <div class="container">
-    <h2>Search Case </h2>
+    <h2>Search Project</h2>
     <h5 th:text="${formList.getTotalElements()+ 'ทั้งหมด'}">ทั้งหมด</h5>
     <table id="table-case">
         <tr>
@@ -100,28 +114,28 @@
             <ul class="pagination">
                 <li th:class="${formList.number == 0} ? disabled"><a
                         class="pageLink"
-                        th:href="@{${#httpServletRequest.requestURI}(pageSize=${selectedPageSize}, page=1,projectId=${#request.getParameter('projectId')},projectName=${#request.getParameter('projectName')},contact=${#request.getParameter('contact')})}">&laquo;</a>
+                        th:href="@{${#httpServletRequest.requestURI}(pageSize=${selectedPageSize}, page=1,projectId=${#request.getParameter('projectId')},projectName=${#request.getParameter('projectName')},contact=${#request.getParameter('contact')},status=${#request.getParameter('status')})}">&laquo;</a>
                 </li>
                 <li th:class="${formList.number == 0} ? disabled"><a
                         class="pageLink"
-                        th:href="@{${#httpServletRequest.requestURI}(pageSize=${selectedPageSize}, page=${formList.number},projectId=${#request.getParameter('projectId')},projectName=${#request.getParameter('projectName')},contact=${#request.getParameter('contact')})}">&larr;</a>
+                        th:href="@{${#httpServletRequest.requestURI}(pageSize=${selectedPageSize}, page=${formList.number},projectId=${#request.getParameter('projectId')},projectName=${#request.getParameter('projectName')},contact=${#request.getParameter('contact')},status=${#request.getParameter('status')})}">&larr;</a>
                 </li>
                 <li
                         th:class="${formList.number == (page - 1)} ? 'active pointer-disabled'"
                         th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
                     <a class="pageLink"
-                       th:href="@{${#httpServletRequest.requestURI}(pageSize=${selectedPageSize}, page=${page},projectId=${#request.getParameter('projectId')},projectName=${#request.getParameter('projectName')},contact=${#request.getParameter('contact')})}"
+                       th:href="@{${#httpServletRequest.requestURI}(pageSize=${selectedPageSize}, page=${page},projectId=${#request.getParameter('projectId')},projectName=${#request.getParameter('projectName')},contact=${#request.getParameter('contact')},status=${#request.getParameter('status')})}"
                        th:text="${page}"></a>
                 </li>
                 <li
                         th:class="${formList.number + 1 == formList.totalPages} ? disabled">
                     <a class="pageLink"
-                       th:href="@{${#httpServletRequest.requestURI}(pageSize=${selectedPageSize}, page=${formList.number + 2},projectId=${#request.getParameter('projectId')},projectName=${#request.getParameter('projectName')},contact=${#request.getParameter('contact')})}">&rarr;</a>
+                       th:href="@{${#httpServletRequest.requestURI}(pageSize=${selectedPageSize}, page=${formList.number + 2},projectId=${#request.getParameter('projectId')},projectName=${#request.getParameter('projectName')},contact=${#request.getParameter('contact')},status=${#request.getParameter('status')})}">&rarr;</a>
                 </li>
                 <li
                         th:class="${formList.number + 1 == formList.totalPages} ? disabled">
                     <a class="pageLink"
-                       th:href="@{${#httpServletRequest.requestURI}(pageSize=${selectedPageSize}, page=${formList.totalPages},projectId=${#request.getParameter('projectId')},projectName=${#request.getParameter('projectName')},contact=${#request.getParameter('contact')})}">&raquo;</a>
+                       th:href="@{${#httpServletRequest.requestURI}(pageSize=${selectedPageSize}, page=${formList.totalPages},projectId=${#request.getParameter('projectId')},projectName=${#request.getParameter('projectName')},contact=${#request.getParameter('contact')},status=${#request.getParameter('status')})}">&raquo;</a>
                 </li>
             </ul>
         </div>
@@ -136,13 +150,14 @@
     var projectId = (url.searchParams.get("projectId")==null) ? "" :url.searchParams.get("projectId") ;
     var projectName = (url.searchParams.get("projectName")==null) ? "" :url.searchParams.get("projectName");
     var contact = (url.searchParams.get("contact")==null) ? "" :url.searchParams.get("contact");
+    var status = (url.searchParams.get("status")==null) ? "" :url.searchParams.get("status");
     $(document).ready(function() {
     changePageAndSize();
     });
 
     function changePageAndSize() {
     $('#pageSizeSelect').change(function(evt) {
-    window.location.replace("/searchCase?pageSize=" + this.value + "&page=1&projectId="+projectId+"&projectName="+projectName+"&contact="+contact);
+    window.location.replace("/searchProject?pageSize=" + this.value + "&page=1&projectId="+projectId+"&projectName="+projectName+"&contact="+contact+"&status="+status);
     });
     }
     /*]]>*/
