@@ -1,0 +1,25 @@
+@charset "utf-8";
+/* CSS Document */
+.table-raw {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+border-collapse: collapse;
+}
+
+.table-raw td{
+border: 1px solid #ddd;
+    padding: 8px;
+    vertical-align: top;
+
+}
+.table-raw th {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align : center;
+}
+
+.table-raw th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #f2f2f2;
+}

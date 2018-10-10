@@ -5,7 +5,7 @@
 <head>
 	<title>Report Raw Data</title>
 	<div th:include="fragments/head :: head" th:remove="tag">Global Header</div>
-	<link rel="stylesheet" type="text/css" href="css/table-case-css.css" th:href="@{/css/table-case-css.css}">
+	<link rel="stylesheet" type="text/css" href="css/table-raw.css" th:href="@{/css/table-raw.css}">
 	<script th:inline="javascript">
         var token = $("meta[name='_csrf']").attr("content");
         var header = $("meta[name='_csrf_header']").attr("content");
@@ -75,7 +75,7 @@
 
 	</div>
 	<label>Form Request</label>
-	<table>
+	<table th:class="table-raw">
 		<tr>
 			<th>ID</th>
 			<th>Project Id</th>
@@ -99,7 +99,7 @@
 		</tr>
 	</table>
 	<label>Load Test scenario</label>
-	<table>
+	<table th:class="table-raw">
 		<tr>
 			<th>ID</th>
 			<th>FormRequestID</th>
@@ -115,7 +115,7 @@
 		</tr>
 	</table>
 	<label>Stress Test scenario</label>
-	<table>
+	<table th:class="table-raw">
 		<tr>
 			<th>ID</th>
 			<th>FormRequestID</th>
@@ -131,7 +131,7 @@
 		</tr>
 	</table>
 	<label>Reliability Test scenario</label>
-	<table>
+	<table th:class="table-raw">
 		<tr>
 			<th>ID</th>
 			<th>FormRequestID</th>
